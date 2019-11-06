@@ -1,20 +1,66 @@
 <template>
   <div class="city">
-    <header-top :goback="true">
-        <span slot="changcity" class="change_city">切换城市</span>
+    <!-- 顶栏 -->
+    <header-top :goback="true" :headshow="true" :headtitle="cityName">
+      <router-link slot="changcity" class="change_city" to="/cities" tag="span">切换城市</router-link>
     </header-top>
+    <!-- 搜索地址 -->
     <div class="select_city">
       <div class="search_city">
-        <input type="text" class="search_input" placeholder="输入学校、商务楼、地址" />
-        <div class="search_btn">搜索</div>
+        <input type="text" class="search_input" placeholder="输入学校、商务楼、地址" v-model="keyword" />
+        <div class="search_btn" @click="searchCity">搜索</div>
       </div>
     </div>
+    <!-- 搜索结果 -->
+    <ul class="search_result">
+      <router-link
+        class="search_result_item"
+        v-for="item in searchResult"
+        :key="item.latitude"
+        tag="li"
+        to="/home"
+      >
+        <h6 class="name">{{item.name}}</h6>
+        <p class="address">{{item.address}}</p>
+      </router-link>
+    </ul>
   </div>
 </template>
 <script>
 import HeaderTop from "../../components/header/header";
 export default {
   name: "City",
+  data() {
+    return {
+      cityId: "",
+      cityName: "",
+      keyword: "",
+      searchResult: []
+    };
+  },
+  methods: {
+    searchCity() {
+      this.$axios
+        .get(
+          "https://elm.cangdu.org/v1/pois?city_id=1&keyword=迪士尼&type=search"
+        )
+        .then(res => {
+          console.log(res);
+          this.searchResult = res.data;
+        });
+    }
+  },
+  mounted() {
+    //根据路由获取当前城市id
+    this.cityId = this.$route.params.id;
+    // 根据id获取城市
+    this.$axios
+      .get(`https://elm.cangdu.org/v1/cities/${this.cityId}`)
+      .then(res => {
+        console.log(this.cityName);
+        this.cityName = res.data.name;
+      });
+  },
   components: {
     HeaderTop
   }
@@ -23,11 +69,13 @@ export default {
 
 <style scoped>
 .city .change_city {
-    font-size: 12px;
-    color: #fff;
+  font-size: 12px;
+  color: #fff;
 }
 .city .select_city {
   padding-top: 49px;
+  border-top: 1px solid #e4e4e4;
+  border-bottom: 2px solid #e4e4e4;
 }
 .city .select_city .search_city {
   padding: 8px 0;
@@ -55,5 +103,22 @@ export default {
   background-color: #3190e8;
   border-radius: 3px;
   font-size: 12px;
+}
+
+/* 搜索结果 */
+.city .search_result .search_result_item {
+  background-color: #fff;
+  padding-top: 13px;
+  border-bottom: 1px solid #e4e4e4;
+}
+.city .search_result .search_result_item .name {
+  font-size: 13px;
+  color: #333;
+  margin: 0 16px 7px;
+}
+.city .search_result .search_result_item .address {
+  font-size: 9.6px;
+  color: #999;
+  margin: 0 16px 11px;
 }
 </style>

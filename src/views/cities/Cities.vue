@@ -2,7 +2,7 @@
   <div class="cities">
     <!-- 顶部 -->
     <header-top>
-      <span class="header_logo" slot="logo">ele.me</span>
+      <span class="header_logo" slot="logo" @click="reload">ele.me</span>
     </header-top>
     <!-- 当前定位城市 -->
     <section class="city_nav">
@@ -10,7 +10,7 @@
         <span class="tip_title">当前定位城市：</span>
         <span class="tip_content">定位不准时，请在城市列表选择</span>
       </div>
-      <router-link class="current_city" tag="div" to="/city">
+      <router-link class="current_city" tag="div" :to="'/city/' + currentCity.id">
         <span class="city_name">{{currentCity.name}}</span>
         <i class="fa fa-angle-right next_arrow" aria-hidden="true"></i>
       </router-link>
@@ -19,7 +19,7 @@
     <section class="hot_city">
       <h3 class="title">热门城市</h3>
       <ul class="city_content">
-        <li class="city_item" v-for="item in hotCity" :key="item.area_code">{{item.name}}</li>
+        <router-link class="city_item" v-for="item in hotCity" :key="item.area_code" :to="'/city/' + item.id" tag="li">{{item.name}}</router-link>
       </ul>
     </section>
     <!-- 所有城市 -->
@@ -27,7 +27,13 @@
       <div v-for="(cities,alpht) in cityGroup" class="hot_city" :key="cities.area_code">
         <h3 class="title">{{alpht}}</h3>
         <ul class="city_content">
-          <li class="city_item" v-for="item in cities" :key="item.area_code">{{item.name | sliceWord}}</li>
+          <router-link
+            class="city_item"
+            tag="li"
+            v-for="item in cities"
+            :key="item.area_code"
+             :to="'/city/' + item.id"
+          >{{item.name | sliceWord}}</router-link>
         </ul>
       </div>
     </section>
@@ -46,9 +52,15 @@ export default {
       cityGroup: {}
     };
   },
+  methods: {
+    reload() {
+      window.location.reload();
+    }
+  },
   mounted() {
     // 获取当前城市
     this.$axios.get("https://elm.cangdu.org/v1/cities?type=guess").then(res => {
+      console.log(res.data)
       this.currentCity = res.data;
     });
     // 获取热门城市
@@ -63,7 +75,7 @@ export default {
   },
   filters: {
     sliceWord(str) {
-      if (str.length > 5) return str.slice(0,4) + "...";
+      if (str.length > 5) return str.slice(0, 4) + "...";
       return str;
     }
   },
@@ -163,6 +175,6 @@ export default {
 }
 
 .city_list .city_content .city_item {
-    color: #666;
+  color: #666;
 }
 </style>

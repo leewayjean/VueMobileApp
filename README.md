@@ -1,29 +1,25 @@
-# vue-ele-app
+# VueEleApp  
+Vue-cli3 构建饿了么
 
-## Project setup
+## 项目介绍  
+项目使用Vue2.x版本，构建使用cli3。
+
+## 项目启动
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 编译、热更新
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 编译、压缩
 ```
 npm run build
 ```
 
-### Run your tests
+### 运行测试
 ```
 npm run test
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 const Cities = () => import("../views/cities/Cities")
 const City = () => import("../views/city/City")
+const Home = () => import("../views/home/Home")
 
 Vue.use(VueRouter)
 
@@ -12,12 +13,14 @@ const routes = [
     component: Cities
   },
   {
-    path: '/city',
+    path: '/city/:id',
     name: 'city',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: City
+  },
+  {
+    path: '/home',
+    name: 'home',
+    component: Home
   }
 ]
 
