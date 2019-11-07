@@ -1,8 +1,8 @@
 <template>
   <div class="cities">
     <!-- 顶部 -->
-    <header-top>
-      <span class="header_logo" slot="logo" @click="reload">ele.me</span>
+    <header-top :loginshow="true">
+      <span class="header_logo" slot="logo" @click="reload">饿了么</span>
     </header-top>
     <!-- 当前定位城市 -->
     <section class="city_nav">

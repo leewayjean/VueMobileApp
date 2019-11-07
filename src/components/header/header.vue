@@ -6,6 +6,10 @@
     <i class="fa fa-angle-left goback" aria-hidden="true" v-if="goback" @click="goBack"></i>
     <!-- 顶栏文字 -->
     <h3 v-if="headshow" class="city_name">{{headtitle}}</h3>
+    <!-- 登录注册按钮 -->
+    <router-link tag="div" to="/login" v-if="loginshow">
+      <span class="login">登录|注册</span>
+    </router-link>
     <slot name="changcity"></slot>
   </header>
 </template>
@@ -23,6 +27,10 @@ export default {
     headshow: {
       type: Boolean,
       default: false
+    },
+    loginshow:{
+      type:Boolean,
+      default:false
     }
   },
   methods: {
@@ -37,6 +45,7 @@ header {
   position: fixed;
   left: 0;
   top: 0;
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -51,12 +60,15 @@ header .goback {
   font-size: 22px;
 }
 header .city_name {
-  width: 160px;
+  width: 100%;
   font-size: 16px;
   color: #fff;
   font-weight: bold;
   text-align: center;
-  margin-left: 38px;
+}
+header .login {
+  font-size: 12px;
+  color: #fff;
 }
 </style>
 

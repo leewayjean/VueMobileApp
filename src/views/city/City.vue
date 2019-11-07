@@ -7,7 +7,7 @@
     <!-- 搜索地址 -->
     <div class="select_city">
       <div class="search_city">
-        <input type="text" class="search_input" placeholder="输入学校、商务楼、地址" v-model="keyword" />
+        <input type="text" class="search_input" placeholder="输入学校、商务楼、地址" v-model="inputValue" />
         <div class="search_btn" @click="searchCity">搜索</div>
       </div>
     </div>
@@ -34,20 +34,23 @@ export default {
     return {
       cityId: "",
       cityName: "",
-      keyword: "",
+      inputValue: "",
       searchResult: []
     };
   },
   methods: {
     searchCity() {
-      this.$axios
+      if(this.inputValue){
+        this.$axios
         .get(
-          "https://elm.cangdu.org/v1/pois?city_id=1&keyword=迪士尼&type=search"
+          `https://elm.cangdu.org/v1/pois?city_id=${this.cityId}&keyword=${this.inputValue}&type=search`
         )
         .then(res => {
           console.log(res);
           this.searchResult = res.data;
         });
+      }
+      
     }
   },
   mounted() {
@@ -71,6 +74,7 @@ export default {
 .city .change_city {
   font-size: 12px;
   color: #fff;
+  white-space:nowrap;
 }
 .city .select_city {
   padding-top: 49px;
