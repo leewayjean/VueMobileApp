@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 // 引入mint-ui
-import { Swipe, SwipeItem, Indicator } from 'mint-ui';
+import { Swipe, SwipeItem } from 'mint-ui';
 
 import router from './router'
 import store from './store'

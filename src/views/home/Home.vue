@@ -6,14 +6,14 @@
     </header-top>
     <!-- 轮播 -->
     <div class="swipe_container">
-      <mt-swipe :auto="0" class="swiper">
-        <mt-swipe-item v-for="(entryItem, index) in indexEntry" :key="index" class="swipe_item">
+      <div class="swiper">
+        <div v-for="(entryItem, index) in indexEntry" :key="index" class="swipe_item">
           <span v-for="item in entryItem" :key="item.id" class="entry_item">
             <img :src="`https://fuss10.elemecdn.com${item.image_url}`" alt="分类" class="entry_img" />
             <h5 class="entry_title">{{item.title}}</h5>
           </span>
-        </mt-swipe-item>
-      </mt-swipe>
+        </div>
+      </div>
     </div>
     <!-- 店铺列表 -->
     <section class="shop_list_container">

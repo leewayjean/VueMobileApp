@@ -103,7 +103,7 @@ export default {
 }
 .shop_list .shop_item .shop .shop_info .order_lead_time {
     font-size: 10px;
-    color: #3190e8;
+    color: #0089dc;
 }
 
 

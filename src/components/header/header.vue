@@ -17,6 +17,7 @@
 export default {
   name: "HeaderTop",
   props: {
+    //是否显示返回
     goback: {
       type: Boolean,
       default: false
@@ -28,9 +29,9 @@ export default {
       type: Boolean,
       default: false
     },
-    loginshow:{
-      type:Boolean,
-      default:false
+    loginshow: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
@@ -54,6 +55,15 @@ header {
   padding: 0 10px;
   box-sizing: border-box;
   background-color: #3190e8;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#0af),
+    to(#0085ff)
+  );
+  background-image: -webkit-linear-gradient(left, #0af, #0085ff);
+  background-image: linear-gradient(90deg, #0af, #0085ff);
 }
 header .goback {
   color: #fff;
