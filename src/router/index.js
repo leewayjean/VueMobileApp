@@ -7,13 +7,14 @@ const Search = () => import("../views/search/Search")
 const Order = () => import("../views/order/Order")
 const Me = () => import("../views/me/Me")
 const Login = () => import("../views/login/Login")
+const Forget = () => import("../views/login/children/Forget")
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path:"*",
-    redirect:"/home"
+    path: "*",
+    redirect: "/home"
   },
   {
     path: '/cities',
@@ -26,10 +27,17 @@ const routes = [
     component: City
   },
   {
-    path:"/login",
-    name:"login",
-    component:Login
+    path: "/login",
+    name: "login",
+    component: Login,
+
   },
+  {
+    path: "/forget",
+    name: "forget",
+    component: Forget
+  },
+
   {
     path: '/home',
     name: 'home',

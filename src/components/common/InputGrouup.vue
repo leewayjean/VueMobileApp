@@ -1,6 +1,6 @@
 <template>
   <section class="input_group">
-    <input :type="inputtype" :placeholder="placeholder" class="input" />
+    <input :type="inputtype" :placeholder="placeholder" class="input" @input="passValue"/>
   </section>
 </template>
 
@@ -15,6 +15,12 @@ export default {
     },
     placeholder: {
       type: String
+    }
+  },
+  methods:{
+    // 向父级传递值
+    passValue(event){
+      this.$emit("input",event.target.value)
     }
   }
 };

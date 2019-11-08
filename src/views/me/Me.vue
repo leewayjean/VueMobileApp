@@ -1,7 +1,7 @@
 <template>
   <div class="profile">
     <!-- 用户信息 -->
-    <header>
+    <router-link tag="header" to="/login">
       <img src="../../assets/images/avatar.png" alt class="avatar" />
       <section class="user_info">
         <section class="user">
@@ -14,7 +14,7 @@
           <i class="fa fa-angle-right" aria-hidden="true"></i>
         </span>
       </section>
-    </header>
+    </router-link>
     <!-- 积分红包 -->
     <section class="info_data">
       <section class="info_data_item">
@@ -26,14 +26,14 @@
       </section>
       <section class="info_data_item">
         <p class="data">
-          <span class="num">33</span>
+          <span class="num">2</span>
           <span class="unit">个</span>
         </p>
         <p class="info_title">优惠</p>
       </section>
       <section class="info_data_item">
         <p class="data">
-          <span class="num">33</span>
+          <span class="num">20</span>
           <span class="unit">分</span>
         </p>
         <p class="info_title">积分</p>
@@ -56,7 +56,7 @@
     </section>
     <!-- 隐私设置 -->
     <div class="user_secrte">
-        <a href="">隐私政策</a>
+        <a href="https://h5.ele.me/service/agreement/#HEAEDER_SHOW=1&initTitle=隐私政策&key=ruleQue50">隐私政策</a>
     </div>
     <Footer />
   </div>
@@ -65,7 +65,7 @@
 import Footer from "../../components/footer/Footer";
 import TextBar from "../../components/common/TextBar";
 export default {
-  name: "Home",
+  name: "Profile",
   components: {
     Footer,
     TextBar

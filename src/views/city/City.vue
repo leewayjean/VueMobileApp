@@ -13,20 +13,20 @@
     </div>
     <!-- 搜索结果 -->
     <ul class="search_result">
-      <router-link
+      <li
         class="search_result_item"
         v-for="item in searchResult"
         :key="item.latitude"
-        tag="li"
-        to="/home"
+        @click="goToHome(item.geohash)"
       >
         <h6 class="name">{{item.name}}</h6>
         <p class="address">{{item.address}}</p>
-      </router-link>
+      </li>
     </ul>
   </div>
 </template>
 <script>
+import {mapMutations} from "vuex"
 import HeaderTop from "../../components/header/header";
 export default {
   name: "City",
@@ -39,18 +39,29 @@ export default {
     };
   },
   methods: {
+    // 搜索地址
     searchCity() {
-      if(this.inputValue){
+      if (this.inputValue) {
         this.$axios
-        .get(
-          `https://elm.cangdu.org/v1/pois?city_id=${this.cityId}&keyword=${this.inputValue}&type=search`
-        )
-        .then(res => {
-          console.log(res);
-          this.searchResult = res.data;
-        });
+          .get(
+            `https://elm.cangdu.org/v1/pois?city_id=${this.cityId}&keyword=${this.inputValue}&type=search`
+          )
+          .then(res => {
+            console.log(res);
+            this.searchResult = res.data;
+          });
       }
-      
+    },
+    //跳转至首页，同时传递经纬度
+    goToHome(geohash) {
+      // 将geohash存储到vuex中
+  
+      this.$router.push({
+        path: "/home",
+        query: {
+          geohash: geohash
+        }
+      });
     }
   },
   mounted() {
@@ -74,7 +85,7 @@ export default {
 .city .change_city {
   font-size: 12px;
   color: #fff;
-  white-space:nowrap;
+  white-space: nowrap;
 }
 .city .select_city {
   padding-top: 49px;

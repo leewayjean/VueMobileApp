@@ -2,7 +2,14 @@
   <div class="home">
     <!-- 顶栏 -->
     <header-top :loginshow="true">
-      <i class="fa fa-search search_btn" aria-hidden="true" slot="search_btn"></i>
+      <!-- 搜索按钮 -->
+      <router-link to="/search" slot="search_btn">
+        <i class="fa fa-search search_btn" aria-hidden="true"></i>
+      </router-link>
+      <!-- 定位地址 -->
+      <router-link to="/cities" slot="address" tag="span">
+        <span class="address">{{address | sliceAddress}}</span>
+      </router-link>
     </header-top>
     <!-- 轮播 -->
     <div class="swipe_container">
@@ -32,7 +39,7 @@ export default {
   data() {
     return {
       indexEntry: [],
-
+      address: "正在获取定位..."
     };
   },
   mounted() {
@@ -41,9 +48,19 @@ export default {
       let arr = [];
       arr.push(res.data.slice(0, 8));
       this.indexEntry = arr;
-      console.log(this.indexEntry);
     });
-   
+    // 根据经纬度获取精确地址
+    this.$axios.get(`https://elm.cangdu.org/v2/pois/${this.$route.query.geohash}`).then((res) => {
+      this.address = res.data.name;
+    })
+  },
+  filters:{
+    sliceAddress(str){
+      if(str.length > 7){
+        return str.slice(0,6) + "...";
+      }
+      return str;
+    }
   },
   components: {
     HeaderTop,
@@ -60,6 +77,12 @@ export default {
 .home .search_btn {
   font-size: 20px;
   color: #fff;
+}
+.home .address {
+  font-size: 14px;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
 }
 .home .swipe_container {
   width: 100%;
@@ -93,16 +116,16 @@ export default {
   color: #666;
 }
 .shop_list_container {
-    margin-top: 8px;
-    background-color: #fff;
-    border-top: 1px solid #e4e4e4
+  margin-top: 8px;
+  background-color: #fff;
+  border-top: 1px solid #e4e4e4;
 }
 .shop_list_container .shop_header {
-    box-sizing: border-box;
-    padding:0 8px;
-    font-size: 11px;
-    color: #999;
-    height: 32px;
-    line-height: 32px;
+  box-sizing: border-box;
+  padding: 0 8px;
+  font-size: 11px;
+  color: #999;
+  height: 32px;
+  line-height: 32px;
 }
 </style>

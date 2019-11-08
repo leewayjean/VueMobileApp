@@ -6,10 +6,12 @@
     <i class="fa fa-angle-left goback" aria-hidden="true" v-if="goback" @click="goBack"></i>
     <!-- 顶栏文字 -->
     <h3 v-if="headshow" class="city_name">{{headtitle}}</h3>
+    <slot name="address"></slot>
     <!-- 登录注册按钮 -->
     <router-link tag="div" to="/login" v-if="loginshow">
       <span class="login">登录|注册</span>
     </router-link>
+    <!-- 切换城市按钮 -->
     <slot name="changcity"></slot>
   </header>
 </template>
