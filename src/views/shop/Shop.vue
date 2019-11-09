@@ -18,18 +18,18 @@
     </section>
     <!-- 导航 -->
     <nav>
-       <section class="nav_item">
-            <router-link :to="{path:`/shop/food`,query:{id}}" tag="span"  class="nav_btn">商品</router-link>
-       </section>
-       <section class="nav_item">
-            <router-link :to="{path:`/shop/comment`,query:{id}}" tag="span" class="nav_btn">评价</router-link>
-       </section>
+      <section class="nav_item">
+        <router-link :to="{path:`/shop/food`,query:{id}}" tag="span" class="nav_btn">商品</router-link>
+      </section>
+      <section class="nav_item">
+        <router-link :to="{path:`/shop/comment`,query:{id}}" tag="span" class="nav_btn">评价</router-link>
+      </section>
     </nav>
     <!-- 食品 -->
-    <section class="food_container"></section>
-    <footer>
-
-    </footer>
+    <section class="food_container">
+      <router-view></router-view>
+    </section>
+    <footer></footer>
   </main>
 </template>
 
@@ -39,16 +39,15 @@ export default {
   data() {
     return {
       shopInfo: {},
-      id:this.$route.query.id
+      id: this.$route.query.id
     };
   },
-  methods:{
-      goBack(){
-          this.$router.push("/home");
-      }
+  methods: {
+    goBack() {
+      this.$router.push("/home");
+    }
   },
   mounted() {
-      
     this.$axios
       .get(`https://elm.cangdu.org/shopping/restaurant/${this.id}`)
       .then(res => {
@@ -60,18 +59,25 @@ export default {
 </script>
 
 <style scoped>
+.shop {
+    width: 100%;
+    height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
 /* 商店头部信息栏 */
 .shop .header {
-    position: relative;
+  position: relative;
 }
 .shop .header .goBackBtn {
-    position: absolute;
-    left: 4px;
-    top: 0px;
+  position: absolute;
+  left: 4px;
+  top: 0px;
 }
 .shop .header .goBackBtn i {
-    font-size: 26px;
-    color: #fff;
+  font-size: 26px;
+  color: #fff;
 }
 .shop .shop_header {
   display: flex;
@@ -124,31 +130,31 @@ export default {
 }
 /* 店铺导航栏 */
 .shop nav {
-    display: flex;
-    height: 45px;
-    background-color: #fff;
-    align-items: center;
+  display: flex;
+  height: 45px;
+  background-color: #fff;
+  align-items: center;
 }
 .shop nav .nav_item {
-    flex: 1;
-    display: flex;
-    justify-content: center;
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 .shop nav .nav_item .nav_btn {
-    color: #666;
-    padding: 4px;
-    font-size: 13px;
+  color: #666;
+  padding: 4px;
+  font-size: 13px;
 }
 
 /* 路由激活状态 */
 .shop nav .nav_item .router-link-active {
-    color: #0085ff;
-    border-bottom: 2px solid #0089dc;
+  color: #0085ff;
+  border-bottom: 2px solid #0089dc;
 }
 
-
-
-
-
-
+.food_container {
+  flex: 1;
+  background-color: #ccc;
+  box-sizing: border-box;
+}
 </style>
