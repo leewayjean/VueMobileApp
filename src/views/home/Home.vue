@@ -8,7 +8,7 @@
       </router-link>
       <!-- 定位地址 -->
       <router-link to="/cities" slot="address" tag="span">
-        <span class="address">{{address | sliceAddress}}</span>
+        <span class="address">{{address}}</span>
       </router-link>
     </header-top>
     <!-- 轮播 -->
@@ -53,14 +53,6 @@ export default {
     this.$axios.get(`https://elm.cangdu.org/v2/pois/${this.$route.query.geohash}`).then((res) => {
       this.address = res.data.name;
     })
-  },
-  filters:{
-    sliceAddress(str){
-      if(str.length > 7){
-        return str.slice(0,6) + "...";
-      }
-      return str;
-    }
   },
   components: {
     HeaderTop,
@@ -108,7 +100,6 @@ export default {
 }
 .home .swiper .entry_item .entry_img {
   width: 36px;
-  height: 36px;
   margin-bottom: 6px;
 }
 .home .swiper .entry_item .entry_title {

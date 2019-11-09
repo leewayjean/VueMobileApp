@@ -1,6 +1,6 @@
 <template>
   <ul class="shop_list">
-    <li class="shop_item" v-for="(item,index) in restaurants" :key="index">
+    <li class="shop_item" v-for="(item,index) in restaurants" :key="index" @click="goToShop(item)">
       <section class="avatar">
         <img :src="`//elm.cangdu.org/img/${item.image_path}`" alt />
       </section>
@@ -37,6 +37,18 @@ export default {
     return {
       restaurants: []
     };
+  },
+  methods:{
+    goToShop(item){
+      console.log(item)
+      this.$router.push({
+        path:"/shop",
+        query:{
+          id:item.id
+        }
+
+      })
+    }
   },
   mounted() {
     // 根据经纬度获取店铺
