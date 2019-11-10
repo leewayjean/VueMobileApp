@@ -55,6 +55,7 @@ const routes = [
     path:'/shop',
     name:"shop",
     component:Shop,
+    redirect:{name:"food"},
     children:[
       {
         path:"/shop/food",

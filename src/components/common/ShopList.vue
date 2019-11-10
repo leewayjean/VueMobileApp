@@ -82,6 +82,7 @@ export default {
   width: 54px;
   height: 54px;
   margin-right: 8px;
+  border-radius: 3px;
 }
 .shop_list .shop_item .shop .shop_info {
   display: flex;

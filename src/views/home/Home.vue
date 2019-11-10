@@ -25,7 +25,9 @@
     <!-- 店铺列表 -->
     <section class="shop_list_container">
       <header class="shop_header">附近商家</header>
-      <shop-list></shop-list>
+      <keep-alive>
+        <shop-list></shop-list>
+      </keep-alive>
     </section>
     <Footer />
   </div>
@@ -50,9 +52,11 @@ export default {
       this.indexEntry = arr;
     });
     // 根据经纬度获取精确地址
-    this.$axios.get(`https://elm.cangdu.org/v2/pois/${this.$route.query.geohash}`).then((res) => {
-      this.address = res.data.name;
-    })
+    this.$axios
+      .get(`https://elm.cangdu.org/v2/pois/${this.$route.query.geohash}`)
+      .then(res => {
+        this.address = res.data.name;
+      });
   },
   components: {
     HeaderTop,

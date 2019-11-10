@@ -27,7 +27,10 @@
     </nav>
     <!-- 食品 -->
     <section class="food_container">
-      <router-view></router-view>
+        <!-- keep-live -->
+      <keep-alive>
+        <router-view :shopInfo="shopInfo"></router-view>
+      </keep-alive>
     </section>
     <footer></footer>
   </main>
@@ -51,7 +54,7 @@ export default {
     this.$axios
       .get(`https://elm.cangdu.org/shopping/restaurant/${this.id}`)
       .then(res => {
-        console.log(res.data);
+          console.log(res.data)
         this.shopInfo = res.data;
       });
   }
@@ -60,11 +63,8 @@ export default {
 
 <style scoped>
 .shop {
-    width: 100%;
-    height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
 }
 /* 商店头部信息栏 */
 .shop .header {
@@ -134,6 +134,7 @@ export default {
   height: 45px;
   background-color: #fff;
   align-items: center;
+  border-bottom: 1px solid #ddd;
 }
 .shop nav .nav_item {
   flex: 1;
@@ -144,6 +145,7 @@ export default {
   color: #666;
   padding: 4px;
   font-size: 13px;
+  border-bottom: 2px solid #fff;
 }
 
 /* 路由激活状态 */
@@ -153,8 +155,8 @@ export default {
 }
 
 .food_container {
-  flex: 1;
-  background-color: #ccc;
+  height: calc(100% - 120px);
+  background-color: #f5f5f5;
   box-sizing: border-box;
 }
 </style>
