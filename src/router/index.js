@@ -11,6 +11,7 @@ const Forget = () => import("../views/login/children/Forget")
 const Shop = () => import("../views/shop/Shop")
 const Food = () => import("../views/shop/children/Food")
 const Comment = () => import("../views/shop/children/Comment")
+const ShopInfo = () => import("../views/shop/children/ShopInfo")
 
 Vue.use(VueRouter)
 
@@ -66,8 +67,13 @@ const routes = [
         path:"/shop/comment",
         name:"comment",
         component:Comment
-      }
+      },
     ]
+  },
+  {
+    path:"/shopinfo",
+    name:"shop_info",
+    component:ShopInfo
   },
   // 搜索店铺
   {

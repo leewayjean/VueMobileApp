@@ -1,6 +1,8 @@
 <template>
   <footer>
-    <router-link tag="div" to="/home" class="tab_item">
+    <router-link tag="div" :to="{path:'/home',query:{
+      geohash,
+    }}" class="tab_item">
       <i class="fa fa-home" aria-hidden="true"></i><span class="tab_name">首页</span>
     </router-link>
     <router-link tag="div" to="/search" class="tab_item">
@@ -14,6 +16,16 @@
     </router-link>
   </footer>
 </template>
+
+<script>
+import {mapState} from "vuex"
+export default {
+  name:"Footer",
+  computed:{
+    ...mapState(["geohash"])
+  }
+}
+</script>
 
 <style scoped>
 footer {

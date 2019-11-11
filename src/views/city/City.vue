@@ -55,11 +55,11 @@ export default {
     //跳转至首页，同时传递经纬度
     goToHome(geohash) {
       // 将geohash存储到vuex中
-  
+      this.$store.commit("SAVE_GEOHASH",geohash);
       this.$router.push({
         path: "/home",
         query: {
-          geohash: geohash
+          geohash,
         }
       });
     }

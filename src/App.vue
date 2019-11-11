@@ -3,7 +3,15 @@
     <router-view/>
   </div>
 </template>
+<script>
+export default {
+  name:"App",
+  created(){
+    
+  }
 
+}
+</script>
 <style>
 @import url("./assets/css/reset.css");
 html {

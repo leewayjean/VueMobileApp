@@ -13,6 +13,9 @@
             <p class="delivery_info">满20配送</p>
             <p class="shop_notice">公告：{{shopInfo.promotion_info}}</p>
           </section>
+          <router-link class="next_icon" to="/shopinfo">
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+          </router-link>
         </section>
       </header>
     </section>
@@ -27,7 +30,7 @@
     </nav>
     <!-- 食品 -->
     <section class="food_container">
-        <!-- keep-live -->
+      <!-- keep-live -->
       <keep-alive>
         <router-view :shopInfo="shopInfo"></router-view>
       </keep-alive>
@@ -54,7 +57,7 @@ export default {
     this.$axios
       .get(`https://elm.cangdu.org/shopping/restaurant/${this.id}`)
       .then(res => {
-          console.log(res.data)
+        console.log(res.data);
         this.shopInfo = res.data;
       });
   }

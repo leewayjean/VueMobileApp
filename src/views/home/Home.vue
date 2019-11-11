@@ -41,8 +41,24 @@ export default {
   data() {
     return {
       indexEntry: [],
-      address: "正在获取定位..."
+      address: "正在获取定位...",
+      geohash:""
     };
+  },
+  created(){
+        // 根据经纬度获取精确地址
+
+    // vuex 中获取 geohash
+    this.geohash = this.$store.state.geohash;
+    if(!this.geohash){
+      this.geohash = this.$route.query.geohash;
+    }
+    this.$axios.get(`https://elm.cangdu.org/v2/pois/${this.geohash}`).then(res => {
+      console.log(res.data)
+      this.address = res.data.name;
+    }).catch((err) => {
+      console.log(err)
+    });
   },
   mounted() {
     //   获取食品分类
@@ -51,12 +67,7 @@ export default {
       arr.push(res.data.slice(0, 8));
       this.indexEntry = arr;
     });
-    // 根据经纬度获取精确地址
-    this.$axios
-      .get(`https://elm.cangdu.org/v2/pois/${this.$route.query.geohash}`)
-      .then(res => {
-        this.address = res.data.name;
-      });
+
   },
   components: {
     HeaderTop,

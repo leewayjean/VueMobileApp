@@ -10,7 +10,10 @@
     <section class="food_wrapper" ref="food_wrapper">
       <section>
         <div v-for="(foodItem,index) in foodList" :key="index" class="list_item">
-          <h3 class="title">{{foodItem.name}}<span class="title_info">{{foodItem.description}}</span></h3>
+          <h3 class="title">
+            {{foodItem.name}}
+            <span class="title_info">{{foodItem.description}}</span>
+          </h3>
           <ul>
             <li v-for="(item,index) in foodItem.foods" :key="index" class="food_info">
               <img :src="`//elm.cangdu.org/img/${item.image_path}`" alt class="food_img" />
@@ -34,7 +37,7 @@ export default {
   data() {
     return {
       foodList: [],
-      id:this.$route.query.id,
+      id: this.$route.query.id
     };
   },
   created() {
@@ -82,6 +85,10 @@ export default {
   color: #666;
   background-color: #f5f5f5;
   border-bottom: 1px solid #ddd;
+  /* 单行省略显示 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .food .food_wrapper .list_item {
@@ -95,7 +102,7 @@ export default {
   font-weight: bold;
   background-color: #f5f5f5;
 }
-.food .food_wrapper .list_item .title  .title_info {
+.food .food_wrapper .list_item .title .title_info {
   font-size: 10px;
   color: #999;
   margin-left: 8px;
