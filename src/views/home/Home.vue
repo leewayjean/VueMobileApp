@@ -49,6 +49,7 @@ export default {
         // 根据经纬度获取精确地址
 
     // vuex 中获取 geohash
+    this.$route.query.geohash = this.geohash;
     this.geohash = this.$store.state.geohash;
     if(!this.geohash){
       this.geohash = this.$route.query.geohash;

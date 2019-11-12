@@ -3,8 +3,10 @@
     <header-top :goback="true" :headshow="true" headtitle="密码登录"></header-top>
     <form>
       <InputGroup inputtype="text" placeholder="账号"  v-model="username"/>
-      <InputGroup inputtype="password" placeholder="密码" v-model="password"/>
-      <InputGroup inputtype="text" placeholder="验证码" v-model="captcha_code"/>
+      <InputGroup :inputtype="inputType" placeholder="密码" v-model="password">
+        <mt-switch v-model="showValue" slot="switch"></mt-switch>
+      </InputGroup>
+      <InputGroup inputtype="text" placeholder="验证码" v-model="captcha_code" />
     </form>
     <section class="login_tips">
       <p class="tip_item">温馨提示：未注册过的账号，登录时将自动注册</p>
@@ -24,7 +26,14 @@ export default {
     return {
       username:'',
       password:'',
-      captcha_code:''
+      captcha_code:'',
+      hasLogin:null,
+      showValue:true,
+    }
+  },
+  computed:{
+    inputType(){
+      return this.showValue ? "password":"text"
     }
   },
   methods:{
@@ -34,7 +43,8 @@ export default {
         password:this.password,
         captcha_code:this.captcha_code,
       }).then((res) => {
-        console.log(res.data);
+        this.hasLogin = res.data;
+        console.log(this.hasLogin);
       })
     }
   },

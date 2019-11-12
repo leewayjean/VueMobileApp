@@ -13,7 +13,7 @@
             <p class="delivery_info">满20配送</p>
             <p class="shop_notice">公告：{{shopInfo.promotion_info}}</p>
           </section>
-          <router-link class="next_icon" to="/shopinfo">
+          <router-link class="next_icon" :to="{path:'/shopinfo',query:{id}}">
             <i class="fa fa-angle-right" aria-hidden="true"></i>
           </router-link>
         </section>
@@ -35,7 +35,19 @@
         <router-view :shopInfo="shopInfo"></router-view>
       </keep-alive>
     </section>
-    <footer></footer>
+    <!-- 底部购物车栏 -->
+    <footer>
+      <span class="cart">
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i> 
+      </span>
+      <section class="cart_container">
+        <section class="total">
+          <p class="price">￥4200元</p>
+          <p class="fee">配送费5元</p>
+        </section>
+        <span class="payBtn">去结算</span>
+      </section>
+    </footer>
   </main>
 </template>
 
@@ -161,5 +173,60 @@ export default {
   height: calc(100% - 120px);
   background-color: #f5f5f5;
   box-sizing: border-box;
+}
+
+/* 底部购物车栏 */
+footer {
+  box-sizing: border-box;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  background-color: #3d3d3f;
+}
+footer .cart {
+  position: absolute;
+  top: -15px;
+  left: 14px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  background-color: #0085ff;
+  border:4px solid #3d3d3f;
+  font-size: 20px;
+  color: #fff;
+}
+.cart_container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.cart_container .total {
+  flex: 1;
+  padding: 8px 0 5px 80px;
+}
+
+.cart_container .total .price {
+  font-size: 16px;
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.cart_container .total .fee {
+  font-size: 9.6px;
+  color: #fff;
+}
+.cart_container .payBtn {
+  flex: 0 0 100px;
+  background-color: #4cd946;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  line-height: 40px;
+  font-weight: bold;
 }
 </style>

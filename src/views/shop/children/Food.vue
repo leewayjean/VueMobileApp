@@ -112,7 +112,7 @@ export default {
         this.foodScroll.on("scroll", pos => {
           this.scrollY = Math.abs(Math.round(pos.y));
         });
-      }, 3000);
+      }, 2000);
     });
   },
 };

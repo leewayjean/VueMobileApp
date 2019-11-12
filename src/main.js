@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 // 引入mint-ui
-import { Swipe, SwipeItem } from 'mint-ui';
+import { Swipe, SwipeItem,Switch} from 'mint-ui';
 
 import router from './router'
 import store from './store'
@@ -12,6 +12,7 @@ import axios from "axios"
 
 Vue.component("mt-swipe", Swipe);
 Vue.component("mt-swipe-item", SwipeItem);
+Vue.component("mt-switch",Switch)
 
 
 // axios 
