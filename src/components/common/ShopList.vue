@@ -2,7 +2,7 @@
   <ul class="shop_list">
     <li class="shop_item" v-for="(item,index) in restaurants" :key="index" @click="goToShop(item)">
       <section class="avatar">
-        <img :src="`//elm.cangdu.org/img/${item.image_path}`" alt />
+        <img :src="`//elm.cangdu.org/img/${item.image_path}`" alt  />
       </section>
       <section class="shop">
         <section class="shop_info">

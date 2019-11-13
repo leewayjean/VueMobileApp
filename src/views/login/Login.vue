@@ -6,7 +6,15 @@
       <InputGroup :inputtype="inputType" placeholder="密码" v-model="password">
         <mt-switch v-model="showValue" slot="switch"></mt-switch>
       </InputGroup>
-      <InputGroup inputtype="text" placeholder="验证码" v-model="captcha_code" />
+      <InputGroup inputtype="text" placeholder="验证码" v-model="captcha_code" >
+        <section slot="verifyCode" class="verify_code">
+          <img src="" alt="">
+          <section class="tips">
+            <p>看不清</p>
+            <span>换一张</span>
+          </section>
+        </section>
+      </InputGroup>
     </form>
     <section class="login_tips">
       <p class="tip_item">温馨提示：未注册过的账号，登录时将自动注册</p>
@@ -58,6 +66,15 @@ export default {
 .login {
   margin-top: 12px;
   padding-top: 39px;
+}
+.login form .verify_code p{
+    font-size: 11px;
+    color:#666;
+    margin-bottom: 3px;
+}
+.login form .verify_code span {
+  font-size: 11px;
+  color: #3b95e9;
 }
 .login .login_tips .tip_item {
   font-size: 10px;

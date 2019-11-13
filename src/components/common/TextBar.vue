@@ -38,5 +38,6 @@ export default {
 }
 .text_bar .next_icon i {
   color: #666;
+  font-size: 16px;
 }
 </style>

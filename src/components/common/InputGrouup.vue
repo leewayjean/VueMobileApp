@@ -2,6 +2,7 @@
   <section class="input_group">
     <input :type="inputtype" :placeholder="placeholder" class="input" @input="passValue"/>
     <slot name="switch"></slot>
+    <slot name="verifyCode"></slot>
   </section>
 </template>
 

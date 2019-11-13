@@ -118,6 +118,7 @@ export default {
 }
 .profile header .user_info .next_icon {
   color: #fff;
+  font-size: 16px;
 }
 
 /* 用户信息 */
