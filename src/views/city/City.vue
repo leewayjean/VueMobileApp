@@ -26,7 +26,8 @@
   </div>
 </template>
 <script>
-import {mapMutations} from "vuex"
+import { mapMutations } from "vuex";
+import { searchAddress, getCurrentCityById } from "../../server/getData";
 import HeaderTop from "../../components/header/header";
 export default {
   name: "City",
@@ -41,25 +42,21 @@ export default {
   methods: {
     // 搜索地址
     searchCity() {
+      // 如果输入框有值
       if (this.inputValue) {
-        this.$axios
-          .get(
-            `https://elm.cangdu.org/v1/pois?city_id=${this.cityId}&keyword=${this.inputValue}&type=search`
-          )
-          .then(res => {
-            console.log(res);
-            this.searchResult = res.data;
-          });
+        searchAddress(this.cityId, this.inputValue).then(res => {
+          this.searchResult = res.data;
+        });
       }
     },
     //跳转至首页，同时传递经纬度
     goToHome(geohash) {
       // 将geohash存储到vuex中
-      this.$store.commit("SAVE_GEOHASH",geohash);
+      this.$store.commit("SAVE_GEOHASH", geohash);
       this.$router.push({
         path: "/home",
         query: {
-          geohash,
+          geohash
         }
       });
     }
@@ -68,12 +65,9 @@ export default {
     //根据路由获取当前城市id
     this.cityId = this.$route.params.id;
     // 根据id获取城市
-    this.$axios
-      .get(`https://elm.cangdu.org/v1/cities/${this.cityId}`)
-      .then(res => {
-        console.log(this.cityName);
-        this.cityName = res.data.name;
-      });
+    getCurrentCityById(this.cityId).then(res => {
+      this.cityName = res.data.name;
+    });
   },
   components: {
     HeaderTop

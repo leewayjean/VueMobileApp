@@ -36,6 +36,7 @@
 import HeaderTop from "../../components/header/header";
 import Footer from "../../components/footer/Footer";
 import ShopList from "../../components/common/ShopList";
+import {getAddressByGeohash,getIndexEntry} from "../../server/getData"
 export default {
   name: "Home",
   data() {
@@ -54,8 +55,8 @@ export default {
     if(!this.geohash){
       this.geohash = this.$route.query.geohash;
     }
-    this.$axios.get(`https://elm.cangdu.org/v2/pois/${this.geohash}`).then(res => {
-      console.log(res.data)
+    // 根据地理精度获取地址
+    getAddressByGeohash(this.geohash).then(res => {
       this.address = res.data.name;
     }).catch((err) => {
       console.log(err)
@@ -63,7 +64,7 @@ export default {
   },
   mounted() {
     //   获取食品分类
-    this.$axios.get(`https://elm.cangdu.org/v2/index_entry`).then(res => {
+    getIndexEntry().then(res => {
       let arr = [];
       arr.push(res.data.slice(0, 8));
       this.indexEntry = arr;

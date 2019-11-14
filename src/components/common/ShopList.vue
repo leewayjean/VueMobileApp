@@ -2,7 +2,7 @@
   <ul class="shop_list">
     <li class="shop_item" v-for="(item,index) in restaurants" :key="index" @click="goToShop(item)">
       <section class="avatar">
-        <img :src="`//elm.cangdu.org/img/${item.image_path}`" alt  />
+        <img :src="`//elm.cangdu.org/img/${item.image_path}`" alt />
       </section>
       <section class="shop">
         <section class="shop_info">
@@ -20,17 +20,20 @@
           <p class="month_sell">月售8888</p>
         </section>
         <section class="shop_info">
-            <span class="delivery">￥{{item.float_delivery_fee}}元起送 / 配送费约{{item.float_minimum_order_amount}}元</span>
-           <span>
-             <span class="distance">{{item.distance}}/</span>
-             <span class="order_lead_time">{{item.order_lead_time}}</span>
-           </span>
+          <span
+            class="delivery"
+          >￥{{item.float_delivery_fee}}元起送 / 配送费约{{item.float_minimum_order_amount}}元</span>
+          <span>
+            <span class="distance">{{item.distance}}/</span>
+            <span class="order_lead_time">{{item.order_lead_time}}</span>
+          </span>
         </section>
       </section>
     </li>
   </ul>
 </template>
 <script>
+import { getShopList } from "../../server/getData";
 export default {
   name: "ShopList",
   data() {
@@ -38,27 +41,22 @@ export default {
       restaurants: []
     };
   },
-  methods:{
-    goToShop(item){
-      console.log(item)
+  methods: {
+    goToShop(item) {
+      console.log(item);
       this.$router.push({
-        path:"/shop",
-        query:{
-          id:item.id
+        path: "/shop",
+        query: {
+          id: item.id
         }
-
-      })
+      });
     }
   },
   mounted() {
     // 根据经纬度获取店铺
-    this.$axios
-      .get(
-        `https://elm.cangdu.org/shopping/restaurants?latitude=31.22967&longitude=121.4762`
-      )
-      .then(res => {
-        this.restaurants = res.data;
-      });
+    getShopList().then(res => {
+      this.restaurants = res.data;
+    });
   }
 };
 </script>
@@ -89,10 +87,10 @@ export default {
   justify-content: space-between;
   align-items: flex-end;
 }
-.shop_list .shop_item .shop .shop_info:nth-child(2){
+.shop_list .shop_item .shop .shop_info:nth-child(2) {
   margin-top: 10px;
 }
-.shop_list .shop_item .shop .shop_info:nth-child(3){
+.shop_list .shop_item .shop .shop_info:nth-child(3) {
   margin-top: 10px;
 }
 .shop_list .shop_item .shop .shop_info .rating_num {
@@ -105,7 +103,7 @@ export default {
   color: #666;
 }
 
-.shop_list .shop_item .shop .shop_info .delivery{
+.shop_list .shop_item .shop .shop_info .delivery {
   font-size: 10px;
   color: #666;
 }
@@ -114,10 +112,9 @@ export default {
   color: #999;
 }
 .shop_list .shop_item .shop .shop_info .order_lead_time {
-    font-size: 10px;
-    color: #0089dc;
+  font-size: 10px;
+  color: #0089dc;
 }
-
 
 .shop_list .shop_item .shop .name {
   font-size: 13px;

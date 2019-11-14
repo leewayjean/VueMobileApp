@@ -74,8 +74,6 @@ export default {
 </script>
 
 <style scoped>
-.profile {
-}
 .profile header {
   display: flex;
   justify-content: space-between;

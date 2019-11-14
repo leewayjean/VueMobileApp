@@ -38,7 +38,7 @@
     <!-- 底部购物车栏 -->
     <footer>
       <span class="cart">
-        <i class="fa fa-shopping-cart" aria-hidden="true"></i> 
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
       </span>
       <section class="cart_container">
         <section class="total">
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+import { getShopInfo } from "../../server/getData";
 export default {
   name: "Shop",
   data() {
@@ -66,12 +67,11 @@ export default {
     }
   },
   mounted() {
-    this.$axios
-      .get(`https://elm.cangdu.org/shopping/restaurant/${this.id}`)
-      .then(res => {
-        console.log(res.data);
-        this.shopInfo = res.data;
-      });
+    // 根据id获取店铺信息
+    getShopInfo(this.id).then(res => {
+      console.log(res.data);
+      this.shopInfo = res.data;
+    });
   }
 };
 </script>
@@ -195,7 +195,7 @@ footer .cart {
   line-height: 40px;
   border-radius: 50%;
   background-color: #0085ff;
-  border:4px solid #3d3d3f;
+  border: 4px solid #3d3d3f;
   font-size: 20px;
   color: #fff;
 }

@@ -38,6 +38,7 @@
 
 <script>
 import BScroll from "@better-scroll/core";
+import { getFoods } from "../../../server/getData";
 export default {
   name: "Food",
   data() {
@@ -100,11 +101,9 @@ export default {
     }
   },
   created() {
-    this.$axios
-      .get(`https://elm.cangdu.org/shopping/v2/menu?restaurant_id=${this.id}`)
-      .then(res => {
-        this.foodList = res.data;
-      });
+    getFoods(this.id).then(res => {
+      this.foodList = res.data;
+    });
     this.$nextTick(() => {
       setTimeout(() => {
         this.initScroll();
@@ -114,7 +113,7 @@ export default {
         });
       }, 2000);
     });
-  },
+  }
 };
 </script>
 

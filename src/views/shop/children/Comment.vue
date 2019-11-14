@@ -21,17 +21,24 @@
         </ul>
         <ul class="content_list">
           <li v-for="(item,index) in rates" :key="index" class="list_item">
-            <img :src="`https://fuss10.elemecdn.com/1/5f/${item.avatar}.jpeg`" alt="头像" class="avatar" />
+            <img
+              :src="`https://fuss10.elemecdn.com/1/5f/${item.avatar}.jpeg`"
+              alt="头像"
+              class="avatar"
+            />
             <section class="rate_content">
               <p class="info">
                 <span class="username">{{item.username}}</span>
                 <span class="rated_at">{{item.rated_at}}</span>
               </p>
               <ul class="img_list">
-               <li v-for="(img,index) in item.item_ratings" :key="index">
-                 {{img.food_name}}
-                 <img :src="`https://fuss10.elemecdn.com/0/74/${img.image_hash}.jpeg`" alt="">
-               </li>
+                <li v-for="(img,index) in item.item_ratings" :key="index">
+                  {{img.food_name}}
+                  <img
+                    :src="`https://fuss10.elemecdn.com/0/74/${img.image_hash}.jpeg`"
+                    alt
+                  />
+                </li>
               </ul>
             </section>
           </li>
@@ -43,6 +50,11 @@
 
 <script>
 import BScroll from "@better-scroll/core";
+import {
+  getRatingsTags,
+  getRatings,
+  getShopInfo
+} from "../../../server/getData";
 export default {
   name: "Comment",
   data() {
@@ -55,25 +67,18 @@ export default {
   },
   mounted() {
     //获取餐馆信息
-    this.$axios
-      .get(`https://elm.cangdu.org/shopping/restaurant/${this.id}`)
-      .then(res => {
-        this.shopInfo = res.data;
-      });
+    getShopInfo(this.id).then(res => {
+      this.shopInfo = res.data;
+    });
 
     // 获取餐馆评价标签
-    this.$axios
-      .get(`https://elm.cangdu.org/ugc/v2/restaurants/${this.id}/ratings/tags`)
-      .then(res => {
-        this.tags = res.data;
-      });
+    getRatingsTags(this.id).then(res => {
+      this.tags = res.data;
+    });
     // 获取评价
-    this.$axios
-      .get(`https://elm.cangdu.org/ugc/v2/restaurants/${this.id}/ratings`)
-      .then(res => {
-        console.log(res.data);
-        this.rates = res.data;
-      });
+    getRatings(this.id).then(res => {
+      this.rates = res.data;
+    });
   },
   updated() {
     new BScroll(this.$refs.wrapper, {

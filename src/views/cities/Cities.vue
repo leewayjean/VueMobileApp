@@ -42,7 +42,7 @@
 
 <script>
 import HeaderTop from "../../components/header/header";
-import { getHotCity } from "../../server/getData";
+import { getHotCity,getCurrentCity,getCityGroup } from "../../server/getData";
 export default {
   name: "Cities",
   data() {
@@ -58,17 +58,16 @@ export default {
     }
   },
   mounted() {
-    // 获取当前城市
-    this.$axios.get("https://elm.cangdu.org/v1/cities?type=guess").then(res => {
+    getCurrentCity().then((res) => {
       console.log(res.data)
       this.currentCity = res.data;
-    });
+    })
     // 获取热门城市
-    this.$axios.get("https://elm.cangdu.org/v1/cities?type=hot").then(res => {
+    getHotCity().then(res => {
       this.hotCity = res.data;
     });
     // 获取所有城市
-    this.$axios.get("https://elm.cangdu.org/v1/cities?type=group").then(res => {
+    getCityGroup().then(res => {
       console.log(res);
       this.cityGroup = res.data;
     });

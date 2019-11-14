@@ -25,6 +25,7 @@
 <script>
 import HeaderTop from "../../components/header/header";
 import Footer from "../../components/footer/Footer";
+import {searchRestaurant} from "../../server/getData"
 export default {
   name: "Search",
   data() {
@@ -34,12 +35,9 @@ export default {
   },
   methods: {
     searchShop() {
-      this.$axios
-        .get(
-          `https://elm.cangdu.org/v4/restaurants?geohash=31.22967,121.4762&keyword=肯德基`
-        )
+      // 根据地理精度geohash和关键词搜索参观
+     searchRestaurant()
         .then(res => {
-          console.log(res.data);
           this.foodList = res.data;
         });
     }
