@@ -41,9 +41,9 @@ export default {
   name: "Home",
   data() {
     return {
-      indexEntry: [],
-      address: "正在获取定位...",
-      geohash:""
+      indexEntry: [], //分类入口
+      address: "正在获取定位...",  // 当前地址
+      geohash:"" // 地理坐标
     };
   },
   created(){

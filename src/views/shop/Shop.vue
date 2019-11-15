@@ -1,5 +1,8 @@
 <template>
   <main class="shop">
+    <!-- <section v-if="!successLoadData">
+      <img src="../../assets/images/shop_back_svg.svg" alt="">
+    </section>-->
     <!-- 店铺信息栏 -->
     <section class="header">
       <span class="goBackBtn" @click="goBack">
@@ -53,20 +56,31 @@
 
 <script>
 import { getShopInfo } from "../../server/getData";
+import { mapState } from "vuex";
 export default {
   name: "Shop",
   data() {
     return {
-      shopInfo: {},
-      id: this.$route.query.id
+      shopInfo: {}, //店铺信息
+      successLoadData: false,
+      id: this.$route.query.id  //当前路由查询参数
     };
   },
+  computed: {
+    ...mapState(["geohash"])
+  },
   methods: {
+    // 返回到home页面
     goBack() {
-      this.$router.push("/home");
+      this.$router.push({
+        path: "/home",
+        query: {
+          geohash: this.geohash
+        }
+      });
     }
   },
-  mounted() {
+  created() {
     // 根据id获取店铺信息
     getShopInfo(this.id).then(res => {
       console.log(res.data);

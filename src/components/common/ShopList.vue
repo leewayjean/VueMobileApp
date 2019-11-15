@@ -43,7 +43,6 @@ export default {
   },
   methods: {
     goToShop(item) {
-      console.log(item);
       this.$router.push({
         path: "/shop",
         query: {

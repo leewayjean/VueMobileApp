@@ -1,6 +1,6 @@
 <template>
   <section class="food">
-    <!-- better-scrool 容器 -->
+    <!-- better-scrool 容器  && 左侧菜单栏 -->
     <section class="categories_wrapper" ref="categories_wrapper">
       <ul class="food_categories">
         <li
@@ -12,21 +12,31 @@
         >{{item.name}}</li>
       </ul>
     </section>
-    <!-- better-scrool 容器 -->
+    <!-- better-scrool 容器  && 右侧食品栏-->
     <section class="food_wrapper" ref="food_wrapper">
       <section>
         <div v-for="(foodItem,index) in foodList" :key="index" class="list_item">
-          <h3 class="title">
+          <!-- 分类标题 -->
+          <h3 class="title"> 
             {{foodItem.name}}
+            <!-- 标题描述 -->
             <span class="title_info">{{foodItem.description}}</span>
           </h3>
+          <!-- 分类下的商品 -->
           <ul>
             <li v-for="(item,index) in foodItem.foods" :key="index" class="food_info">
               <img :src="`//elm.cangdu.org/img/${item.image_path}`" alt class="food_img" />
               <section>
+                <!-- 商品名称 -->
                 <h5 class="food_name">{{item.name}}</h5>
+                <!-- 商品描述 -->
                 <p class="food_des">{{item.description}}</p>
+                <!-- 商品提示 -->
                 <p class="food_tips">{{item.tips}}</p>
+                <section>
+                  <!-- 商品价格 -->
+                  <span class="price">{{item.price}}</span>
+                </section>
               </section>
             </li>
           </ul>
@@ -43,8 +53,8 @@ export default {
   name: "Food",
   data() {
     return {
-      foodList: [],
-      id: this.$route.query.id,
+      foodList: [], //食品列表
+      id: this.$route.query.id, // 路由查询参数
       listHeight: [], //右边每个li所处高度
       foodScroll: {}, //右侧的BScroll对象
       menuScroll: {}, //左侧的BScroll对象
@@ -102,11 +112,19 @@ export default {
   },
   created() {
     getFoods(this.id).then(res => {
+      // 获取数据
+      console.log(res.data);
       this.foodList = res.data;
+      // 获取数据完成后关闭骨架图
+      this.$parent.successLoadData = true;
       this.$nextTick(() => {
+        // 初始化better-scroll
         this.initScroll();
+        // 记录每项高度
         this.calculateHeight();
+        // 监听滚动事件
         this.foodScroll.on("scroll", pos => {
+          // 记录Y轴滚动距离
           this.scrollY = Math.abs(Math.round(pos.y));
         });
       });
@@ -130,6 +148,7 @@ export default {
   flex: 1;
 }
 .food .food_categories {
+  padding-bottom: 100px;
   width: 100%;
   overflow: hidden;
 }
@@ -147,9 +166,12 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
 .food .food_wrapper .list_item {
   background-color: #fff;
+}
+
+.food .food_wrapper .list_item:last-child{
+  padding-bottom: 100vh;
 }
 .food .food_wrapper .list_item .title {
   box-sizing: border-box;

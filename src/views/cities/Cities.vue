@@ -47,17 +47,19 @@ export default {
   name: "Cities",
   data() {
     return {
-      currentCity: {},
-      hotCity: [],
-      cityGroup: {}
+      currentCity: {},// 当前城市
+      hotCity: [], // 热门城市列表
+      cityGroup: {} // 全国城市列表
     };
   },
   methods: {
     reload() {
+      // 重新加载页面
       window.location.reload();
     }
   },
   mounted() {
+    // 获取当前城市
     getCurrentCity().then((res) => {
       this.currentCity = res.data;
     })
@@ -71,6 +73,7 @@ export default {
     });
   },
   filters: {
+    // 截取过长的文字
     sliceWord(str) {
       if (str.length > 5) return str.slice(0, 4) + "...";
       return str;

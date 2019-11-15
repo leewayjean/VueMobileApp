@@ -9,7 +9,12 @@
     </form>
     <!-- 商家或食品列表 -->
     <main class="search_result_container">
-      <section class="search_result_item" v-for="(item,index) in foodList" :key="index">
+      <section
+        class="search_result_item"
+        v-for="(item,index) in foodList"
+        :key="index"
+        @click="toShop(item)"
+      >
         <img :src="`//elm.cangdu.org/img/${item.image_path}`" alt class="shop_avatar" />
         <section class="shop_info">
           <h3 class="name">{{item.name}}</h3>
@@ -25,7 +30,7 @@
 <script>
 import HeaderTop from "../../components/header/header";
 import Footer from "../../components/footer/Footer";
-import {searchRestaurant} from "../../server/getData"
+import { searchRestaurant } from "../../server/getData";
 export default {
   name: "Search",
   data() {
@@ -36,10 +41,18 @@ export default {
   methods: {
     searchShop() {
       // 根据地理精度geohash和关键词搜索参观
-     searchRestaurant()
-        .then(res => {
-          this.foodList = res.data;
-        });
+      searchRestaurant().then(res => {
+        this.foodList = res.data;
+      });
+    },
+    // 跳转到店铺
+    toShop(item) {
+      this.$router.push({
+        path: "/shop",
+        query: {
+          id: item.id
+        }
+      });
     }
   },
   components: {
@@ -84,6 +97,9 @@ export default {
   text-align: center;
   line-height: 30px;
   border-radius: 4px;
+}
+.search .search_result_container {
+  margin-top: 8px;
 }
 .search .search_result_item {
   display: flex;

@@ -54,10 +54,10 @@ footer .tab_item i {
 footer .tab_item .tab_name {
   font-size: 9.6px;
 }
-.router-link-active i{
+footer .router-link-active i{
   color: #0089dc;
 }
-.router-link-active .tab_name {
+footer .router-link-active .tab_name {
     color: #0089dc;
 }
 </style>

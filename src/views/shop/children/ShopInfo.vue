@@ -1,13 +1,18 @@
 <template>
   <div class="order">
     <header-top :goback="true" :headshow="true" headtitle="店铺详情"></header-top>
-    <p>order</p>
+    <Cell>
+      <h3 slot="title">
+        活动与属性
+      </h3>
+    </Cell>
     <Footer />
   </div>
 </template>
 <script>
 import HeaderTop from "../../../components/header/header";
 import { getShopInfo } from "../../../server/getData";
+import { Cell } from 'mint-ui';
 export default {
   name: "Order",
   data() {
@@ -21,7 +26,8 @@ export default {
     });
   },
   components: {
-    HeaderTop
+    HeaderTop,
+    Cell
   }
 };
 </script>

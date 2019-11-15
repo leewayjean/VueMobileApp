@@ -33,10 +33,10 @@ export default {
   name: "City",
   data() {
     return {
-      cityId: "",
-      cityName: "",
-      inputValue: "",
-      searchResult: []
+      cityId: "", // 当前城市id
+      cityName: "",  //当前城市的名称
+      inputValue: "", // 搜索框的值
+      searchResult: [] // 搜索的地址列表
     };
   },
   methods: {
@@ -60,6 +60,7 @@ export default {
       }
       // 记录当前地址的经纬度
       this.$store.commit("RECORD_ADDRESS",geo)
+      // 跳转到首页
       this.$router.push({
         path: "/home",
         query: {

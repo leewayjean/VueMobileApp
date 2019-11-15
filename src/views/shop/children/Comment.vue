@@ -17,7 +17,13 @@
       <!-- 评论内容 -->
       <section class="content">
         <ul class="tags">
-          <li v-for="(tag,index) in tags" :key="index" class="tag">{{tag.name}}({{tag.count}})</li>
+          <li
+            v-for="(tag,index) in tags"
+            :key="index"
+            class="tag"
+            :class="{activeClass:currentIndex == index}"
+            @click="changeTag(index)"
+          >{{tag.name}}({{tag.count}})</li>
         </ul>
         <ul class="content_list">
           <li v-for="(item,index) in rates" :key="index" class="list_item">
@@ -62,8 +68,14 @@ export default {
       shopInfo: {},
       tags: [],
       rates: [],
+      currentIndex: 0, // 当前点击的标签索引
       id: this.$route.query.id
     };
+  },
+  methods:{
+    changeTag(index){
+      this.currentIndex = index;
+    }
   },
   mounted() {
     //获取餐馆信息
@@ -83,6 +95,7 @@ export default {
   updated() {
     new BScroll(this.$refs.wrapper, {
       // ...... 详见配置项
+      click:true
     });
   }
 };
@@ -159,5 +172,10 @@ export default {
 .comment .content .content_list .list_item .rate_content .info .rated_at {
   font-size: 9.6px;
   color: #999;
+}
+
+.comment .tags .tag.activeClass {
+  background-color: #3190e8;
+  color: #fff;
 }
 </style>

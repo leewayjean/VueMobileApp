@@ -96,7 +96,7 @@ export default {
    display: flex;
  }
   .login form .verify_code img {
-    widows: 70px;
+    width: 70px;
     margin-right: 5px;
   }
 .login form .verify_code p{
