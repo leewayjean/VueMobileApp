@@ -103,15 +103,13 @@ export default {
   created() {
     getFoods(this.id).then(res => {
       this.foodList = res.data;
-    });
-    this.$nextTick(() => {
-      setTimeout(() => {
+      this.$nextTick(() => {
         this.initScroll();
         this.calculateHeight();
         this.foodScroll.on("scroll", pos => {
           this.scrollY = Math.abs(Math.round(pos.y));
         });
-      }, 2000);
+      });
     });
   }
 };

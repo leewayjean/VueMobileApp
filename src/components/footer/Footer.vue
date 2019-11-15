@@ -11,7 +11,7 @@
     <router-link tag="div" to="/order" class="tab_item">
       <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="tab_name">订单</span>
     </router-link>
-    <router-link tag="div" to="/me" class="tab_item">
+    <router-link tag="div" to="/profile" class="tab_item">
       <i class="fa fa-user" aria-hidden="true"></i><span class="tab_name">我的</span>
     </router-link>
   </footer>

@@ -59,7 +59,6 @@ export default {
   },
   mounted() {
     getCurrentCity().then((res) => {
-      console.log(res.data)
       this.currentCity = res.data;
     })
     // 获取热门城市
@@ -68,7 +67,6 @@ export default {
     });
     // 获取所有城市
     getCityGroup().then(res => {
-      console.log(res);
       this.cityGroup = res.data;
     });
   },

@@ -41,8 +41,8 @@ export const searchRestaurant = () => {
 
 // 获取店铺首页店铺列表(根据经纬度)
 
-export const getShopList = (latitue, longitute) => {
-    return axios.get(`https://elm.cangdu.org/shopping/restaurants?latitude=31.22967&longitude=121.4762`)
+export const getShopList = (latitude, longitude) => {
+    return axios.get(`https://elm.cangdu.org/shopping/restaurants?latitude=${latitude}&longitude=${longitude}`)
 }
 
 

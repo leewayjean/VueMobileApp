@@ -13,14 +13,14 @@
     </header-top>
     <!-- 轮播 -->
     <div class="swipe_container">
-      <div class="swiper">
-        <div v-for="(entryItem, index) in indexEntry" :key="index" class="swipe_item">
-          <span v-for="item in entryItem" :key="item.id" class="entry_item">
+      <mt-swipe class="swiper" :auto="0">
+        <mt-swipe-item v-for="(entryItem, index) in indexEntry" :key="index" class="swipe_item">
+          <div v-for="item in entryItem" :key="item.id" class="entry_item">
             <img :src="`https://fuss10.elemecdn.com${item.image_url}`" alt="分类" class="entry_img" />
             <h5 class="entry_title">{{item.title}}</h5>
-          </span>
-        </div>
-      </div>
+          </div>
+        </mt-swipe-item>
+      </mt-swipe>
     </div>
     <!-- 店铺列表 -->
     <section class="shop_list_container">
@@ -49,13 +49,11 @@ export default {
   created(){
         // 根据经纬度获取精确地址
 
-    // vuex 中获取 geohash
-    this.$route.query.geohash = this.geohash;
-    this.geohash = this.$store.state.geohash;
-    if(!this.geohash){
-      this.geohash = this.$route.query.geohash;
-    }
+   this.geohash = this.$route.query.geohash ;
     // 根据地理精度获取地址
+    if(!this.geohash){
+      this.geohash = this.$store.state.geohash;
+    }
     getAddressByGeohash(this.geohash).then(res => {
       this.address = res.data.name;
     }).catch((err) => {
@@ -67,6 +65,7 @@ export default {
     getIndexEntry().then(res => {
       let arr = [];
       arr.push(res.data.slice(0, 8));
+      console.log(arr)
       this.indexEntry = arr;
     });
 
@@ -100,7 +99,9 @@ export default {
 }
 .home .swiper {
   width: 100%;
+  height: 180px;
   background-color: #fff;
+  display: inline-block;
 }
 .home .swiper .swipe_item {
   width: 100%;

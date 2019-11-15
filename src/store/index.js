@@ -5,9 +5,11 @@ import mutations from "./mutations"
 import actions from "./actions"
 
 Vue.use(Vuex)
-
+// state
 const state = {
-  geohash:"31.14419,121.66034",//地址hash值
+  geohash:"31.14419,121.66034",//地址geohash值
+  latitude:null,
+  longitude:null,
 }
 
 export default new Vuex.Store({

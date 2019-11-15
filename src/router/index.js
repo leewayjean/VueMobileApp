@@ -5,7 +5,7 @@ const City = () => import("../views/city/City")
 const Home = () => import("../views/home/Home")
 const Search = () => import("../views/search/Search")
 const Order = () => import("../views/order/Order")
-const Me = () => import("../views/me/Me")
+const Profile = () => import("../views/profile/Profile")
 const Login = () => import("../views/login/Login")
 const Forget = () => import("../views/login/children/Forget")
 const Shop = () => import("../views/shop/Shop")
@@ -45,7 +45,7 @@ const routes = [
     name: "forget",
     component: Forget
   },
-// 首页
+  // 首页
   {
     path: '/home',
     name: 'home',
@@ -53,27 +53,27 @@ const routes = [
   },
   // 店铺
   {
-    path:'/shop',
-    name:"shop",
-    component:Shop,
-    redirect:{name:"food"},
-    children:[
+    path: '/shop',
+    name: "shop",
+    component: Shop,
+    redirect: { name: "food" },
+    children: [
       {
-        path:"/shop/food",
-        name:"food",
-        component:Food
+        path: "/shop/food",
+        name: "food",
+        component: Food
       },
       {
-        path:"/shop/comment",
-        name:"comment",
-        component:Comment
+        path: "/shop/comment",
+        name: "comment",
+        component: Comment
       },
     ]
   },
   {
-    path:"/shopinfo",
-    name:"shop_info",
-    component:ShopInfo
+    path: "/shopinfo",
+    name: "shop_info",
+    component: ShopInfo
   },
   // 搜索店铺
   {
@@ -89,9 +89,9 @@ const routes = [
   },
   // 我的
   {
-    path: '/me',
-    name: 'me',
-    component: Me
+    path: '/profile',
+    name: 'profile',
+    component: Profile
   },
 
 ]

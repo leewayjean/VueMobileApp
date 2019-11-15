@@ -17,7 +17,7 @@
         class="search_result_item"
         v-for="item in searchResult"
         :key="item.latitude"
-        @click="goToHome(item.geohash)"
+        @click="goToHome(item)"
       >
         <h6 class="name">{{item.name}}</h6>
         <p class="address">{{item.address}}</p>
@@ -45,18 +45,25 @@ export default {
       // 如果输入框有值
       if (this.inputValue) {
         searchAddress(this.cityId, this.inputValue).then(res => {
+          console.log(res.data)
           this.searchResult = res.data;
         });
       }
     },
     //跳转至首页，同时传递经纬度
-    goToHome(geohash) {
+    goToHome(address) {
       // 将geohash存储到vuex中
-      this.$store.commit("SAVE_GEOHASH", geohash);
+      this.$store.commit("SAVE_GEOHASH", address.geohash);
+      const geo = {
+        latitude:address.latitude,
+        longitude:address.longitude
+      }
+      // 记录当前地址的经纬度
+      this.$store.commit("RECORD_ADDRESS",geo)
       this.$router.push({
         path: "/home",
         query: {
-          geohash
+          geohash:address.geohash
         }
       });
     }

@@ -35,6 +35,7 @@
 <script>
 import HeaderTop from "../../components/header/header";
 import InputGroup from "../../components/common/InputGrouup";
+import { Toast } from 'mint-ui';
 export default {
   name:"Login",
   data(){
@@ -59,6 +60,7 @@ export default {
   },
   methods:{
     toLogin(){
+      Toast('提示信息');
       console.log(this.username,this.password,this.captcha_code)
       this.$axios.post(`https://elm.cangdu.org/v2/login`,{
         username:this.username,
