@@ -65,7 +65,6 @@ export default {
     getIndexEntry().then(res => {
       let arr = [];
       arr.push(res.data.slice(0, 8));
-      console.log(arr)
       this.indexEntry = arr;
     });
 
