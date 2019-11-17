@@ -26,15 +26,17 @@
   </div>
 </template>
 <script>
+import { Toast } from "mint-ui";
 import { mapMutations } from "vuex";
 import { searchAddress, getCurrentCityById } from "../../server/getData";
+import {setLocalStorage} from "../../config/utils"
 import HeaderTop from "../../components/header/header";
 export default {
   name: "City",
   data() {
     return {
       cityId: "", // 当前城市id
-      cityName: "",  //当前城市的名称
+      cityName: "", //当前城市的名称
       inputValue: "", // 搜索框的值
       searchResult: [] // 搜索的地址列表
     };
@@ -44,9 +46,15 @@ export default {
     searchCity() {
       // 如果输入框有值
       if (this.inputValue) {
+        // 搜索历史存储到localStorage
+      setLocalStorage("address",this.inputValue)
         searchAddress(this.cityId, this.inputValue).then(res => {
-          console.log(res.data)
           this.searchResult = res.data;
+        });
+      } else {
+        Toast({
+          message: "请输入内容",
+          duration: 1000
         });
       }
     },
@@ -55,16 +63,16 @@ export default {
       // 将geohash存储到vuex中
       this.$store.commit("SAVE_GEOHASH", address.geohash);
       const geo = {
-        latitude:address.latitude,
-        longitude:address.longitude
-      }
+        latitude: address.latitude,
+        longitude: address.longitude
+      };
       // 记录当前地址的经纬度
-      this.$store.commit("RECORD_ADDRESS",geo)
+      this.$store.commit("RECORD_ADDRESS", geo);
       // 跳转到首页
       this.$router.push({
         path: "/home",
         query: {
-          geohash:address.geohash
+          geohash: address.geohash
         }
       });
     }

@@ -18,7 +18,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: "*",
-    redirect: "/home"
+    redirect: "/cities"
   },
   // 城市列表
   {

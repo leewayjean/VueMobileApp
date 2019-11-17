@@ -4,7 +4,7 @@
     <header-top :goback="true" :headshow="true" headtitle="搜索"></header-top>
     <!-- 表达你 -->
     <form class="search_form">
-      <input type="text" class="search_input" placeholder="请输入商家或美食名称" />
+      <input type="text" class="search_input" placeholder="请输入商家或美食名称"  v-model="inputValue"/>
       <span class="search_btn" @click="searchShop">搜索</span>
     </form>
     <!-- 商家或食品列表 -->
@@ -35,11 +35,16 @@ export default {
   name: "Search",
   data() {
     return {
-      foodList: []
+      inputValue:"",// 搜索关键字
+      foodList: [], // 搜索结果
+      geohash:this.$route.query.geohash
+
     };
   },
   methods: {
     searchShop() {
+      // 将搜索内容存储到localstorage
+      if(this)
       // 根据地理精度geohash和关键词搜索参观
       searchRestaurant().then(res => {
         this.foodList = res.data;

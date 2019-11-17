@@ -5,7 +5,7 @@
       <ul class="food_categories">
         <li
           v-for="(item,index) in foodList"
-          :key="index"
+          :key="item.id"
           class="categories_item"
           :class="{activeClass:currentIndex == index}"
           @click="scrollToElement(index)"
@@ -15,16 +15,16 @@
     <!-- better-scrool 容器  && 右侧食品栏-->
     <section class="food_wrapper" ref="food_wrapper">
       <section>
-        <div v-for="(foodItem,index) in foodList" :key="index" class="list_item">
+        <div v-for="(foodItem) in foodList" :key="foodItem.id" class="list_item">
           <!-- 分类标题 -->
-          <h3 class="title"> 
+          <h3 class="title">
             {{foodItem.name}}
             <!-- 标题描述 -->
             <span class="title_info">{{foodItem.description}}</span>
           </h3>
           <!-- 分类下的商品 -->
           <ul>
-            <li v-for="(item,index) in foodItem.foods" :key="index" class="food_info">
+            <li v-for="(item) in foodItem.foods" :key="item.item_idd" class="food_info">
               <img :src="`//elm.cangdu.org/img/${item.image_path}`" alt class="food_img" />
               <section>
                 <!-- 商品名称 -->
@@ -33,14 +33,61 @@
                 <p class="food_des">{{item.description}}</p>
                 <!-- 商品提示 -->
                 <p class="food_tips">{{item.tips}}</p>
-                <section>
+                <section class="buy_container">
                   <!-- 商品价格 -->
-                  <span class="price">{{item.price}}</span>
+                  <span class="price">
+                    <span class="icon">￥</span>20
+                  </span>
+                  <!-- 添加购物车按钮 -->
+                  <!-- 选择规格 -->
+                  <span class="add_btn" v-if="item.specfoods.length > 1" @click="selected">选规格</span>
+                  <!-- 添加购物车 -->
+                  <span class="plus_btn" v-else>
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                  </span>
                 </section>
               </section>
             </li>
           </ul>
         </div>
+      </section>
+    </section>
+    <!-- 底部购物车栏 -->
+    <footer>
+      <!-- 购物车图标 -->
+      <span class="cart">
+        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+      </span>
+      <section class="cart_container">
+        <section class="total">
+          <p class="price">￥4200元</p>
+          <p class="fee">配送费5元</p>
+        </section>
+        <span class="payBtn">去结算</span>
+      </section>
+    </footer>
+    <section class="pop_mask" v-if="isShow" @click="closeAlert">
+      <section class="content">
+        <!-- 头部 -->
+        <header>
+          <span>我问问</span>
+          <span @click="closeAlert">&times;</span>
+        </header>
+        <!-- 主内容 -->
+        <main>
+          <h3>规格</h3>
+          <div>
+            <span>默认</span>
+            <span>啊</span>
+          </div>
+        </main>
+        <!-- 底部 -->
+        <footer>
+          <span class="price">
+            <span>￥</span>20
+          </span>
+          <span class="add">加入购物车</span>
+        </footer>
       </section>
     </section>
   </section>
@@ -58,7 +105,8 @@ export default {
       listHeight: [], //右边每个li所处高度
       foodScroll: {}, //右侧的BScroll对象
       menuScroll: {}, //左侧的BScroll对象
-      scrollY: 0 // Y轴滚动距离
+      scrollY: 0, // Y轴滚动距离
+      isShow: false
     };
   },
   computed: {
@@ -76,6 +124,14 @@ export default {
     }
   },
   methods: {
+    selected(){
+      this.isShow = true;
+    },
+    closeAlert(){
+      if(this.isShow){
+        this.isShow = false;
+      }
+    },
     // 点击菜单滚动到某个元素
     scrollToElement(index) {
       let elementArray = this.$refs.food_wrapper.getElementsByClassName(
@@ -146,6 +202,7 @@ export default {
 }
 .food .food_wrapper {
   flex: 1;
+  width: calc(100% - 76px);
 }
 .food .food_categories {
   padding-bottom: 100px;
@@ -170,7 +227,7 @@ export default {
   background-color: #fff;
 }
 
-.food .food_wrapper .list_item:last-child{
+.food .food_wrapper .list_item:last-child {
   padding-bottom: 100vh;
 }
 .food .food_wrapper .list_item .title {
@@ -190,6 +247,10 @@ export default {
   display: flex;
   padding: 12px 8px;
   border-bottom: 1px solid #eee;
+  box-sizing: border-box;
+}
+.food .food_wrapper .list_item .food_info > section {
+  flex: 1;
 }
 .food .food_wrapper .list_item .food_info .food_img {
   width: 40px;
@@ -212,9 +273,169 @@ export default {
   color: #333;
   margin: 5px 0;
 }
+.food .food_wrapper .list_item .food_info section section {
+  display: flex;
+  justify-content: space-between;
+}
+.food .food_wrapper .list_item .food_info section .buy_container .price {
+  font-size: 14px;
+  color: #f60;
+  font-weight: bold;
+}
+.food .food_wrapper .list_item .food_info section .buy_container .price .icon {
+  font-size: 10px;
+}
+.food .food_wrapper .list_item .food_info section .buy_container .add_btn {
+  font-size: 11px;
+  padding: 2px 4px;
+  border-radius: 3px;
+  border: 1px solid #3190e8;
+  color: #fff;
+  background-color: #0085ff;
+}
+.food .food_wrapper .list_item .food_info section .buy_container .plus_btn {
+  width: 14px;
+  height: 14px;
+  background-color: #0085ff;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 2px;
+  font-size: 12px;
+}
 .food .food_categories .categories_item.activeClass {
   border-left: 2px solid #0089dc;
   background-color: #fff;
   font-weight: bold;
+}
+/* 底部购物车栏 */
+.food > footer {
+  box-sizing: border-box;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+}
+.food > footer .cart {
+  position: absolute;
+  top: -15px;
+  left: 14px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  background-color: #0085ff;
+  border: 4px solid #3d3d3f;
+  font-size: 20px;
+  color: #fff;
+}
+.food .cart_container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: #3d3d3f;
+}
+.food .cart_container .total {
+  flex: 1;
+  padding: 8px 0 5px 80px;
+}
+
+.food .cart_container .total .price {
+  font-size: 16px;
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.food .cart_container .total .fee {
+  font-size: 9.6px;
+  color: #fff;
+}
+.food .cart_container .payBtn {
+  flex: 0 0 100px;
+  background-color: #4cd946;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+  line-height: 40px;
+  font-weight: bold;
+}
+/*  弹出框遮罩层*/
+.food section.pop_mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.food .pop_mask .content {
+  background-color: #fff;
+  border-radius: 10px;
+  width: 224px;
+}
+.food .pop_mask .content header {
+  font-size: 14px;
+  color: #222;
+  padding: 10px;
+  text-align: center;
+}
+.food .pop_mask .content header span:last-child {
+  font-size: 22px;
+  float: right;
+}
+.food .pop_mask .content main {
+  padding: 10px;
+}
+.food .pop_mask .content main h3 {
+  font-size: 12px;
+  color: #666;
+}
+.food .pop_mask .content main div {
+  padding: 8px 0;
+}
+.food .pop_mask .content main div span {
+  display: inline-block;
+  width: 46px;
+  height: 29px;
+  box-sizing: border-box;
+  font-size: 12px;
+  color: #0085ff;
+  padding: 6px 10px;
+  border: 1px solid #0085ff;
+  border-radius: 5px;
+  background-color: #fff;
+}
+.food .pop_mask .content footer {
+  padding: 10px;
+}
+.food .pop_mask .content footer .price {
+  vertical-align: middle;
+  color: #f60;
+  font-size: 16px;
+  font-weight: bold;
+}
+.food .pop_mask .content footer .price span {
+  font-size: 10px;
+}
+.food .pop_mask .content footer .add {
+  float: right;
+  display: inline-block;
+  width: 80px;
+  height: 26px;
+  text-align: center;
+  line-height: 26px;
+  font-size: 12px;
+  color: #fff;
+  background-color: #0085ff;
+  border-radius: 3px;
 }
 </style>

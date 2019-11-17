@@ -115,6 +115,11 @@ export default {
   background-color: #fff;
   display: flex;
 }
+
+.comment .comment_header section:last-child {
+  font-size: 13px;
+  color: #666;
+}
 .comment .comment_header section {
   width: 100%;
   text-align: center;
