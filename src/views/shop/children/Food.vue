@@ -42,7 +42,7 @@
                   <!-- 选择规格 -->
                   <span class="add_btn" v-if="item.specfoods.length > 1" @click="selected">选规格</span>
                   <!-- 添加购物车 -->
-                  <span class="plus_btn" v-else>
+                  <span class="plus_btn" v-else @click="addToCart">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                   </span>
                 </section>
@@ -66,12 +66,12 @@
         <span class="payBtn">去结算</span>
       </section>
     </footer>
-    <section class="pop_mask" v-if="isShow" @click="closeAlert">
+    <section class="pop_mask" v-if="isShow" @click.stop.prevent.once="closeAlert">
       <section class="content">
         <!-- 头部 -->
         <header>
           <span>我问问</span>
-          <span @click="closeAlert">&times;</span>
+          <span @click.stop.prevent.once="closeAlert">&times;</span>
         </header>
         <!-- 主内容 -->
         <main>
@@ -124,6 +124,10 @@ export default {
     }
   },
   methods: {
+    // 添加到购物车
+    addToCart(){
+      this.toast.show("添加到购物车成功！")
+    },
     selected(){
       this.isShow = true;
     },

@@ -8,7 +8,13 @@ import store from './store'
 import axios from "axios"
 
 
-// 使用插件
+import Toast from "../src/components/common/toast/index"
+
+
+Vue.use(Toast)
+
+
+// 注册全局组件
 
 Vue.component("mt-swipe", Swipe);
 Vue.component("mt-swipe-item", SwipeItem);

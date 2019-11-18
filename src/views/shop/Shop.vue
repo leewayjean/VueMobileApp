@@ -71,7 +71,6 @@ export default {
   created() {
     // 根据id获取店铺信息
     getShopInfo(this.id).then(res => {
-      console.log(res.data);
       this.shopInfo = res.data;
     });
   }
