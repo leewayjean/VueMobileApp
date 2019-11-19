@@ -42,9 +42,12 @@
                   <!-- 选择规格 -->
                   <span class="add_btn" v-if="item.specfoods.length > 1" @click="selected">选规格</span>
                   <!-- 添加购物车 -->
-                  <span class="plus_btn" v-else @click="addToCart">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                  </span>
+                  <CartControl v-else @add-food="addToCart(item)"></CartControl>
+                  <!-- <div v-else>
+                    <span class="plus_btn"  @click="addToCart(item)">
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                    </span>
+                  </div> -->
                 </section>
               </section>
             </li>
@@ -96,10 +99,12 @@
 <script>
 import BScroll from "@better-scroll/core";
 import { getFoods } from "../../../server/getData";
+import CartControl from "../../../components/common/CartControl"
 export default {
   name: "Food",
   data() {
     return {
+      cart: [],
       foodList: [], //食品列表
       id: this.$route.query.id, // 路由查询参数
       listHeight: [], //右边每个li所处高度
@@ -125,14 +130,16 @@ export default {
   },
   methods: {
     // 添加到购物车
-    addToCart(){
-      this.toast.show("添加到购物车成功！")
+    addToCart(item) {
+      console.log(item);
+      this.$store.commit("ADD_FOOD",item)
+      this.toast.show("添加到购物车成功！");
     },
-    selected(){
+    selected() {
       this.isShow = true;
     },
-    closeAlert(){
-      if(this.isShow){
+    closeAlert() {
+      if (this.isShow) {
         this.isShow = false;
       }
     },
@@ -189,6 +196,9 @@ export default {
         });
       });
     });
+  },
+  components:{
+    CartControl,
   }
 };
 </script>
@@ -297,18 +307,7 @@ export default {
   color: #fff;
   background-color: #0085ff;
 }
-.food .food_wrapper .list_item .food_info section .buy_container .plus_btn {
-  width: 14px;
-  height: 14px;
-  background-color: #0085ff;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  padding: 2px;
-  font-size: 12px;
-}
+
 .food .food_categories .categories_item.activeClass {
   border-left: 2px solid #0089dc;
   background-color: #fff;

@@ -10,6 +10,7 @@ const state = {
   geohash:"31.14419,121.66034",//地址geohash值
   latitude:null,
   longitude:null,
+  cartList:[] // 购物车商品
 }
 
 export default new Vuex.Store({
