@@ -1,10 +1,10 @@
 <template>
   <div class="profile">
     <!-- 用户信息 -->
-    <router-link tag="header" to="/login">
+    <header  @click="nextPage">
       <img src="../../assets/images/avatar.png" alt class="avatar" />
       <section class="user_info">
-        <section class="user"  v-if="!userInfo">
+        <section class="user"  v-if="!userInfo.username">
           <h3 class="login">登录/注册</h3>
           <p class="login_tip">
             <i class="fa fa-mobile" aria-hidden="true"></i>登录享受更多特权
@@ -18,7 +18,7 @@
           <i class="fa fa-angle-right" aria-hidden="true"></i>
         </span>
       </section>
-    </router-link>
+    </header>
     <!-- 积分红包 -->
     <section class="info_data">
       <section class="info_data_item">
@@ -73,6 +73,19 @@ export default {
   computed:{
     userInfo(){
       return this.$store.state.userInfo;
+    }
+  },
+  methods:{
+    nextPage(){
+      if(this.userInfo.username){
+        this.$router.push({
+          path:"/userInfo"
+        })
+      }else {
+        this.$router.push({
+          path:"/login"
+        })
+      }
     }
   },
   components: {

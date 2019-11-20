@@ -12,6 +12,10 @@ Vue-cli3 构建饿了么
     功能方面，实现了定位到城市，搜索地址等。同时封装了输入框、文本框等组件  （2019.11.8 更新）
     
 
+## 查看线上Demo
+地址：[传送门](https://leewayjean.github.io)  
+
+
 ## 项目截图   
 ### ---------home
 <img  src="./screenshot/home.png" width="320"/>   

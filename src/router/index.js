@@ -6,6 +6,7 @@ const Home = () => import("../views/home/Home")
 const Search = () => import("../views/search/Search")
 const Order = () => import("../views/order/Order")
 const Profile = () => import("../views/profile/Profile")
+const UserInfo = () => import("../views/profile/user/UserInfo")
 const Login = () => import("../views/login/Login")
 const Forget = () => import("../views/login/children/Forget")
 const Shop = () => import("../views/shop/Shop")
@@ -93,11 +94,16 @@ const routes = [
     name: 'profile',
     component: Profile
   },
+  {
+    path:'/userInfo',
+    name:"userInfo",
+    component:UserInfo
+  }
 
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes
 })

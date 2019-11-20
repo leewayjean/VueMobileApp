@@ -72,7 +72,7 @@ export default {
         this.toast.show("请输入验证码");
       } else {
         const userInfo = {
-          username: "Kobe",
+          username: this.username,
           user_id: 2,
           id: 2,
           point: 0,
