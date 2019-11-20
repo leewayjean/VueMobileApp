@@ -4,11 +4,15 @@
     <router-link tag="header" to="/login">
       <img src="../../assets/images/avatar.png" alt class="avatar" />
       <section class="user_info">
-        <section class="user">
+        <section class="user"  v-if="!userInfo">
           <h3 class="login">登录/注册</h3>
           <p class="login_tip">
             <i class="fa fa-mobile" aria-hidden="true"></i>登录享受更多特权
           </p>
+        </section>
+        <section class="user" v-else>
+          <h3 class="login">{{userInfo.username}}</h3>
+          <p class="login_tip" v-text="userInfo.mobile?userInfo.mobile:'未绑定手机号'">{{userInfo.mobile}}</p>
         </section>
         <span class="next_icon">
           <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -66,6 +70,11 @@ import Footer from "../../components/footer/Footer";
 import TextBar from "../../components/common/TextBar";
 export default {
   name: "Profile",
+  computed:{
+    userInfo(){
+      return this.$store.state.userInfo;
+    }
+  },
   components: {
     Footer,
     TextBar

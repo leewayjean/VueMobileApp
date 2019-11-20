@@ -66,3 +66,26 @@ export const getRatingsTags = (id) => {
 export const getRatings = (id) => {
     return axios.get(`https://elm.cangdu.org/ugc/v2/restaurants/${id}/ratings`)
 }
+
+
+// 使用用户名进行登录
+
+export const userLogin = (username,password,captcha_code) => {
+    return axios.post(`https://elm.cangdu.org/v2/login`,{
+        username,
+        password,
+        captcha_code,
+      })
+}
+
+// 获取图片验证码
+
+export const getCaptchaCode = () => {
+    return axios.post("https://elm.cangdu.org/v1/captchas",{});
+}
+
+
+//   获取用户信息
+export const getUserInfo = () => {
+    return axios.get(`https://elm.cangdu.org/v1/user`)
+}

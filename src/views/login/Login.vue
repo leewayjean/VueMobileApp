@@ -4,15 +4,15 @@
     <header-top :goback="true" :headshow="true" headtitle="密码登录"></header-top>
     <form>
       <!-- 账号 -->
-      <InputGroup inputtype="text" placeholder="账号"  v-model="username"/>
+      <InputGroup inputtype="text" placeholder="账号" v-model="username" />
       <!-- 密码 -->
       <InputGroup :inputtype="inputType" placeholder="密码" v-model="password">
         <mt-switch v-model="showValue" slot="switch"></mt-switch>
       </InputGroup>
       <!-- 验证码 -->
-      <InputGroup inputtype="text" placeholder="验证码" v-model="captcha_code" >
+      <InputGroup inputtype="text" placeholder="验证码" v-model="captcha_code">
         <section slot="verifyCode" class="verify_code">
-          <img :src="captcha_codeSrc" alt="">
+          <img :src="captcha_codeSrc" alt />
           <section class="tips">
             <p>看不清</p>
             <span @click="changeverifyCode">换一张</span>
@@ -35,48 +35,77 @@
 <script>
 import HeaderTop from "../../components/header/header";
 import InputGroup from "../../components/common/InputGrouup";
+import { userLogin, getCaptchaCode } from "../../server/getData";
 export default {
-  name:"Login",
-  data(){
+  name: "Login",
+  data() {
     return {
-      username:'', //用户名
-      password:'', // 密码
-      captcha_code:'', //验证码
-      hasLogin:null,  
-      showValue:true,  // 是否显示密码
-      captcha_codeSrc:"",
-    }
+      username: "", //用户名
+      password: "", // 密码
+      captcha_code: "", //验证码
+      hasLogin: null,
+      showValue: true, // 是否显示密码
+      captcha_codeSrc: ""
+    };
   },
-  computed:{
+  computed: {
     // 是否显示密码
-    inputType(){
-      return this.showValue ? "password":"text"
+    inputType() {
+      return this.showValue ? "password" : "text";
     }
   },
-  created(){
+  created() {
     // 创建实例后立即获取验证码
-    this.getCaptcha_code();
+    getCaptchaCode().then(res => {
+      console.log(res.data);
+      this.captcha_codeSrc = res.data.code;
+    });
   },
-  methods:{
-    toLogin(){
-      console.log(this.username,this.password,this.captcha_code)
-      this.$axios.post(`https://elm.cangdu.org/v2/login`,{
-        username:this.username,
-        password:this.password,
-        captcha_code:this.captcha_code,
-      }).then((res) => {
-        console.log(res.data);
-      })
+  methods: {
+    toLogin() {
+      console.log(this.username, this.password, this.captcha_code);
+      if (!this.username) {
+        this.toast.show("登录账号不能为空");
+      } else if (!this.password) {
+        this.toast.show("请输入密码");
+      } else if (!this.captcha_code) {
+        this.toast.show("请输入验证码");
+      } else {
+        const userInfo = {
+          username: "Kobe",
+          user_id: 2,
+          id: 2,
+          point: 0,
+          mobile: "",
+          is_mobile_valid: true,
+          is_email_valid: false,
+          is_active: 1,
+          gift_amount: 3,
+          email: "",
+          delivery_card_expire_days: 0,
+          current_invoice_id: 0,
+          current_address_id: 0,
+          brand_member_new: 0,
+          balance: 0,
+          avatar: "/img/default/default.jpg",
+          __v: 0
+        };
+        userLogin(this.username, this.password, this.captcha_codeSrc).then(
+          res => {
+            // 登录成功，将用户信息存储到vuex中
+            this.$store.commit("RECORD_USERINFO",userInfo)
+            // 跳转
+            this.$router.go(-1);
+          }
+        );
+      }
     },
     // 更换验证码
-    changeverifyCode(){
-      this.getCaptcha_code();
-    },
-    // 获取base64验证码
-    getCaptcha_code(){
-      this.$axios.post("https://elm.cangdu.org/v1/captchas").then((res) => {
+    changeverifyCode() {
+      getCaptchaCode().then(res => {
         this.captcha_codeSrc = res.data.code;
-      })
+        console.log(res.data);
+      });
     }
   },
   components: {
@@ -90,17 +119,17 @@ export default {
   margin-top: 12px;
   padding-top: 39px;
 }
- .login form .verify_code {
-   display: flex;
- }
-  .login form .verify_code img {
-    width: 70px;
-    margin-right: 5px;
-  }
-.login form .verify_code p{
-    font-size: 11px;
-    color:#666;
-    margin-bottom: 3px;
+.login form .verify_code {
+  display: flex;
+}
+.login form .verify_code img {
+  width: 70px;
+  margin-right: 5px;
+}
+.login form .verify_code p {
+  font-size: 11px;
+  color: #666;
+  margin-bottom: 3px;
 }
 .login form .verify_code span {
   font-size: 11px;

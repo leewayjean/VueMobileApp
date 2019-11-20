@@ -8,9 +8,13 @@
     <h3 v-if="headshow" class="city_name">{{headtitle}}</h3>
     <slot name="address"></slot>
     <!-- 登录注册按钮 -->
-    <router-link tag="div" to="/login" v-if="loginshow">
-      <span class="login">登录|注册</span>
-    </router-link>
+    <div  @click="nextPage" v-if="loginshow">
+      <span class="login" v-if="!isLogin">登录|注册</span>
+      <span tag="span" to="/login" class="user" v-else>
+        <i class="fa fa-user" aria-hidden="true"></i>
+      </span>
+    </div>
+
     <!-- 切换城市按钮 -->
     <slot name="changcity"></slot>
   </header>
@@ -36,9 +40,25 @@ export default {
       default: false
     }
   },
+  computed: {
+    isLogin() {
+      return this.$store.state.isLogin;
+    },
+  },
   methods: {
     goBack() {
       this.$router.go(-1);
+    },
+    nextPage(){
+      if(this.isLogin){
+        this.$router.push({
+          path:"/profile"
+        })
+      }else {
+        this.$router.push({
+          path:"/login"
+        })
+      }
     }
   }
 };
@@ -80,6 +100,10 @@ header .city_name {
 }
 header .login {
   font-size: 12px;
+  color: #fff;
+}
+header .user i {
+  font-size: 16px;
   color: #fff;
 }
 </style>
