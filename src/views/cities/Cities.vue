@@ -69,7 +69,11 @@ export default {
     });
     // 获取所有城市
     getCityGroup().then(res => {
-      this.cityGroup = res.data;
+      let orderGroup = {};
+      Object.keys(res.data).sort().forEach((key) => {
+        orderGroup[key] = res.data[key];
+      })
+      this.cityGroup = orderGroup;
     });
   },
   filters: {

@@ -1,7 +1,7 @@
 <template>
   <div class="profile">
     <!-- 用户信息 -->
-    <header  @click="nextPage">
+    <router-link  tag="header" :to="userInfo.username?'/userInfo':'/login'">
       <img src="../../assets/images/avatar.png" alt class="avatar" />
       <section class="user_info">
         <section class="user"  v-if="!userInfo.username">
@@ -18,7 +18,7 @@
           <i class="fa fa-angle-right" aria-hidden="true"></i>
         </span>
       </section>
-    </header>
+    </router-link>
     <!-- 积分红包 -->
     <section class="info_data">
       <section class="info_data_item">
@@ -73,19 +73,6 @@ export default {
   computed:{
     userInfo(){
       return this.$store.state.userInfo;
-    }
-  },
-  methods:{
-    nextPage(){
-      if(this.userInfo.username){
-        this.$router.push({
-          path:"/userInfo"
-        })
-      }else {
-        this.$router.push({
-          path:"/login"
-        })
-      }
     }
   },
   components: {

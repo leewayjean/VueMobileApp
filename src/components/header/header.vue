@@ -8,12 +8,12 @@
     <h3 v-if="headshow" class="city_name">{{headtitle}}</h3>
     <slot name="address"></slot>
     <!-- 登录注册按钮 -->
-    <div  @click="nextPage" v-if="loginshow">
+    <router-link  :to="isLogin?'/profile':'login'" v-if="loginshow">
       <span class="login" v-if="!isLogin">登录|注册</span>
       <span tag="span" to="/login" class="user" v-else>
         <i class="fa fa-user" aria-hidden="true"></i>
       </span>
-    </div>
+    </router-link>
 
     <!-- 切换城市按钮 -->
     <slot name="changcity"></slot>
@@ -28,19 +28,23 @@ export default {
       type: Boolean,
       default: false
     },
+    // 中间显示文本
     headtitle: {
       type: String
     },
+    // 是否显示文本
     headshow: {
       type: Boolean,
       default: false
     },
+    // 是否显示登录/用户按钮
     loginshow: {
       type: Boolean,
       default: false
     }
   },
   computed: {
+    // vuex中获取是否用户已经登录
     isLogin() {
       return this.$store.state.isLogin;
     },
@@ -49,17 +53,6 @@ export default {
     goBack() {
       this.$router.go(-1);
     },
-    nextPage(){
-      if(this.isLogin){
-        this.$router.push({
-          path:"/profile"
-        })
-      }else {
-        this.$router.push({
-          path:"/login"
-        })
-      }
-    }
   }
 };
 </script>
@@ -92,11 +85,10 @@ header .goback {
   font-size: 22px;
 }
 header .city_name {
-  width: 100%;
   font-size: 16px;
   color: #fff;
   font-weight: bold;
-  text-align: center;
+  justify-self: center;
 }
 header .login {
   font-size: 12px;
