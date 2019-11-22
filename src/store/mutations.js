@@ -22,19 +22,6 @@ export default {
     },
     // 商品的数量加
     [ADD_FOOD](state,playload){
-        let len = state.cartList.length;
-        // 如果购物车没有任何商品，直接添加
-        if(len = 0){
-            state.cartList.push(playload);
-        }else {
-            let arr = state.cartList.filter((item) => {
-                return item._id == item._id;
-            })
-            if(arr.length>0){
-                state.cartList[index].count ++;
-            }
-        }
-        
-        state.cartList.push(playload);
+       state.cartList.push(playload);
     }
 }

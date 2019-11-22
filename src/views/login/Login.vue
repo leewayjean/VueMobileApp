@@ -57,7 +57,6 @@ export default {
   created() {
     // 创建实例后立即获取验证码
     getCaptchaCode().then(res => {
-      console.log(res.data);
       this.captcha_codeSrc = res.data.code;
     });
   },
@@ -104,7 +103,6 @@ export default {
     changeverifyCode() {
       getCaptchaCode().then(res => {
         this.captcha_codeSrc = res.data.code;
-        console.log(res.data);
       });
     }
   },
@@ -124,6 +122,7 @@ export default {
 }
 .login form .verify_code img {
   width: 70px;
+  height: 30px;
   margin-right: 5px;
 }
 .login form .verify_code p {
@@ -143,6 +142,7 @@ export default {
 .login .login_btn {
   display: inline-block;
   width: 300px;
+  font-size: 16px;
   margin: 0 10px 20px;
   text-align: center;
   padding: 10px 0;

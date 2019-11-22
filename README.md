@@ -16,7 +16,7 @@ Vue-cli3 构建饿了么
 地址：[传送门](https://leewayjean.github.io)  
 
 
-## 项目截图   
+## 项目截图 (部分)  
 ### ---------home
 <img  src="./screenshot/home.png" width="320"/>   
 
@@ -24,14 +24,9 @@ Vue-cli3 构建饿了么
 <img  src="./screenshot/profile.png" width="320"/>   
 
 
-### ---------cities
-<img  src="./screenshot/cities.png" width="320"/>   
-
-### ---------city
-<img  src="./screenshot/city.png" width="320"/>   
 ## 项目启动
 ```
-npm install //安装依赖
+npm install   //安装依赖
 ```
 
 ### 编译、热更新

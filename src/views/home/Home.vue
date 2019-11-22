@@ -8,7 +8,7 @@
       </router-link>
       <!-- 定位地址 -->
       <router-link to="/cities" slot="address" tag="span">
-        <span class="address">{{address}}</span>
+        <span class="address">{{sliceAddress}}</span>
       </router-link>
     </header-top>
     <!-- 轮播 -->
@@ -36,29 +36,40 @@
 import HeaderTop from "../../components/header/header";
 import Footer from "../../components/footer/Footer";
 import ShopList from "../../components/common/ShopList";
-import {getAddressByGeohash,getIndexEntry} from "../../server/getData"
+import { getAddressByGeohash, getIndexEntry } from "../../server/getData";
 export default {
   name: "Home",
   data() {
     return {
       indexEntry: [], //分类入口
-      address: "正在获取定位...",  // 当前地址
-      geohash:"" // 地理坐标
+      address: "正在获取定位...", // 当前地址
+      geohash: "" // 地理坐标
     };
   },
-  created(){
-        // 根据经纬度获取精确地址
+  computed:{
+    sliceAddress(){
+      if(this.address.length > 9){
+        return this.address.slice(0,9) + "...";
+      }else {
+        return this.address;
+      }
+    }
+  },
+  created() {
+    // 根据经纬度获取精确地址
 
-   this.geohash = this.$route.query.geohash ;
+    this.geohash = this.$route.query.geohash;
     // 根据地理精度获取地址
-    if(!this.geohash){
+    if (!this.geohash) {
       this.geohash = this.$store.state.geohash;
     }
-    getAddressByGeohash(this.geohash).then(res => {
-      this.address = res.data.name;
-    }).catch((err) => {
-      console.log(err)
-    });
+    getAddressByGeohash(this.geohash)
+      .then(res => {
+        this.address = res.data.name;
+      })
+      .catch(err => {
+        console.log(err);
+      });
   },
   mounted() {
     //   获取食品分类
@@ -67,7 +78,6 @@ export default {
       arr.push(res.data.slice(0, 8));
       this.indexEntry = arr;
     });
-
   },
   components: {
     HeaderTop,
@@ -89,7 +99,7 @@ export default {
   font-size: 14px;
   color: #fff;
   font-weight: bold;
-  text-align: center;
+  padding-left: 32.8px;
 }
 .home .swipe_container {
   width: 100%;

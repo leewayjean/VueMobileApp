@@ -42,7 +42,7 @@
                   <!-- 选择规格 -->
                   <span class="add_btn" v-if="item.specfoods.length > 1" @click="selected">选规格</span>
                   <!-- 添加购物车 -->
-                  <CartControl v-else @add-food="addToCart(item)"></CartControl>
+                  <CartControl v-else :foodItem="item"></CartControl>
                   <!-- <div v-else>
                     <span class="plus_btn"  @click="addToCart(item)">
                       <i class="fa fa-plus" aria-hidden="true"></i>
@@ -55,8 +55,10 @@
         </div>
       </section>
     </section>
+
     <!-- 底部购物车栏 -->
     <footer>
+      {{cartFoods}}
       <!-- 购物车图标 -->
       <span class="cart">
         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -126,15 +128,23 @@ export default {
         }
       }
       return 0;
+    },
+    // 计算出添加进购物车的商品
+    cartFoods(){
+      // 购物车列表
+      let cartList = [];
+      this.foodList.forEach((foods) => {
+        foods.foods.forEach((item) => {
+          if(item.count > 0){
+            this.$store.commit("ADD_FOOD",item)
+            cartList.push(item)
+          }
+        })
+      })
+      return cartList;
     }
   },
   methods: {
-    // 添加到购物车
-    addToCart(item) {
-      console.log(item);
-      this.$store.commit("ADD_FOOD",item)
-      this.toast.show("添加到购物车成功！");
-    },
     selected() {
       this.isShow = true;
     },
@@ -180,7 +190,6 @@ export default {
   created() {
     getFoods(this.id).then(res => {
       // 获取数据
-      console.log(res.data);
       this.foodList = res.data;
       // 获取数据完成后关闭骨架图
       this.$parent.successLoadData = true;

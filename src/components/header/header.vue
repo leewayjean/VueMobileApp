@@ -8,7 +8,7 @@
     <h3 v-if="headshow" class="city_name">{{headtitle}}</h3>
     <slot name="address"></slot>
     <!-- 登录注册按钮 -->
-    <router-link  :to="isLogin?'/profile':'login'" v-if="loginshow">
+    <router-link  :to="isLogin?'/profile':'login'" v-if="loginshow" tag="div">
       <span class="login" v-if="!isLogin">登录|注册</span>
       <span tag="span" to="/login" class="user" v-else>
         <i class="fa fa-user" aria-hidden="true"></i>
@@ -88,7 +88,8 @@ header .city_name {
   font-size: 16px;
   color: #fff;
   font-weight: bold;
-  justify-self: center;
+  width: 100%;
+  text-align: center;
 }
 header .login {
   font-size: 12px;
