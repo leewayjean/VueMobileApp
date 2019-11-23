@@ -58,7 +58,6 @@
 
     <!-- 底部购物车栏 -->
     <footer>
-      {{cartFoods}}
       <!-- 购物车图标 -->
       <span class="cart">
         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
