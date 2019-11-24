@@ -62,7 +62,7 @@ export default {
   font-size: 12px;
 }
 .cart_control .count {
-  margin: 0 2px;
+  margin: 0 6px;
   font-size: 12px;
   color: #666;
 }

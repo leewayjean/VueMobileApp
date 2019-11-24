@@ -382,8 +382,9 @@ export default {
   width: 12px;
   height: 12px;
   color: #fff;
-  font-size: 3px;
+  font-size: 8px;
   line-height: 12px;
+  text-align: center;
   border-radius: 50%;
   background: red;
 }

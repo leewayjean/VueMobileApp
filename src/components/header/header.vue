@@ -85,10 +85,13 @@ header .goback {
   font-size: 22px;
 }
 header .city_name {
+  position: absolute;
+  left:50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
   font-size: 16px;
   color: #fff;
   font-weight: bold;
-  width: 100%;
   text-align: center;
 }
 header .login {
