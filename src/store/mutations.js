@@ -2,6 +2,7 @@ import {
     SAVE_GEOHASH,
     RECORD_ADDRESS,
     RECORD_USERINFO,
+    UPDATE_CARTLIST,
     ADD_FOOD
 } from "./mutations-type"
 
@@ -19,6 +20,9 @@ export default {
     [RECORD_USERINFO](state,userInfo){
         state.userInfo = userInfo;
         state.isLogin = true;
+    },
+    [UPDATE_CARTLIST](state,playload){
+        state.cartList = playload;
     },
     // 商品的数量加
     [ADD_FOOD](state,playload){

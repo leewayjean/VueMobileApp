@@ -36,18 +36,19 @@
                 <section class="buy_container">
                   <!-- 商品价格 -->
                   <span class="price">
-                    <span class="icon">￥</span>20
+                    <span class="icon" v-if="item.specfoods[0].price">￥</span>
+                    {{item.specfoods[0].price}}
                   </span>
                   <!-- 添加购物车按钮 -->
                   <!-- 选择规格 -->
                   <span class="add_btn" v-if="item.specfoods.length > 1" @click="selected">选规格</span>
                   <!-- 添加购物车 -->
-                  <CartControl v-else :foodItem="item"></CartControl>
+                  <CartControl v-else :foodItem="item.specfoods[0]"></CartControl>
                   <!-- <div v-else>
                     <span class="plus_btn"  @click="addToCart(item)">
                       <i class="fa fa-plus" aria-hidden="true"></i>
                     </span>
-                  </div> -->
+                  </div>-->
                 </section>
               </section>
             </li>
@@ -58,18 +59,24 @@
 
     <!-- 底部购物车栏 -->
     <footer>
+      <!-- 购物车详情 -->
+      <CartDetail :foodList="cartFoods" v-if="isShowCart && cartFoods.length>0" />
       <!-- 购物车图标 -->
-      <span class="cart">
+      <span class="cart" :style="{backgroundColor:cartFoods.length>0?'#0089dc':'#535356'}" @click="isShowCart = true;">
+        <span class="count" v-if="foodCount">{{foodCount}}</span>
         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
       </span>
       <section class="cart_container">
         <section class="total">
-          <p class="price">￥4200元</p>
+          <p class="price">￥{{totalPrice}}元</p>
           <p class="fee">配送费5元</p>
         </section>
-        <span class="payBtn">去结算</span>
+        <span class="payBtn" :style="{backgroundColor:cartFoods.length>0?'#4cd946':'#535356'}">去结算</span>
       </section>
     </footer>
+          <!-- 遮罩层 -->
+      <div class="layer_mask" v-if="isShowCart&&cartFoods.length > 0" @click="isShowCart = false"></div>
+    <!-- 选规格 -->
     <section class="pop_mask" v-if="isShow" @click.stop.prevent.once="closeAlert">
       <section class="content">
         <!-- 头部 -->
@@ -100,7 +107,8 @@
 <script>
 import BScroll from "@better-scroll/core";
 import { getFoods } from "../../../server/getData";
-import CartControl from "../../../components/common/CartControl"
+import CartControl from "../../../components/common/CartControl";
+import CartDetail from "../../../components/common/CartDetail";
 export default {
   name: "Food",
   data() {
@@ -112,10 +120,32 @@ export default {
       foodScroll: {}, //右侧的BScroll对象
       menuScroll: {}, //左侧的BScroll对象
       scrollY: 0, // Y轴滚动距离
+      isShowCart:false,
       isShow: false
     };
   },
   computed: {
+    totalPrice() {
+      return this.$store.getters.totalPrice;
+    },
+    foodCount() {
+      return this.$store.getters.foodCount;
+    },
+    // 计算出添加进购物车的商品
+    cartFoods() {
+      // 购物车列表
+      let cartList = [];
+      this.foodList.forEach(foods => {
+        foods.foods.forEach(item => {
+          item.specfoods.forEach(foodItem => {
+            if (foodItem.count > 0) {
+              cartList.push(foodItem);
+            }
+          });
+        });
+      });
+      return cartList;
+    },
     // 滚动过程中实时计算所在区间索引
     currentIndex() {
       for (let i = 0; i < this.listHeight.length; i++) {
@@ -127,26 +157,22 @@ export default {
         }
       }
       return 0;
-    },
-    // 计算出添加进购物车的商品
-    cartFoods(){
-      // 购物车列表
-      let cartList = [];
-      this.foodList.forEach((foods) => {
-        foods.foods.forEach((item) => {
-          if(item.count > 0){
-            this.$store.commit("ADD_FOOD",item)
-            cartList.push(item)
-          }
-        })
-      })
-      return cartList;
+    }
+  },
+  watch: {
+    cartFoods(newValue,oldValue) {
+      this.$store.commit("UPDATE_CARTLIST", this.cartFoods);
+      // 如果购物车中已经没有东西，那么购物车详情置为false，解决点击时弹出购物车详情bug
+      if(newValue.length<1){
+        this.isShowCart = false;
+      }
     }
   },
   methods: {
     selected() {
       this.isShow = true;
     },
+    // 关闭弹出框
     closeAlert() {
       if (this.isShow) {
         this.isShow = false;
@@ -190,6 +216,7 @@ export default {
     getFoods(this.id).then(res => {
       // 获取数据
       this.foodList = res.data;
+      console.log(this.foodList);
       // 获取数据完成后关闭骨架图
       this.$parent.successLoadData = true;
       this.$nextTick(() => {
@@ -205,8 +232,9 @@ export default {
       });
     });
   },
-  components:{
+  components: {
     CartControl,
+    CartDetail
   }
 };
 </script>
@@ -329,6 +357,7 @@ export default {
   bottom: 0;
   width: 100%;
   height: 40px;
+  z-index: 13;
 }
 .food > footer .cart {
   position: absolute;
@@ -343,6 +372,20 @@ export default {
   border: 4px solid #3d3d3f;
   font-size: 20px;
   color: #fff;
+  z-index: 999;
+}
+.food > footer .cart .count {
+  position: absolute;
+  right: -1px;
+  top: -3px;
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  color: #fff;
+  font-size: 3px;
+  line-height: 12px;
+  border-radius: 50%;
+  background: red;
 }
 .food .cart_container {
   width: 100%;
@@ -448,5 +491,15 @@ export default {
   color: #fff;
   background-color: #0085ff;
   border-radius: 3px;
+}
+
+.food .layer_mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 12;
 }
 </style>
