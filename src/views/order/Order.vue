@@ -1,6 +1,6 @@
 <template>
     <div class="order">
-        <header-top :goback="true" :headshow="true" headtitle="订单列表" >
+        <header-top :goHome="true" :headshow="true" headtitle="订单列表" >
         </header-top>
         <p>order</p>
         <Footer/>

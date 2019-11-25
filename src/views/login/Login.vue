@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <!-- 顶栏 -->
-    <header-top :goback="true" :headshow="true" headtitle="密码登录"></header-top>
+    <header-top :goback="isHomePath" :goHome="!isHomePath" :headshow="true" headtitle="密码登录"></header-top>
     <form>
       <!-- 账号 -->
       <InputGroup inputtype="text" placeholder="账号" v-model="username" />
@@ -52,6 +52,14 @@ export default {
     // 是否显示密码
     inputType() {
       return this.showValue ? "password" : "text";
+    },
+    // 跳转至首页或者时上一页
+    isHomePath(){
+      if(this.$store.state.isLogin){
+        return true;
+      }else {
+        return false;
+      }
     }
   },
   created() {
@@ -127,6 +135,7 @@ export default {
 }
 .login form .verify_code p {
   font-size: 11px;
+  white-space: nowrap;
   color: #666;
   margin-bottom: 3px;
 }

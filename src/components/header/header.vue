@@ -2,13 +2,14 @@
   <header>
     <slot name="logo"></slot>
     <slot name="search_btn"></slot>
+    <router-link class="fa fa-angle-left goback" aria-hidden="true" v-if="goHome" tag="i" :to="{path:'/home',query:{geohash}}"></router-link>
     <!-- 返回按钮 -->
-    <i class="fa fa-angle-left goback" aria-hidden="true" v-if="goback" @click="goBack"></i>
+    <i class="fa fa-angle-left goback" aria-hidden="true" v-if="goback" @click="$router.go(-1)" ></i>
     <!-- 顶栏文字 -->
     <h3 v-if="headshow" class="city_name">{{headtitle}}</h3>
     <slot name="address"></slot>
     <!-- 登录注册按钮 -->
-    <router-link  :to="isLogin?'/profile':'login'" v-if="loginshow" tag="div">
+    <router-link :to="isLogin?'/profile':'login'" v-if="loginshow" tag="div">
       <span class="login" v-if="!isLogin">登录|注册</span>
       <span tag="span" to="/login" class="user" v-else>
         <i class="fa fa-user" aria-hidden="true"></i>
@@ -27,6 +28,10 @@ export default {
     goback: {
       type: Boolean,
       default: false
+    },
+    goHome:{
+      type:Boolean,
+      default:false
     },
     // 中间显示文本
     headtitle: {
@@ -48,12 +53,10 @@ export default {
     isLogin() {
       return this.$store.state.isLogin;
     },
+    geohash(){
+      return this.$store.state.geohash;
+    }
   },
-  methods: {
-    goBack() {
-      this.$router.go(-1);
-    },
-  }
 };
 </script>
 <style scoped>
@@ -86,9 +89,9 @@ header .goback {
 }
 header .city_name {
   position: absolute;
-  left:50%;
+  left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   font-size: 16px;
   color: #fff;
   font-weight: bold;

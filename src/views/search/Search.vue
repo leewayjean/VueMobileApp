@@ -1,7 +1,7 @@
 <template>
   <div class="search">
     <!-- 顶栏 -->
-    <header-top :goback="true" :headshow="true" headtitle="搜索"></header-top>
+    <header-top :goHome="true" :headshow="true" headtitle="搜索"></header-top>
     <!-- 表达你 -->
     <form class="search_form">
       <input type="text" class="search_input" placeholder="请输入商家或美食名称" v-model="inputValue" />
