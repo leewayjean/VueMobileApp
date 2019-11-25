@@ -1,19 +1,20 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 <script>
 export default {
-  name:"App",
-}
+  name: "App"
+};
 </script>
 <style>
 /* reset.css */
 @import url("./assets/css/reset.css");
 html {
   background-color: #f5f5f5;
-  font-family: 'Helvetica Neue',Tahoma,Arial,PingFangSC-Regular,'Hiragino Sans GB','Microsoft Yahei',sans-serif;
+  font-family: "Helvetica Neue", Tahoma, Arial, PingFangSC-Regular,
+    "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
 }
 /* app充满整屏 */
 #app {

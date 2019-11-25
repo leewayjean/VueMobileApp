@@ -61,9 +61,7 @@ export default {
 </script>
 
 <style scoped>
-.shop_list {
-  padding-bottom: 49px;
-}
+
 .shop_list .shop_item {
   box-sizing: border-box;
   padding: 14px 8px;

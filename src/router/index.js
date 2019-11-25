@@ -13,6 +13,7 @@ const Shop = () => import("../views/shop/Shop")
 const Food = () => import("../views/shop/children/Food")
 const Comment = () => import("../views/shop/children/Comment")
 const ShopInfo = () => import("../views/shop/children/ShopInfo")
+const ConfirmOrder = () => import("../views/confirm_order/ConfirmOrder")
 
 Vue.use(VueRouter)
 
@@ -70,6 +71,11 @@ const routes = [
         component: Comment
       },
     ]
+  },
+  {
+    path:'/confirmOrder',
+    name:"confirmOrder",
+    component:ConfirmOrder
   },
   {
     path: "/shopinfo",

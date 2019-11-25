@@ -11,23 +11,31 @@
         <span class="address">{{sliceAddress}}</span>
       </router-link>
     </header-top>
-    <!-- 轮播 -->
-    <div class="swipe_container">
-      <mt-swipe class="swiper" :auto="0">
-        <mt-swipe-item v-for="(entryItem, index) in indexEntry" :key="index" class="swipe_item">
-          <div v-for="item in entryItem" :key="item.id" class="entry_item">
-            <img :src="`https://fuss10.elemecdn.com${item.image_url}`" alt="分类" class="entry_img" />
-            <h5 class="entry_title">{{item.title}}</h5>
-          </div>
-        </mt-swipe-item>
-      </mt-swipe>
-    </div>
-    <!-- 店铺列表 -->
-    <section class="shop_list_container">
-      <header class="shop_header">附近商家</header>
-      <keep-alive>
-        <shop-list></shop-list>
-      </keep-alive>
+    <section class="bs-wrap">
+      <main>
+        <!-- 轮播 -->
+        <div class="swipe_container">
+          <mt-swipe class="swiper" :auto="0">
+            <mt-swipe-item v-for="(entryItem, index) in indexEntry" :key="index" class="swipe_item">
+              <div v-for="item in entryItem" :key="item.id" class="entry_item">
+                <img
+                  :src="`https://fuss10.elemecdn.com${item.image_url}`"
+                  alt="分类"
+                  class="entry_img"
+                />
+                <h5 class="entry_title">{{item.title}}</h5>
+              </div>
+            </mt-swipe-item>
+          </mt-swipe>
+        </div>
+        <!-- 店铺列表 -->
+        <section class="shop_list_container">
+          <header class="shop_header">附近商家</header>
+          <keep-alive>
+            <shop-list></shop-list>
+          </keep-alive>
+        </section>
+      </main>
     </section>
     <Footer />
   </div>
@@ -37,6 +45,11 @@ import HeaderTop from "../../components/header/header";
 import Footer from "../../components/footer/Footer";
 import ShopList from "../../components/common/ShopList";
 import { getAddressByGeohash, getIndexEntry } from "../../server/getData";
+import BScroll from "@better-scroll/core";
+import PullDown from "@better-scroll/pull-down";
+
+BScroll.use(PullDown);
+
 export default {
   name: "Home",
   data() {
@@ -46,11 +59,11 @@ export default {
       geohash: "" // 地理坐标
     };
   },
-  computed:{
-    sliceAddress(){
-      if(this.address.length > 9){
-        return this.address.slice(0,9) + "...";
-      }else {
+  computed: {
+    sliceAddress() {
+      if (this.address.length > 9) {
+        return this.address.slice(0, 9) + "...";
+      } else {
         return this.address;
       }
     }
@@ -79,6 +92,14 @@ export default {
       this.indexEntry = arr;
     });
   },
+  updated() {
+    this.$nextTick(() => {
+      // new BScroll(".bs-wrap", {
+      //   click: true,
+      //   scrollY: true,
+      // });
+    });
+  },
   components: {
     HeaderTop,
     ShopList,
@@ -89,7 +110,7 @@ export default {
 
 <style scoped>
 .home {
-  padding-top: 42px;
+  margin-top: 42px;
 }
 .home .search_btn {
   font-size: 20px;
@@ -100,6 +121,10 @@ export default {
   color: #fff;
   font-weight: bold;
   padding-left: 32.8px;
+}
+/* 滚动 */
+.home .bs-wrap {
+  height: calc(100vh - 78px);
 }
 .home .swipe_container {
   width: 100%;

@@ -35,7 +35,7 @@ export const getIndexEntry = () => {
 
 // 搜索食品和餐馆(根据地理精度和关键词)
 export const searchRestaurant = (geohash,keyword) => {
-    return axios.get(`https://elm.cangdu.org/v4/restaurants?geohash=31.22967,121.4762&keyword=肯德基`)
+    return axios.get(`https://elm.cangdu.org/v4/restaurants?geohash=${geohash}&keyword=${keyword}`)
 }
 
 
