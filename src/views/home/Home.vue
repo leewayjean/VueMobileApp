@@ -7,9 +7,7 @@
         <i class="fa fa-search search_btn" aria-hidden="true"></i>
       </router-link>
       <!-- 定位地址 -->
-      <router-link to="/cities" slot="address" tag="span">
-        <span class="address">{{sliceAddress}}</span>
-      </router-link>
+      <router-link to="/cities" slot="address" tag="span" class="address">{{sliceAddress}}</router-link>
     </header-top>
     <section class="bs-wrap">
       <main>
@@ -120,7 +118,10 @@ export default {
   font-size: 14px;
   color: #fff;
   font-weight: bold;
-  padding-left: 32.8px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 /* 滚动 */
 .home .bs-wrap {

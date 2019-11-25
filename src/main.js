@@ -3,8 +3,11 @@ import App from './App.vue'
 // 引入mint-ui
 import { Swipe, SwipeItem,Switch,Indicator  } from 'mint-ui';
 
-import { AddressList } from 'vant';
+import { AddressList} from 'vant';
 Vue.use(AddressList);
+
+// 全局注册
+
 
 import router from './router'
 import store from './store'

@@ -2,9 +2,11 @@ import {
     SAVE_GEOHASH,
     RECORD_ADDRESS,
     RECORD_USERINFO,
+    SIGN_OUT,
     UPDATE_CARTLIST,
     ADD_FOOD
 } from "./mutations-type"
+import { stat } from "fs";
 
 export default {
     // 保存地理精度geohash
@@ -20,6 +22,10 @@ export default {
     [RECORD_USERINFO](state,userInfo){
         state.userInfo = userInfo;
         state.isLogin = true;
+    },
+    [SIGN_OUT](state){
+        state.isLogin = false;
+        state.userInfo = {};
     },
     [UPDATE_CARTLIST](state,playload){
         state.cartList = playload;

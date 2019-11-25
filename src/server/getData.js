@@ -78,6 +78,10 @@ export const userLogin = (username,password,captcha_code) => {
       })
 }
 
+export const signOut = () => {
+    return axios.get('https://elm.cangdu.org/v2/signout')
+}
+
 // 获取图片验证码
 
 export const getCaptchaCode = () => {

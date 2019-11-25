@@ -1,5 +1,5 @@
 <template>
-  <span class="login_btn">{{btnText}}</span>
+  <span class="login_btn" @click="$emit('btn-click')">{{btnText}}</span>
 </template>
 
 <script>
