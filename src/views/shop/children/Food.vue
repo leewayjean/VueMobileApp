@@ -41,14 +41,9 @@
                   </span>
                   <!-- 添加购物车按钮 -->
                   <!-- 选择规格 -->
-                  <span class="add_btn" v-if="item.specfoods.length > 1" @click="selected">选规格</span>
+                  <span class="add_btn" v-if="item.specfoods.length > 1" @click="selected(item.specfoods)">选规格</span>
                   <!-- 添加购物车 -->
                   <CartControl v-else :foodItem="item.specfoods[0]"></CartControl>
-                  <!-- <div v-else>
-                    <span class="plus_btn"  @click="addToCart(item)">
-                      <i class="fa fa-plus" aria-hidden="true"></i>
-                    </span>
-                  </div>-->
                 </section>
               </section>
             </li>
@@ -56,13 +51,19 @@
         </div>
       </section>
     </section>
+    <!-- 选规格 -->
+    <SelectedFood :foods="selectedFood" v-if="isShow"/>
 
     <!-- 底部购物车栏 -->
     <footer>
       <!-- 购物车详情 -->
       <CartDetail :foodList="cartFoods" v-if="isShowCart && cartFoods.length>0" />
       <!-- 购物车图标 -->
-      <span class="cart" :style="{backgroundColor:cartFoods.length>0?'#0089dc':'#535356'}" @click="isShowCart = true;">
+      <span
+        class="cart"
+        :style="{backgroundColor:cartFoods.length>0?'#0089dc':'#535356'}"
+        @click="isShowCart = true;"
+      >
         <span class="count" v-if="foodCount">{{foodCount}}</span>
         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
       </span>
@@ -71,36 +72,16 @@
           <p class="price">￥{{totalPrice}}元</p>
           <p class="fee">配送费5元</p>
         </section>
-        <span class="payBtn" :style="{backgroundColor:cartFoods.length>0?'#4cd946':'#535356'}">去结算</span>
+        <router-link
+          class="payBtn"
+          :style="{backgroundColor:cartFoods.length>0?'#4cd946':'#535356'}"
+          tag="span"
+          to="/confirmOrder"
+        >去结算</router-link>
       </section>
     </footer>
-          <!-- 遮罩层 -->
-      <div class="layer_mask" v-if="isShowCart&&cartFoods.length > 0" @click="isShowCart = false"></div>
-    <!-- 选规格 -->
-    <section class="pop_mask" v-if="isShow" @click.stop.prevent.once="closeAlert">
-      <section class="content">
-        <!-- 头部 -->
-        <header>
-          <span>我问问</span>
-          <span @click.stop.prevent.once="closeAlert">&times;</span>
-        </header>
-        <!-- 主内容 -->
-        <main>
-          <h3>规格</h3>
-          <div>
-            <span>默认</span>
-            <span>啊</span>
-          </div>
-        </main>
-        <!-- 底部 -->
-        <footer>
-          <span class="price">
-            <span>￥</span>20
-          </span>
-          <span class="add">加入购物车</span>
-        </footer>
-      </section>
-    </section>
+    <!-- 遮罩层 -->
+    <div class="layer_mask" v-if="isShowCart&&cartFoods.length > 0" @click="isShowCart = false"></div>
   </section>
 </template>
 
@@ -109,6 +90,7 @@ import BScroll from "@better-scroll/core";
 import { getFoods } from "../../../server/getData";
 import CartControl from "../../../components/common/CartControl";
 import CartDetail from "../../../components/common/CartDetail";
+import SelectedFood from "../../../components/common/SelectedFood";
 export default {
   name: "Food",
   data() {
@@ -120,8 +102,9 @@ export default {
       foodScroll: {}, //右侧的BScroll对象
       menuScroll: {}, //左侧的BScroll对象
       scrollY: 0, // Y轴滚动距离
-      isShowCart:false,
-      isShow: false
+      isShowCart: false,
+      selectedFood: [],
+      isShow:false
     };
   },
   computed: {
@@ -160,16 +143,17 @@ export default {
     }
   },
   watch: {
-    cartFoods(newValue,oldValue) {
+    cartFoods(newValue, oldValue) {
       this.$store.commit("UPDATE_CARTLIST", this.cartFoods);
       // 如果购物车中已经没有东西，那么购物车详情置为false，解决点击时弹出购物车详情bug
-      if(newValue.length<1){
+      if (newValue.length < 1) {
         this.isShowCart = false;
       }
     }
   },
   methods: {
-    selected() {
+    selected(foods) {
+      this.selectedFood = foods;
       this.isShow = true;
     },
     // 关闭弹出框
@@ -234,7 +218,8 @@ export default {
   },
   components: {
     CartControl,
-    CartDetail
+    CartDetail,
+    SelectedFood
   }
 };
 </script>
@@ -344,6 +329,7 @@ export default {
   background-color: #0085ff;
 }
 
+/* 左侧菜单选中样式 */
 .food .food_categories .categories_item.activeClass {
   border-left: 2px solid #0089dc;
   background-color: #fff;
@@ -419,80 +405,7 @@ export default {
   line-height: 40px;
   font-weight: bold;
 }
-/*  弹出框遮罩层*/
-.food section.pop_mask {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.food .pop_mask .content {
-  background-color: #fff;
-  border-radius: 10px;
-  width: 224px;
-}
-.food .pop_mask .content header {
-  font-size: 14px;
-  color: #222;
-  padding: 10px;
-  text-align: center;
-}
-.food .pop_mask .content header span:last-child {
-  font-size: 22px;
-  float: right;
-}
-.food .pop_mask .content main {
-  padding: 10px;
-}
-.food .pop_mask .content main h3 {
-  font-size: 12px;
-  color: #666;
-}
-.food .pop_mask .content main div {
-  padding: 8px 0;
-}
-.food .pop_mask .content main div span {
-  display: inline-block;
-  width: 46px;
-  height: 29px;
-  box-sizing: border-box;
-  font-size: 12px;
-  color: #0085ff;
-  padding: 6px 10px;
-  border: 1px solid #0085ff;
-  border-radius: 5px;
-  background-color: #fff;
-}
-.food .pop_mask .content footer {
-  padding: 10px;
-}
-.food .pop_mask .content footer .price {
-  vertical-align: middle;
-  color: #f60;
-  font-size: 16px;
-  font-weight: bold;
-}
-.food .pop_mask .content footer .price span {
-  font-size: 10px;
-}
-.food .pop_mask .content footer .add {
-  float: right;
-  display: inline-block;
-  width: 80px;
-  height: 26px;
-  text-align: center;
-  line-height: 26px;
-  font-size: 12px;
-  color: #fff;
-  background-color: #0085ff;
-  border-radius: 3px;
-}
+/* 购物车遮罩层 */
 
 .food .layer_mask {
   position: fixed;
