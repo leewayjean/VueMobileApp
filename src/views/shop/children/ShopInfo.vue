@@ -4,10 +4,7 @@
 
     <section>
       <h3 class="title">活动与属性</h3>
-      <p>满30减4，满60减8(APP专享)</p>
-      <p>已加入“外卖保”计划，食品安全有保障</p>
-      <p>准时必达，超时必赔</p>
-      <p>该商家支持开发票，请在下单时天浩发票抬头</p>
+      <p v-for="(item,index) in shopInfo.activities" :key="index">{{item.description}}</p>
     </section>
     <section>
       <h3 class="title">食品监督安全公示</h3>
@@ -18,9 +15,8 @@
     </section>
     <section>
       <h3 class="title">商家信息</h3>
-      <p>地址：广东省湛江市麻章区广东海洋大学</p>
-      <p>联系电话：343438483</p>
-      <p>营业时间：8：00 - 22：00</p>
+      <TextBar :textBarTitle="shopInfo.name"/>
+      <TextBar :textBarTitle="shopInfo.address"/>
       <TextBar textBarTitle="营业执照"/>
       <TextBar textBarTitle="餐饮服务许可证"/>
     </section>
@@ -35,12 +31,14 @@ export default {
   name: "Order",
   data() {
     return {
+      shopInfo:{},//商店列表
       id: this.$route.query.id
     };
   },
   mounted() {
     getShopInfo(this.id).then(res => {
       console.log(res.data);
+      this.shopInfo = res.data;
     });
   },
   components: {
