@@ -13,8 +13,16 @@
       <main>
         <!-- 轮播 -->
         <div class="swipe_container">
-          <mt-swipe class="swiper" :auto="0">
-            <mt-swipe-item v-for="(entryItem, index) in indexEntry" :key="index" class="swipe_item">
+          <van-swipe
+            class="swiper"
+            :autoplay="5000"
+            indicator-color="#1989fa"
+          >
+            <van-swipe-item
+              v-for="(entryItem, index) in indexEntry"
+              :key="index"
+              class="swipe_item"
+            >
               <div v-for="item in entryItem" :key="item.id" class="entry_item">
                 <img
                   :src="`https://fuss10.elemecdn.com${item.image_url}`"
@@ -23,8 +31,8 @@
                 />
                 <h5 class="entry_title">{{item.title}}</h5>
               </div>
-            </mt-swipe-item>
-          </mt-swipe>
+            </van-swipe-item>
+          </van-swipe>
         </div>
         <!-- 店铺列表 -->
         <section class="shop_list_container">
@@ -87,6 +95,7 @@ export default {
     getIndexEntry().then(res => {
       let arr = [];
       arr.push(res.data.slice(0, 8));
+      arr.push(res.data.slice(8));
       this.indexEntry = arr;
     });
   },
@@ -134,7 +143,6 @@ export default {
 }
 .home .swiper {
   width: 100%;
-  height: 180px;
   background-color: #fff;
   display: inline-block;
 }

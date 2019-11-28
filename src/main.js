@@ -1,10 +1,14 @@
 import Vue from 'vue'
 import App from './App.vue'
 // 引入mint-ui
-import { Swipe, SwipeItem,Switch,Indicator  } from 'mint-ui';
+import { Switch,Indicator  } from 'mint-ui';
 
 import { AddressList} from 'vant';
 Vue.use(AddressList);
+
+import { Swipe, SwipeItem } from 'vant';
+
+Vue.use(Swipe).use(SwipeItem);
 
 // 全局注册
 
