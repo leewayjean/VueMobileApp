@@ -35,8 +35,9 @@ export default {
         .then(() => {
           signOut()
             .then(res => {
+              window.localStorage.removeItem("IS_LOGIN");
+              window.localStorage.removeItem("USER_INFO");
               this.$store.commit("SIGN_OUT");
-              this.toast.show("退出成功。")
               this.$router.push("/login");
             })
             .catch(err => {

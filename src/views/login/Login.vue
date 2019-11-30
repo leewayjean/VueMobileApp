@@ -99,8 +99,11 @@ export default {
         };
         userLogin(this.username, this.password, this.captcha_codeSrc).then(
           res => {
-            // 登录成功，将用户信息存储到vuex中
+            // 登录成功，将用户信息存储到vuex中和浏览器中
             this.$store.commit("RECORD_USERINFO",userInfo)
+            window.localStorage.setItem("IS_LOGIN",true);
+            let user = JSON.stringify(userInfo);
+            window.localStorage.setItem("USER_INFO",user);
             // 跳转
             this.$router.go(-1);
           }
