@@ -200,7 +200,6 @@ export default {
     getFoods(this.id).then(res => {
       // 获取数据
       this.foodList = res.data;
-      console.log(this.foodList);
       // 获取数据完成后关闭骨架图
       this.$parent.successLoadData = true;
       this.$nextTick(() => {

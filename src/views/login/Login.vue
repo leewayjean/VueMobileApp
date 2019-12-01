@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <!-- 顶栏 -->
-    <header-top :goback="isHomePath" :goHome="!isHomePath" :headshow="true" headtitle="密码登录"></header-top>
+    <header-top :goback="isLogin" :goHome="!isLogin" :headshow="true" headtitle="密码登录"></header-top>
     <form>
       <!-- 账号 -->
       <InputGroup inputtype="text" placeholder="账号" v-model="username" />
@@ -43,9 +43,9 @@ export default {
       username: "", //用户名
       password: "", // 密码
       captcha_code: "", //验证码
-      hasLogin: null,
+      isLogin:this.$store.state.isLogin,
       showValue: true, // 是否显示密码
-      captcha_codeSrc: ""
+      captcha_codeSrc: "" //验证码图片src
     };
   },
   computed: {
@@ -53,14 +53,6 @@ export default {
     inputType() {
       return this.showValue ? "password" : "text";
     },
-    // 跳转至首页或者时上一页
-    isHomePath(){
-      if(this.$store.state.isLogin){
-        return true;
-      }else {
-        return false;
-      }
-    }
   },
   created() {
     // 创建实例后立即获取验证码
@@ -70,7 +62,6 @@ export default {
   },
   methods: {
     toLogin() {
-      console.log(this.username, this.password, this.captcha_code);
       if (!this.username) {
         this.toast.show("登录账号不能为空");
       } else if (!this.password) {
@@ -78,6 +69,7 @@ export default {
       } else if (!this.captcha_code) {
         this.toast.show("请输入验证码");
       } else {
+        // 这里使用本地数据，有后台接口时更换
         const userInfo = {
           username: this.username,
           user_id: 2,

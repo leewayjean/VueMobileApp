@@ -11,25 +11,37 @@
         <div class="search_btn" @click="searchCity">搜索</div>
       </div>
     </div>
+    <div class="container" v-if="searchResult.length === 0">
+      <h3 class="title">搜索历史</h3>
+      <ul class="search_result">
+        <li class="search_result_item" v-for="(item,index) in searchHistory" :key="index" @click="goToHome(item)">
+          <h6 class="name">{{item.name}}</h6>
+          <p class="address">{{item.address}}</p>
+        </li>
+      </ul>
+    </div>
     <!-- 搜索结果 -->
-    <ul class="search_result">
-      <li
-        class="search_result_item"
-        v-for="item in searchResult"
-        :key="item.latitude"
-        @click="goToHome(item)"
-      >
-        <h6 class="name">{{item.name}}</h6>
-        <p class="address">{{item.address}}</p>
-      </li>
-    </ul>
+    <div class="container" v-if="searchResult.lenght > 0">
+      <h3 class="title">搜索结果</h3>
+      <ul class="search_result">
+        <li
+          class="search_result_item"
+          v-for="item in searchResult"
+          :key="item.latitude"
+          @click="goToHome(item)"
+        >
+          <h6 class="name">{{item.name}}</h6>
+          <p class="address">{{item.address}}</p>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 <script>
 import { Toast } from "mint-ui";
 import { mapMutations } from "vuex";
 import { searchAddress, getCurrentCityById } from "../../server/getData";
-import {setLocalStorage} from "../../config/utils"
+import { setLocalStorage } from "../../config/utils";
 import HeaderTop from "../../components/header/header";
 export default {
   name: "City",
@@ -38,7 +50,8 @@ export default {
       cityId: "", // 当前城市id
       cityName: "", //当前城市的名称
       inputValue: "", // 搜索框的值
-      searchResult: [] // 搜索的地址列表
+      searchResult: [], // 搜索的地址列表
+      searchHistory: []
     };
   },
   methods: {
@@ -47,7 +60,7 @@ export default {
       // 如果输入框有值
       if (this.inputValue) {
         // 搜索历史存储到localStorage
-      setLocalStorage("address",this.inputValue)
+        setLocalStorage("address", this.inputValue);
         searchAddress(this.cityId, this.inputValue).then(res => {
           this.searchResult = res.data;
         });
@@ -60,6 +73,8 @@ export default {
     },
     //跳转至首页，同时传递经纬度
     goToHome(address) {
+      // 保存搜索记录
+      this.storeHistory(address);
       // 将geohash存储到vuex中
       this.$store.commit("SAVE_GEOHASH", address.geohash);
       const geo = {
@@ -75,7 +90,41 @@ export default {
           geohash: address.geohash
         }
       });
+    },
+    storeHistory(address) {
+      //  判断地址是否已经搜索过
+      if (this.searchHistory.length !== 0) {
+        let sameAddress = this.searchHistory.filter(item => {
+          return item.name == address.name;
+        });
+        // 只有搜索历史中没有相同的记录时才加入
+        if (sameAddress.length === 0) {
+          this.searchHistory.push(address);
+        }
+      } else {
+        // 搜索记录为空直接添加
+        this.searchHistory.push(address);
+      }
+      // JSON 化
+      let addressList = JSON.stringify(this.searchHistory);
+      // 存储搜索地址
+      window.localStorage.setItem("searchAddressHistory", addressList);
+    },
+    getStore() {
+      // 查看localstorage中是否有存储搜索历史
+      let addressArray = window.localStorage.getItem("searchAddressHistory");
+      //  如果有历史记录
+      if (addressArray && addressArray.length !== 0) {
+        // 解析json
+        let data = JSON.parse(addressArray);
+        this.searchHistory = data;
+      }
     }
+  },
+
+  created() {
+    // 获取localStorage 中的搜索历史
+    this.getStore();
   },
   mounted() {
     //根据路由获取当前城市id
@@ -128,6 +177,12 @@ export default {
   background-color: #3190e8;
   border-radius: 3px;
   font-size: 12px;
+}
+/* 搜索历史 */
+.city .container .title {
+  font-size: 9.6px;
+  color: #333;
+  padding: 2px 0 2px 8px;
 }
 
 /* 搜索结果 */
