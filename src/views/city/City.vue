@@ -4,14 +4,15 @@
     <header-top :goback="true" :headshow="true" :headtitle="cityName">
       <router-link slot="changcity" class="change_city" to="/cities" tag="span">切换城市</router-link>
     </header-top>
-    <!-- 搜索地址 -->
+    <!-- 搜索框 -->
     <div class="select_city">
       <div class="search_city">
         <input type="text" class="search_input" placeholder="输入学校、商务楼、地址" v-model="inputValue" />
         <div class="search_btn" @click="searchCity">搜索</div>
       </div>
     </div>
-    <div class="container" v-if="searchResult.length === 0">
+    <!-- 搜索历史记录 -->
+    <div class="container" v-if="searchResult.length === 0 && searchHistory.length != 0">
       <h3 class="title">搜索历史</h3>
       <ul class="search_result">
         <li class="search_result_item" v-for="(item,index) in searchHistory" :key="index" @click="goToHome(item)">
@@ -21,7 +22,7 @@
       </ul>
     </div>
     <!-- 搜索结果 -->
-    <div class="container" v-if="searchResult.lenght > 0">
+    <div class="container" v-if="searchResult.length !== 0">
       <h3 class="title">搜索结果</h3>
       <ul class="search_result">
         <li
@@ -59,8 +60,6 @@ export default {
     searchCity() {
       // 如果输入框有值
       if (this.inputValue) {
-        // 搜索历史存储到localStorage
-        setLocalStorage("address", this.inputValue);
         searchAddress(this.cityId, this.inputValue).then(res => {
           this.searchResult = res.data;
         });
@@ -92,7 +91,7 @@ export default {
       });
     },
     storeHistory(address) {
-      //  判断地址是否已经搜索过
+      //  判断是否已经有搜索历史
       if (this.searchHistory.length !== 0) {
         let sameAddress = this.searchHistory.filter(item => {
           return item.name == address.name;
