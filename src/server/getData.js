@@ -67,6 +67,12 @@ export const getRatings = (id) => {
     return axios.get(`https://elm.cangdu.org/ugc/v2/restaurants/${id}/ratings`)
 }
 
+//获取订单列表
+
+export const getOrder = () => {
+    return axios.get("https://elm.cangdu.org/bos/v2/users/1/orders?limit=10&offset=0");
+}
+
 
 // 使用用户名进行登录
 

@@ -20,6 +20,7 @@
           <p class="address">{{item.address}}</p>
         </li>
       </ul>
+      <p class="clear_history" @click="clearHistory">清除搜索记录</p>
     </div>
     <!-- 搜索结果 -->
     <div class="container" v-if="searchResult.length !== 0">
@@ -56,6 +57,11 @@ export default {
     };
   },
   methods: {
+    // 清除搜索记录
+    clearHistory(){
+      this.searchHistory = [];
+      window.localStorage.removeItem("searchAddressHistory");
+    },
     // 搜索地址
     searchCity() {
       // 如果输入框有值
@@ -90,6 +96,7 @@ export default {
         }
       });
     },
+    // 储存搜索历史
     storeHistory(address) {
       //  判断是否已经有搜索历史
       if (this.searchHistory.length !== 0) {
@@ -109,6 +116,7 @@ export default {
       // 存储搜索地址
       window.localStorage.setItem("searchAddressHistory", addressList);
     },
+    // 获取搜索记录
     getStore() {
       // 查看localstorage中是否有存储搜索历史
       let addressArray = window.localStorage.getItem("searchAddressHistory");
@@ -182,6 +190,12 @@ export default {
   font-size: 9.6px;
   color: #333;
   padding: 2px 0 2px 8px;
+}
+.city .container .clear_history {
+  text-align: center;
+  line-height: 26px;
+  color: #333;
+  font-size: 12px;
 }
 
 /* 搜索结果 */
