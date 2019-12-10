@@ -3,12 +3,12 @@ module.exports = {
     '@vue/cli-plugin-babel/preset'
   ],
   "plugins": [
-    ["component", [
+    ["component", 
       {
         "libraryName": "mint-ui",
         "style": true
       }
-    ]],
+    ,"mint-ui"],
     ['import', {
       libraryName: 'vant',
       libraryDirectory: 'es',
