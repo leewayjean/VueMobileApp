@@ -86,16 +86,16 @@ export default {
 .shop .header {
   position: relative;
 }
-.shop .header .goBackBtn {
+ .goBackBtn {
   position: absolute;
   left: 4px;
   top: 0px;
 }
-.shop .header .goBackBtn i {
+.goBackBtn i {
   font-size: 26px;
   color: #fff;
 }
-.shop .shop_header {
+.shop_header {
   display: flex;
   padding: 8px;
   background-image: -webkit-gradient(
@@ -108,13 +108,13 @@ export default {
   background-image: -webkit-linear-gradient(left, #0af, #0085ff);
   background-image: linear-gradient(90deg, #0af, #0085ff);
 }
-.shop .shop_header .info_container {
+.info_container {
   flex: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.shop .shop_header .info_container .shop_info {
+.shop_info {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -122,25 +122,25 @@ export default {
   line-height: 1.2em;
 }
 
-.shop .shop_header .shop_avatar {
+ .shop_avatar {
   width: 58px;
   height: 58px;
   margin-right: 8px;
   border-radius: 3px;
 }
-.shop .shop_header .info_container .shop_info .name {
+.shop_info .name {
   font-size: 16px;
   color: #fff;
 }
-.shop .shop_header .info_container .shop_info .delivery_info {
+ .shop_info .delivery_info {
   font-size: 10px;
   color: #fff;
 }
-.shop .shop_header .info_container .shop_info .shop_notice {
+.shop_info .shop_notice {
   font-size: 10px;
   color: #fff;
 }
-.shop .shop_header .info_container .next_icon i {
+.next_icon i {
   font-size: 12px;
   color: #fff;
 }
@@ -157,7 +157,7 @@ export default {
   display: flex;
   justify-content: center;
 }
-.shop nav .nav_item .nav_btn {
+.nav_item .nav_btn {
   color: #666;
   padding: 4px;
   font-size: 13px;
@@ -165,7 +165,7 @@ export default {
 }
 
 /* 路由激活状态 */
-.shop nav .nav_item .router-link-active {
+.nav_item .router-link-active {
   color: #0085ff;
   border-bottom: 2px solid #0089dc;
 }

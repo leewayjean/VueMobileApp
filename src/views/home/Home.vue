@@ -9,7 +9,6 @@
       <!-- 定位地址 -->
       <router-link to="/cities" slot="address" tag="span" class="address">{{sliceAddress}}</router-link>
     </header-top>
-    <section class="bs-wrap">
       <main>
         <!-- 轮播 -->
         <div class="swipe_container">
@@ -42,7 +41,6 @@
           </keep-alive>
         </section>
       </main>
-    </section>
     <!-- tabbar -->
     <Footer />
   </div>
@@ -52,10 +50,6 @@ import HeaderTop from "../../components/header/header";
 import Footer from "../../components/footer/Footer";
 import ShopList from "../../components/common/ShopList";
 import { getAddressByGeohash, getIndexEntry } from "../../server/getData";
-import BScroll from "@better-scroll/core";
-import PullDown from "@better-scroll/pull-down";
-
-BScroll.use(PullDown);
 
 export default {
   name: "Home",
@@ -98,14 +92,6 @@ export default {
       arr.push(res.data.slice(0, 8));
       arr.push(res.data.slice(8));
       this.indexEntry = arr;
-    });
-  },
-  updated() {
-    this.$nextTick(() => {
-      // new BScroll(".bs-wrap", {
-      //   click: true,
-      //   scrollY: true,
-      // });
     });
   },
   components: {

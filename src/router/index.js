@@ -1,19 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-const Cities = () => import("../views/cities/Cities")
-const City = () => import("../views/city/City")
-const Home = () => import("../views/home/Home")
-const Search = () => import("../views/search/Search")
-const Order = () => import("../views/order/Order")
-const Profile = () => import("../views/profile/Profile")
-const UserInfo = () => import("../views/profile/user/UserInfo")
-const Login = () => import("../views/login/Login")
-const Forget = () => import("../views/login/children/Forget")
-const Shop = () => import("../views/shop/Shop")
-const Food = () => import("../views/shop/children/Food")
-const Comment = () => import("../views/shop/children/Comment")
-const ShopInfo = () => import("../views/shop/children/ShopInfo")
-const ConfirmOrder = () => import("../views/confirm_order/ConfirmOrder")
+const cities = () => import("../views/cities/cities")
+const city = () => import("../views/city/city")
+const home = () => import("../views/home/home")
+const search = () => import("../views/search/search")
+const order = () => import("../views/order/order")
+const profile = () => import("../views/profile/profile")
+const userInfo = () => import("../views/profile/user/userInfo")
+const login = () => import("../views/login/login")
+const forget = () => import("../views/login/children/forget")
+const shop = () => import("../views/shop/shop")
+const food = () => import("../views/shop/children/food")
+const comment = () => import("../views/shop/children/comment")
+const shopInfo = () => import("../views/shop/children/shopInfo")
+const confirmOrder = () => import("../views/confirm_order/confirmOrder")
 
 Vue.use(VueRouter)
 
@@ -26,84 +26,84 @@ const routes = [
   {
     path: '/cities',
     name: 'cities',
-    component: Cities
+    component: cities
   },
   // 地址
   {
     path: '/city/:id',
     name: 'city',
-    component: City
+    component: city
   },
   // 登录
   {
     path: "/login",
     name: "login",
-    component: Login,
+    component: login,
 
   },
   // 忘记密码
   {
     path: "/forget",
     name: "forget",
-    component: Forget
+    component: forget
   },
   // 首页
   {
     path: '/home',
     name: 'home',
-    component: Home
+    component: home
   },
   // 店铺
   {
     path: '/shop',
     name: "shop",
-    component: Shop,
+    component: shop,
     redirect: { name: "food" },
     children: [
       {
         path: "/shop/food",
         name: "food",
-        component: Food
+        component: food
       },
       {
         path: "/shop/comment",
         name: "comment",
-        component: Comment
+        component: comment
       },
     ]
   },
   {
     path:'/confirmOrder',
     name:"confirmOrder",
-    component:ConfirmOrder
+    component:confirmOrder
   },
   {
     path: "/shopinfo",
     name: "shop_info",
-    component: ShopInfo
+    component: shopInfo
   },
   // 搜索店铺
   {
     path: '/search',
     name: 'search',
-    component: Search
+    component: search
   },
   // 订单中心
   {
     path: '/order',
     name: 'order',
-    component: Order
+    component: order
   },
   // 我的
   {
     path: '/profile',
     name: 'profile',
-    component: Profile
+    component: profile
   },
   {
     path:'/userInfo',
     name:"userInfo",
-    component:UserInfo
+    component:userInfo
   }
 
 ]
