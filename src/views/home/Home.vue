@@ -104,7 +104,8 @@ export default {
 
 <style scoped>
 .home {
-  margin-top: 42px;
+  min-height: 100%;
+  padding-top: 42px;
 }
 .home .search_btn {
   font-size: 20px;
@@ -146,11 +147,11 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.home .swiper .entry_item .entry_img {
+ .entry_img {
   width: 36px;
   margin-bottom: 6px;
 }
-.home .swiper .entry_item .entry_title {
+.entry_title {
   font-size: 11px;
   color: #666;
 }
@@ -159,7 +160,7 @@ export default {
   background-color: #fff;
   border-top: 1px solid #e4e4e4;
 }
-.shop_list_container .shop_header {
+ .shop_header {
   box-sizing: border-box;
   padding: 0 8px;
   font-size: 11px;

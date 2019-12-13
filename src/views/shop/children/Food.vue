@@ -41,7 +41,11 @@
                   </span>
                   <!-- 添加购物车按钮 -->
                   <!-- 选择规格 -->
-                  <span class="add_btn" v-if="item.specfoods.length > 1" @click="selected(item.specfoods)">选规格</span>
+                  <span
+                    class="add_btn"
+                    v-if="item.specfoods.length > 1"
+                    @click="selected(item.specfoods)"
+                  >选规格</span>
                   <!-- 添加购物车 -->
                   <CartControl v-else :foodItem="item.specfoods[0]"></CartControl>
                 </section>
@@ -52,7 +56,7 @@
       </section>
     </section>
     <!-- 选规格 -->
-    <SelectedFood :foods="selectedFood" v-if="isShow"/>
+    <SelectedFood :foods="selectedFood" v-if="isShow" />
 
     <!-- 底部购物车栏 -->
     <footer>
@@ -87,6 +91,7 @@
 
 <script>
 import BScroll from "@better-scroll/core";
+import {Indicator} from 'mint-ui';
 import { getFoods } from "../../../server/getData";
 import CartControl from "../../../components/common/CartControl";
 import CartDetail from "../../../components/common/CartDetail";
@@ -95,7 +100,7 @@ export default {
   name: "Food",
   data() {
     return {
-      cart: [],
+      cart: [], //购物车
       foodList: [], //食品列表
       id: this.$route.query.id, // 路由查询参数
       listHeight: [], //右边每个li所处高度
@@ -103,14 +108,16 @@ export default {
       menuScroll: {}, //左侧的BScroll对象
       scrollY: 0, // Y轴滚动距离
       isShowCart: false,
-      selectedFood: [],
-      isShow:false
+      selectedFood: [], 
+      isShow: false
     };
   },
   computed: {
+    // 总价格
     totalPrice() {
       return this.$store.getters.totalPrice;
     },
+    // 总数量
     foodCount() {
       return this.$store.getters.foodCount;
     },
@@ -143,7 +150,7 @@ export default {
     }
   },
   watch: {
-    cartFoods(newValue, oldValue) {
+    cartFoods(newValue) {
       this.$store.commit("UPDATE_CARTLIST", this.cartFoods);
       // 如果购物车中已经没有东西，那么购物车详情置为false，解决点击时弹出购物车详情bug
       if (newValue.length < 1) {
@@ -194,26 +201,27 @@ export default {
         heightArray.push(height);
       }
       this.listHeight = heightArray;
+    },
+    loadData() {
+      getFoods(this.id).then(res => {
+        // 获取数据
+        this.foodList = res.data;
+        this.$nextTick(() => {
+          // 初始化better-scroll
+          this.initScroll();
+          // 记录每项高度
+          this.calculateHeight();
+          // 监听滚动事件
+          this.foodScroll.on("scroll", pos => {
+            // 记录Y轴滚动距离
+            this.scrollY = Math.abs(Math.round(pos.y));
+          });
+        });
+      });
     }
   },
   created() {
-    getFoods(this.id).then(res => {
-      // 获取数据
-      this.foodList = res.data;
-      // 获取数据完成后关闭骨架图
-      this.$parent.successLoadData = true;
-      this.$nextTick(() => {
-        // 初始化better-scroll
-        this.initScroll();
-        // 记录每项高度
-        this.calculateHeight();
-        // 监听滚动事件
-        this.foodScroll.on("scroll", pos => {
-          // 记录Y轴滚动距离
-          this.scrollY = Math.abs(Math.round(pos.y));
-        });
-      });
-    });
+    this.loadData();
   },
   components: {
     CartControl,
@@ -264,7 +272,7 @@ export default {
 .food .food_wrapper .list_item:last-child {
   padding-bottom: 100vh;
 }
-.food .food_wrapper .list_item .title {
+.list_item .title {
   box-sizing: border-box;
   padding: 12px 8px;
   font-size: 14px;
@@ -272,54 +280,54 @@ export default {
   font-weight: bold;
   background-color: #f5f5f5;
 }
-.food .food_wrapper .list_item .title .title_info {
+.list_item .title .title_info {
   font-size: 10px;
   color: #999;
   margin-left: 8px;
 }
-.food .food_wrapper .list_item .food_info {
+.list_item .food_info {
   display: flex;
   padding: 12px 8px;
   border-bottom: 1px solid #eee;
   box-sizing: border-box;
 }
-.food .food_wrapper .list_item .food_info > section {
+.food_info > section {
   flex: 1;
 }
-.food .food_wrapper .list_item .food_info .food_img {
+.food_info .food_img {
   width: 40px;
   height: 40px;
   margin-right: 8px;
   border-radius: 3px;
 }
-.food .food_wrapper .list_item .food_info .food_name {
+.food_info .food_name {
   font-size: 14px;
   color: #333;
   font-weight: bold;
 }
-.food .food_wrapper .list_item .food_info .food_des {
+.food_info .food_des {
   font-size: 10px;
   color: #999;
   margin: 5px 0;
 }
-.food .food_wrapper .list_item .food_info .food_tips {
+.food_info .food_tips {
   font-size: 10px;
   color: #333;
   margin: 5px 0;
 }
-.food .food_wrapper .list_item .food_info section section {
+.food_info section section {
   display: flex;
   justify-content: space-between;
 }
-.food .food_wrapper .list_item .food_info section .buy_container .price {
+.food_info section .buy_container .price {
   font-size: 14px;
   color: #f60;
   font-weight: bold;
 }
-.food .food_wrapper .list_item .food_info section .buy_container .price .icon {
+.buy_container .price .icon {
   font-size: 10px;
 }
-.food .food_wrapper .list_item .food_info section .buy_container .add_btn {
+.buy_container .add_btn {
   font-size: 11px;
   padding: 2px 4px;
   border-radius: 3px;

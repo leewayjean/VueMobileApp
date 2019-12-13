@@ -59,6 +59,8 @@ export default {
 
 <style scoped>
 .order {
+  width: 100%;
+  min-height: 100%;
   padding-top: 49px;
 }
 .order section.userinfo_item h3 {

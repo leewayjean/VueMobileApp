@@ -50,7 +50,6 @@ export default {
   data() {
     return {
       shopInfo: {}, //店铺信息
-      successLoadData: false,
       id: this.$route.query.id  //当前路由查询参数
     };
   },
