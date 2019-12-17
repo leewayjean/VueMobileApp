@@ -3,28 +3,32 @@
     <router-link tag="div" :to="{path:'/home',query:{
       geohash,
     }}" class="tabbar-item">
-      <i class="fa fa-home tabbar-icon" aria-hidden="true"></i><span class="tabbar-name">首页</span>
+      <i class="fa fa-home tabbar-icon" aria-hidden="true"></i>
+      <span class="tabbar-name">首页</span>
     </router-link>
     <router-link tag="div" to="/search" class="tabbar-item">
-      <i class="fa fa-compass tabbar-icon" aria-hidden="true"></i><span class="tabbar-name">搜索</span>
+      <i class="fa fa-compass tabbar-icon" aria-hidden="true"></i>
+      <span class="tabbar-name">搜索</span>
     </router-link>
     <router-link tag="div" to="/order" class="tabbar-item">
-      <i class="fa fa-shopping-cart tabbar-icon" aria-hidden="true"></i> <span class="tabbar-name">订单</span>
+      <i class="fa fa-shopping-cart tabbar-icon" aria-hidden="true"></i>
+      <span class="tabbar-name">订单</span>
     </router-link>
     <router-link tag="div" to="/profile" class="tabbar-item">
-      <i class="fa fa-use tabbar-icon" aria-hidden="true"></i><span class="tabbar-name">我的</span>
+      <i class="fa fa-user tabbar-icon" aria-hidden="true"></i>
+      <span class="tabbar-name">我的</span>
     </router-link>
   </footer>
 </template>
 
 <script>
-import {mapState} from "vuex"
+import { mapState } from "vuex";
 export default {
-  name:"tabbar",
-  computed:{
+  name: "tabbar",
+  computed: {
     ...mapState(["geohash"])
   }
-}
+};
 </script>
 
 <style scoped>
@@ -45,19 +49,19 @@ footer {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #666
+  color: #666;
 }
-.tabbar-icon{
+.tabbar-icon {
   font-size: 16px;
   margin-bottom: 4px;
 }
 .tabbar-name {
   font-size: 9.6px;
 }
- .router-link-active .tabbar-item{
+.router-link-active .tabbar-icon {
   color: #0089dc;
 }
 .router-link-active .tabbar-name {
-    color: #0089dc;
+  color: #0089dc;
 }
 </style>
