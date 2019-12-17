@@ -20,6 +20,6 @@ export default {
 
 <style scoped>
 .order {
-    padding-top: 49px;
+    padding-top: 39px;
 }
 </style>

@@ -2,7 +2,7 @@
   <section ref="wrapper" class="wrapper">
     <section class="comment">
       <!-- 头部 -->
-      <section class="comment_header">
+      <section class="comment-header">
         <section>
           <h4 class="score">{{shopInfo.rating}}</h4>
           <p class="rating">综合评价</p>
@@ -25,19 +25,19 @@
             @click="changeTag(index)"
           >{{tag.name}}({{tag.count}})</li>
         </ul>
-        <ul class="content_list">
-          <li v-for="(item,index) in rates" :key="index" class="list_item">
+        <ul class="content-list">
+          <li v-for="(item,index) in rates" :key="index" class="list-item">
             <img
               :src="`https://fuss10.elemecdn.com/1/5f/${item.avatar}.jpeg`"
               alt="头像"
               class="avatar"
             />
-            <section class="rate_content">
+            <section class="rate-content">
               <p class="info">
                 <span class="username">{{item.username}}</span>
                 <span class="rated_at">{{item.rated_at}}</span>
               </p>
-              <ul class="img_list">
+              <ul class="img-list">
                 <li v-for="(img,index) in item.item_ratings" :key="index">
                   {{img.food_name}}
                   <img
@@ -109,42 +109,42 @@ export default {
   overflow: hidden;
 }
 /* 评价头部 */
-.comment .comment_header {
+.comment-header {
   padding: 16px 10px;
   margin-bottom: 10px;
   background-color: #fff;
   display: flex;
 }
 
-.comment .comment_header section:last-child {
+.comment-header section:last-child {
   font-size: 13px;
   color: #666;
 }
-.comment .comment_header section {
+.comment-header section {
   width: 100%;
   text-align: center;
 }
-.comment .comment_header .score {
+.comment-header .score {
   font-size: 24px;
   color: #f60;
 }
-.comment .comment_header .rating {
+.comment-header .rating {
   font-size: 13px;
   color: #666;
 }
-.comment .comment_header .rate {
+.comment-header .rate {
   font-size: 9.6px;
   color: #999;
 }
 /* 评价标签 */
-.comment .content .tags {
+ .content .tags {
   display: flex;
   flex-wrap: wrap;
   padding: 8px;
   background-color: #fff;
   border-bottom: 1px solid #eee;
 }
-.comment .content .tags .tag {
+ .content .tags .tag {
   font-size: 12px;
   color: #6d7885;
   padding: 6px;
@@ -153,33 +153,33 @@ export default {
   border-radius: 5px;
 }
 /* 评价列表 */
-.comment .content .content_list {
+  .content-list {
   padding: 0 10px;
   background-color: #fff;
 }
-.comment .content .content_list .list_item {
+ .list-item {
   display: flex;
   padding: 12px 0;
   border-bottom: 1px solid #eee;
 }
-.comment .content .content_list .list_item .avatar {
+ .list-item .avatar {
   width: 30px;
   height: 30px;
   margin-right: 16px;
 }
-.comment .content .content_list .list_item .rate_content {
+ .rate-content {
   flex: 1;
 }
-.comment .content .content_list .list_item .rate_content .info {
+ .rate-content .info {
   display: flex;
   justify-content: space-between;
 }
-.comment .content .content_list .list_item .rate_content .info .rated_at {
+ .rate-content .info .rated_at {
   font-size: 9.6px;
   color: #999;
 }
 
-.comment .tags .tag.activeClass {
+ .tags .tag.activeClass {
   background-color: #3190e8;
   color: #fff;
 }

@@ -1,5 +1,5 @@
 <template>
-  <span class="login_btn" @click="$emit('btn-click')">{{btnText}}</span>
+  <span class="confirm-btn" @click="$emit('btn-click')">{{btnText}}</span>
 </template>
 
 <script>
@@ -14,7 +14,7 @@ export default {
 }
 </script>
 <style scoped>
-.login_btn {
+.confirm-btn {
   display: inline-block;
   width: 300px;
   margin: 0 10px 20px;

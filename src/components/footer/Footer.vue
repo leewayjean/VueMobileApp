@@ -1,18 +1,18 @@
 <template>
-  <footer>
+  <footer class="tabbar">
     <router-link tag="div" :to="{path:'/home',query:{
       geohash,
-    }}" class="tab_item">
-      <i class="fa fa-home" aria-hidden="true"></i><span class="tab_name">首页</span>
+    }}" class="tabbar-item">
+      <i class="fa fa-home tabbar-icon" aria-hidden="true"></i><span class="tabbar-name">首页</span>
     </router-link>
-    <router-link tag="div" to="/search" class="tab_item">
-      <i class="fa fa-compass" aria-hidden="true"></i><span class="tab_name">搜索</span>
+    <router-link tag="div" to="/search" class="tabbar-item">
+      <i class="fa fa-compass tabbar-icon" aria-hidden="true"></i><span class="tabbar-name">搜索</span>
     </router-link>
-    <router-link tag="div" to="/order" class="tab_item">
-      <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="tab_name">订单</span>
+    <router-link tag="div" to="/order" class="tabbar-item">
+      <i class="fa fa-shopping-cart tabbar-icon" aria-hidden="true"></i> <span class="tabbar-name">订单</span>
     </router-link>
-    <router-link tag="div" to="/profile" class="tab_item">
-      <i class="fa fa-user" aria-hidden="true"></i><span class="tab_name">我的</span>
+    <router-link tag="div" to="/profile" class="tabbar-item">
+      <i class="fa fa-use tabbar-icon" aria-hidden="true"></i><span class="tabbar-name">我的</span>
     </router-link>
   </footer>
 </template>
@@ -20,7 +20,7 @@
 <script>
 import {mapState} from "vuex"
 export default {
-  name:"Footer",
+  name:"tabbar",
   computed:{
     ...mapState(["geohash"])
   }
@@ -39,7 +39,7 @@ footer {
   box-shadow: 0 -0.02667rem 0.05333rem rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }
-footer .tab_item {
+.tabbar-item {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -47,17 +47,17 @@ footer .tab_item {
   align-items: center;
   color: #666
 }
-footer .tab_item i {
+.tabbar-icon{
   font-size: 16px;
   margin-bottom: 4px;
 }
-footer .tab_item .tab_name {
+.tabbar-name {
   font-size: 9.6px;
 }
-footer .router-link-active i{
+ .router-link-active .tabbar-item{
   color: #0089dc;
 }
-footer .router-link-active .tab_name {
+.router-link-active .tabbar-name {
     color: #0089dc;
 }
 </style>

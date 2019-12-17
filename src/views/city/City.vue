@@ -2,32 +2,32 @@
   <div class="city">
     <!-- 顶栏 -->
     <header-top :goback="true" :headshow="true" :headtitle="cityName">
-      <router-link slot="changcity" class="change_city" to="/cities" tag="span">切换城市</router-link>
+      <router-link slot="changcity" class="change-city" to="/cities" tag="span">切换城市</router-link>
     </header-top>
     <!-- 搜索框 -->
-    <div class="select_city">
-      <div class="search_city">
-        <input type="text" class="search_input" placeholder="输入学校、商务楼、地址" v-model="inputValue" />
-        <div class="search_btn" @click="searchCity">搜索</div>
+    <div class="select-city">
+      <div class="search-city">
+        <input type="text" class="search-input" placeholder="输入学校、商务楼、地址" v-model="inputValue" />
+        <div class="search-btn" @click="searchCity">搜索</div>
       </div>
     </div>
     <!-- 搜索历史记录 -->
-    <div class="container" v-if="searchResult.length === 0 && searchHistory.length != 0">
-      <h3 class="title">搜索历史</h3>
-      <ul class="search_result">
-        <li class="search_result_item" v-for="(item,index) in searchHistory" :key="index" @click="goToHome(item)">
+    <div class="search-history" v-if="searchResult.length === 0 && searchHistory.length != 0">
+      <h3 class="search-title">搜索历史</h3>
+      <ul class="search-result">
+        <li class="search-result-item" v-for="(item,index) in searchHistory" :key="index" @click="goToHome(item)">
           <h6 class="name">{{item.name}}</h6>
           <p class="address">{{item.address}}</p>
         </li>
       </ul>
-      <p class="clear_history" @click="clearHistory">清除搜索记录</p>
+      <p class="clear-history" @click="clearHistory">清除搜索记录</p>
     </div>
     <!-- 搜索结果 -->
     <div class="container" v-if="searchResult.length !== 0">
-      <h3 class="title">搜索结果</h3>
-      <ul class="search_result">
+      <h3 class="search-title">搜索结果</h3>
+      <ul class="search-result">
         <li
-          class="search_result_item"
+          class="search-result-item"
           v-for="item in searchResult"
           :key="item.latitude"
           @click="goToHome(item)"
@@ -148,22 +148,22 @@ export default {
 </script>
 
 <style scoped>
-.city .change_city {
+.change-city {
   font-size: 12px;
   color: #fff;
   white-space: nowrap;
 }
-.city .select_city {
+.select-city {
   padding-top: 49px;
   border-top: 1px solid #e4e4e4;
   border-bottom: 2px solid #e4e4e4;
 }
-.city .select_city .search_city {
+.search-city {
   padding: 8px 0;
   background-color: #fff;
   width: 100%;
 }
-.city .search_city .search_input {
+.search-input {
   display: block;
   box-sizing: border-box;
   width: 288px;
@@ -173,7 +173,7 @@ export default {
   border: 1px solid #e4e4e4;
   outline: none;
 }
-.city .search_city .search_btn {
+ .search-btn {
   box-sizing: border-box;
   width: 288px;
   height: 28px;
@@ -186,12 +186,12 @@ export default {
   font-size: 12px;
 }
 /* 搜索历史 */
-.city .container .title {
+.search-title {
   font-size: 9.6px;
   color: #333;
   padding: 2px 0 2px 8px;
 }
-.city .container .clear_history {
+.clear-history {
   text-align: center;
   line-height: 26px;
   color: #333;
@@ -199,17 +199,17 @@ export default {
 }
 
 /* 搜索结果 */
-.city .search_result .search_result_item {
+.search-result-item {
   background-color: #fff;
   padding-top: 13px;
   border-bottom: 1px solid #e4e4e4;
 }
-.city .search_result .search_result_item .name {
+.search-result-item .name {
   font-size: 13px;
   color: #333;
   margin: 0 16px 7px;
 }
-.city .search_result .search_result_item .address {
+ .search-result-item .address {
   font-size: 9.6px;
   color: #999;
   margin: 0 16px 11px;

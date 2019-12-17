@@ -1,30 +1,29 @@
 <template>
   <!-- 选规格 -->
-  <section class="pop_mask" @click.stop="$parent.isShow = false">
-    <section class="content">
+  <section class="select-food-container" @click.stop="$parent.isShow = false">
+    <section class="select-food-main">
       <!-- 头部 -->
       <header>
-        <span>我问问</span>
-        <span>&times;</span>
+        <span class="food-name">我问问</span>
+        <em class="close-btn">&times;</em>
       </header>
       <!-- 主内容 -->
-      <main>
-        <h3>规格</h3>
-        <div>
-          <span
+      <main class="food-options">
+        <h3 class="food-options-title">规格</h3>
+        <ul class="food-options-list">
+          <li
+            class="food-options-item"
             v-for="(item,index) in foods"
             :key="index"
-            @click="selected(index)"
+            @click="currentIndex = index"
             :class="{activeClass:currentIndex == index}"
-          >{{item.name}}</span>
-        </div>
+          >{{item.name}}</li>
+        </ul>
       </main>
       <!-- 底部 -->
       <footer>
-        <span class="price">
-          <span>￥</span>20
-        </span>
-        <span class="add">加入购物车</span>
+        <span class="food-price">￥20</span>
+        <span class="add-btn">加入购物车</span>
       </footer>
     </section>
   </section>
@@ -42,16 +41,11 @@ export default {
       currentIndex: 0
     };
   },
-  methods: {
-    selected(index) {
-      this.currentIndex = index;
-    }
-  }
 };
 </script>
 <style scoped>
 /*  弹出框遮罩层*/
-section.pop_mask {
+.select-food-container {
   position: fixed;
   left: 0;
   top: 0;
@@ -60,7 +54,7 @@ section.pop_mask {
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 999;
 }
-.pop_mask .content {
+.select-food-main {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -69,27 +63,27 @@ section.pop_mask {
   border-radius: 10px;
   width: 224px;
 }
-.pop_mask .content header {
+.select-food-main header {
   font-size: 14px;
   color: #222;
   padding: 10px;
   text-align: center;
 }
-.pop_mask .content header span:last-child {
+.close-btn {
   font-size: 22px;
   float: right;
 }
-.pop_mask .content main {
+.food-options {
   padding: 10px;
 }
-.pop_mask .content main h3 {
+.food-options-title {
   font-size: 12px;
   color: #666;
 }
-.pop_mask .content main div {
+.food-options-list {
   padding: 8px 0;
 }
-.pop_mask .content main div span {
+.food-options-item {
   display: inline-block;
   margin-right: 8px;
   text-align: center;
@@ -105,19 +99,20 @@ section.pop_mask {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.pop_mask .content footer {
+footer {
   padding: 10px;
+  margin-bottom: 5px;
 }
-.pop_mask .content footer .price {
+.food-price {
   vertical-align: middle;
   color: #f60;
   font-size: 16px;
   font-weight: bold;
 }
-.pop_mask .content footer .price span {
+.food-price{
   font-size: 10px;
 }
-.pop_mask .content footer .add {
+.add-btn {
   float: right;
   display: inline-block;
   width: 80px;
@@ -129,7 +124,7 @@ section.pop_mask {
   background-color: #0085ff;
   border-radius: 3px;
 }
-.pop_mask .content main .activeClass {
+.food-options .activeClass {
   color: #0085ff;
   border-color: #0085ff;
 }

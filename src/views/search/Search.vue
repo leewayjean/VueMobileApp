@@ -3,23 +3,23 @@
     <!-- 顶栏 -->
     <header-top :goHome="true" :headshow="true" headtitle="搜索"></header-top>
     <!-- 表达你 -->
-    <form class="search_form">
-      <input type="text" class="search_input" placeholder="请输入商家或美食名称" v-model="inputValue" />
-      <span class="search_btn" @click="searchShop">搜索</span>
+    <form class="search-form">
+      <input type="text" class="search-input" placeholder="请输入商家或美食名称" v-model="inputValue" />
+      <span class="search-btn" @click="searchShop">搜索</span>
     </form>
     <!-- 商家或食品列表 -->
-    <main class="search_result_container">
+    <main class="search-result-container">
       <section
-        class="search_result_item"
+        class="search-result-item"
         v-for="(item,index) in foodList"
         :key="index"
         @click="toShop(item)"
       >
-        <img :src="`//elm.cangdu.org/img/${item.image_path}`" alt class="shop_avatar" />
-        <section class="shop_info">
+        <img :src="`//elm.cangdu.org/img/${item.image_path}`" alt class="shop-avatar" />
+        <section class="shop-info">
           <h3 class="name">{{item.name}}</h3>
-          <p class="sell_num">月售{{item.recent_order_num}}单</p>
-          <P class="delivery_info">{{item.float_delivery_fee}} 元起送 / 距离 {{item.distance}}</P>
+          <p class="sell-num">月售{{item.recent_order_num}}单</p>
+          <P class="delivery-info">{{item.float_delivery_fee}} 元起送 / 距离 {{item.distance}}</P>
         </section>
       </section>
     </main>
@@ -73,14 +73,14 @@ export default {
 .search {
   padding-top: 39px;
 }
-.search .search_form {
+.search-form {
   padding: 10px;
   background-color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.search .search_input {
+.search-input {
   flex: 1;
   height: 30px;
   background-color: #f2f2f2;
@@ -92,7 +92,7 @@ export default {
   border: 1px solid #e4e4e4;
   border-radius: 4px;
 }
-.search .search_btn {
+.search-btn {
   margin-left: 8px;
   border: none;
   display: inline-block;
@@ -105,21 +105,21 @@ export default {
   line-height: 30px;
   border-radius: 4px;
 }
-.search .search_result_container {
+.search-result-container {
   margin-top: 8px;
 }
-.search .search_result_item {
+.search-result-item {
   display: flex;
   justify-content: flex-start;
   background-color: #fff;
   padding: 10px;
 }
-.search .search_result_item .shop_avatar {
+.shop-avatar {
   width: 34px;
   height: 34px;
   margin-right: 8px;
 }
-.search .search_result_item .shop_info {
+.shop-info {
   font-size: 11px;
   color: #333;
   line-height: 1.3em;

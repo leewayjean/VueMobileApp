@@ -1,10 +1,10 @@
 <template>
-  <section class="text_bar">
-    <section class="text_bar_title">
+  <section class="text-bar">
+    <section class="text-bar-title">
       <slot class="title_icon"></slot>
-      <span class="text">{{textBarTitle}}</span>
+      <span class="text-bar-name">{{textBarTitle}}</span>
     </section>
-    <span class="next_icon">
+    <span class="next-icon">
       <i class="fa fa-angle-right" aria-hidden="true"></i>
     </span>
   </section>
@@ -22,7 +22,7 @@ export default {
 }
 </script>
 <style scoped>
-.text_bar {
+.text-bar {
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
@@ -32,11 +32,11 @@ export default {
   padding: 0 10px;
   border-bottom: 1px solid #eee;
 }
-.text_bar .text_bar_title .text {
+.text-bar-name {
   font-size: 14px;
   color: #666;
 }
-.text_bar .next_icon i {
+.next-icon i {
   color: #666;
   font-size: 16px;
 }

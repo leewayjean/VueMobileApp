@@ -11,7 +11,7 @@
       </InputGroup>
       <!-- 验证码 -->
       <InputGroup inputtype="text" placeholder="验证码" v-model="captcha_code">
-        <section slot="verifyCode" class="verify_code">
+        <section slot="verifyCode" class="verify-code">
           <img :src="captcha_codeSrc" alt />
           <section class="tips">
             <p>看不清</p>
@@ -21,14 +21,14 @@
       </InputGroup>
     </form>
     <!--登录提示 -->
-    <section class="login_tips">
-      <p class="tip_item">温馨提示：未注册过的账号，登录时将自动注册</p>
-      <p class="tip_item">注册过的用户可凭账号密码登录</p>
+    <section class="login-tips">
+      <p class="tips-item">温馨提示：未注册过的账号，登录时将自动注册</p>
+      <p class="tips-item">注册过的用户可凭账号密码登录</p>
     </section>
     <!-- 登录按钮 -->
-    <span class="login_btn" @click="toLogin">登录</span>
+    <span class="login-btn" @click="toLogin">登录</span>
     <!-- 重置密码 -->
-    <router-link class="reset_password" to="/forget" tag="p">重置密码？</router-link>
+    <router-link class="reset-password" to="/forget" tag="p">重置密码？</router-link>
   </div>
 </template>
 
@@ -43,7 +43,7 @@ export default {
       username: "", //用户名
       password: "", // 密码
       captcha_code: "", //验证码
-      isLogin:this.$store.state.isLogin,
+      isLogin: this.$store.state.isLogin,
       showValue: true, // 是否显示密码
       captcha_codeSrc: "" //验证码图片src
     };
@@ -52,7 +52,7 @@ export default {
     // 是否显示密码
     inputType() {
       return this.showValue ? "password" : "text";
-    },
+    }
   },
   created() {
     // 创建实例后立即获取验证码
@@ -92,10 +92,10 @@ export default {
         userLogin(this.username, this.password, this.captcha_codeSrc).then(
           res => {
             // 登录成功，将用户信息存储到vuex中和浏览器中
-            this.$store.commit("RECORD_USERINFO",userInfo)
-            window.localStorage.setItem("IS_LOGIN",true);
+            this.$store.commit("RECORD_USERINFO", userInfo);
+            window.localStorage.setItem("IS_LOGIN", true);
             let user = JSON.stringify(userInfo);
-            window.localStorage.setItem("USER_INFO",user);
+            window.localStorage.setItem("USER_INFO", user);
             // 跳转
             this.$router.go(-1);
           }
@@ -120,30 +120,30 @@ export default {
   margin-top: 12px;
   padding-top: 39px;
 }
-.login form .verify_code {
+.verify-code {
   display: flex;
 }
-.login form .verify_code img {
+.verify-code img {
   width: 70px;
   height: 30px;
   margin-right: 5px;
 }
-.login form .verify_code p {
+.verify-code p {
   font-size: 11px;
   white-space: nowrap;
   color: #666;
   margin-bottom: 3px;
 }
-.login form .verify_code span {
+.verify-code span {
   font-size: 11px;
   color: #3b95e9;
 }
-.login .login_tips .tip_item {
+.login-tips .tips-item {
   font-size: 10px;
   color: #f00;
   padding: 8px 12px;
 }
-.login .login_btn {
+.login-btn {
   display: inline-block;
   width: 300px;
   font-size: 16px;
@@ -154,7 +154,7 @@ export default {
   border-radius: 4px;
   background: #4cd96f;
 }
-.login .reset_password {
+.reset-password {
   float: right;
   font-size: 12px;
   color: #3b95e9;

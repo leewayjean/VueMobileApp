@@ -1,48 +1,53 @@
 <template>
   <section class="food">
     <!-- better-scrool 容器  && 左侧菜单栏 -->
-    <section class="categories_wrapper" ref="categories_wrapper">
-      <ul class="food_categories">
+    <nav class="navbar-wrapper" ref="navbarWrapper">
+      <ul class="navbar">
         <li
           v-for="(item,index) in foodList"
           :key="item.id"
-          class="categories_item"
+          class="navbar-item"
           :class="{activeClass:currentIndex == index}"
           @click="scrollToElement(index)"
         >{{item.name}}</li>
       </ul>
-    </section>
+    </nav>
     <!-- better-scrool 容器  && 右侧食品栏-->
-    <section class="food_wrapper" ref="food_wrapper">
-      <section>
-        <div v-for="(foodItem) in foodList" :key="foodItem.id" class="list_item">
+    <section class="food-wrapper" ref="foodWrapper">
+      <section class="food-categories">
+        <div v-for="(foodItem) in foodList" :key="foodItem.id" class="food-categories-item">
           <!-- 分类标题 -->
-          <h3 class="title">
-            {{foodItem.name}}
+          <header class="food-categories-title">
+            <span>{{foodItem.name}}</span>
             <!-- 标题描述 -->
-            <span class="title_info">{{foodItem.description}}</span>
-          </h3>
+            <span class="food-categories-desc">{{foodItem.description}}</span>
+          </header>
           <!-- 分类下的商品 -->
-          <ul>
-            <li v-for="(item) in foodItem.foods" :key="item.item_idd" class="food_info">
-              <img :src="`//elm.cangdu.org/img/${item.image_path}`" alt class="food_img" />
-              <section>
+          <ul class="food-list">
+            <li v-for="(item) in foodItem.foods" :key="item.item_idd" class="food-list-item">
+              <img
+                :src="`//elm.cangdu.org/img/${item.image_path}`"
+                alt="商品图片"
+                loading="lazy"
+                class="food-item-img"
+              />
+              <section class="food-item-info">
                 <!-- 商品名称 -->
-                <h5 class="food_name">{{item.name}}</h5>
+                <h5 class="food-item-name">{{item.name}}</h5>
                 <!-- 商品描述 -->
-                <p class="food_des">{{item.description}}</p>
+                <p class="food-item-desc">{{item.description}}</p>
                 <!-- 商品提示 -->
-                <p class="food_tips">{{item.tips}}</p>
-                <section class="buy_container">
+                <p class="food-item-tips">{{item.tips}}</p>
+                <section class="food-price-container">
                   <!-- 商品价格 -->
-                  <span class="price">
-                    <span class="icon" v-if="item.specfoods[0].price">￥</span>
+                  <span class="food-item-price">
+                    <span class="food-unit-icon" v-if="item.specfoods[0].price">￥</span>
                     {{item.specfoods[0].price}}
                   </span>
                   <!-- 添加购物车按钮 -->
                   <!-- 选择规格 -->
                   <span
-                    class="add_btn"
+                    class="addcart-btn"
                     v-if="item.specfoods.length > 1"
                     @click="selected(item.specfoods)"
                   >选规格</span>
@@ -59,25 +64,25 @@
     <SelectedFood :foods="selectedFood" v-if="isShow" />
 
     <!-- 底部购物车栏 -->
-    <footer>
+    <footer class="cart">
       <!-- 购物车详情 -->
       <CartDetail :foodList="cartFoods" v-if="isShowCart && cartFoods.length>0" />
       <!-- 购物车图标 -->
       <span
-        class="cart"
+        class="cart-icon-wrapper"
         :style="{backgroundColor:cartFoods.length>0?'#0089dc':'#535356'}"
         @click="isShowCart = true;"
       >
-        <span class="count" v-if="foodCount">{{foodCount}}</span>
+        <span class="cart-food-count" v-if="foodCount">{{foodCount}}</span>
         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
       </span>
-      <section class="cart_container">
-        <section class="total">
-          <p class="price">￥{{totalPrice}}元</p>
-          <p class="fee">配送费5元</p>
+      <section class="cart-details">
+        <section class="cart-cost">
+          <p class="cart-total-price">￥{{totalPrice}}元</p>
+          <p class="cart-delivery-fee">配送费5元</p>
         </section>
         <router-link
-          class="payBtn"
+          class="cart-pay-btn"
           :style="{backgroundColor:cartFoods.length>0?'#4cd946':'#535356'}"
           tag="span"
           to="/confirmOrder"
@@ -85,13 +90,17 @@
       </section>
     </footer>
     <!-- 遮罩层 -->
-    <div class="layer_mask" v-if="isShowCart&&cartFoods.length > 0" @click="isShowCart = false"></div>
+    <div
+      class="cart-layer-mask"
+      v-if="isShowCart&&cartFoods.length > 0"
+      @click="isShowCart = false"
+    ></div>
   </section>
 </template>
 
 <script>
 import BScroll from "@better-scroll/core";
-import {Indicator} from 'mint-ui';
+import { Indicator } from "mint-ui";
 import { getFoods } from "../../../server/getData";
 import CartControl from "../../../components/common/CartControl";
 import CartDetail from "../../../components/common/CartDetail";
@@ -108,7 +117,7 @@ export default {
       menuScroll: {}, //左侧的BScroll对象
       scrollY: 0, // Y轴滚动距离
       isShowCart: false,
-      selectedFood: [], 
+      selectedFood: [],
       isShow: false
     };
   },
@@ -171,18 +180,18 @@ export default {
     },
     // 点击菜单滚动到某个元素
     scrollToElement(index) {
-      let elementArray = this.$refs.food_wrapper.getElementsByClassName(
-        "list_item"
+      let elementArray = this.$refs.foodWrapper.getElementsByClassName(
+        "food-categories-item"
       );
       this.foodScroll.scrollToElement(elementArray[index], 200);
     },
     // 初始化better-scroll
     initScroll() {
-      this.menuScroll = new BScroll(this.$refs.categories_wrapper, {
+      this.menuScroll = new BScroll(this.$refs.navbarWrapper, {
         // ...... 详见配置项
         click: true
       });
-      this.foodScroll = new BScroll(this.$refs.food_wrapper, {
+      this.foodScroll = new BScroll(this.$refs.foodWrapper, {
         click: true,
         // 派发滚动事件
         probeType: 3
@@ -190,8 +199,8 @@ export default {
     },
     calculateHeight() {
       // 获取所有li
-      let itemArray = this.$refs.food_wrapper.getElementsByClassName(
-        "list_item"
+      let itemArray = this.$refs.foodWrapper.getElementsByClassName(
+        "food-categories-item"
       );
       let height = 0;
       let heightArray = [];
@@ -238,20 +247,20 @@ export default {
   height: 100%;
   overflow: hidden;
 }
-.food .categories_wrapper {
+.navbar-wrapper {
   width: 76px;
   height: 100%;
 }
-.food .food_wrapper {
+.food-wrapper {
   flex: 1;
   width: calc(100% - 76px);
 }
-.food .food_categories {
+.food-categories {
   padding-bottom: 100px;
   width: 100%;
   overflow: hidden;
 }
-.food .food_categories .categories_item {
+.navbar-item {
   box-sizing: border-box;
   width: 76px;
   padding: 14px 6px;
@@ -265,14 +274,14 @@ export default {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.food .food_wrapper .list_item {
+.food-categories-item {
   background-color: #fff;
 }
 
-.food .food_wrapper .list_item:last-child {
+.food-categories-item:last-child {
   padding-bottom: 100vh;
 }
-.list_item .title {
+.food-categories-title {
   box-sizing: border-box;
   padding: 12px 8px;
   font-size: 14px;
@@ -280,54 +289,54 @@ export default {
   font-weight: bold;
   background-color: #f5f5f5;
 }
-.list_item .title .title_info {
+.food-categories-desc {
   font-size: 10px;
   color: #999;
   margin-left: 8px;
 }
-.list_item .food_info {
+.food-list-item {
   display: flex;
   padding: 12px 8px;
   border-bottom: 1px solid #eee;
   box-sizing: border-box;
 }
-.food_info > section {
+.food-item-info {
   flex: 1;
 }
-.food_info .food_img {
+.food-item-img {
   width: 40px;
   height: 40px;
   margin-right: 8px;
   border-radius: 3px;
 }
-.food_info .food_name {
+.food-item-name {
   font-size: 14px;
   color: #333;
   font-weight: bold;
 }
-.food_info .food_des {
+.food-item-desc {
   font-size: 10px;
   color: #999;
   margin: 5px 0;
 }
-.food_info .food_tips {
+.food-item-tips {
   font-size: 10px;
   color: #333;
   margin: 5px 0;
 }
-.food_info section section {
+.food-price-container {
   display: flex;
   justify-content: space-between;
 }
-.food_info section .buy_container .price {
+.food-item-price {
   font-size: 14px;
   color: #f60;
   font-weight: bold;
 }
-.buy_container .price .icon {
+.food-unit-icon {
   font-size: 10px;
 }
-.buy_container .add_btn {
+.addcart-btn {
   font-size: 11px;
   padding: 2px 4px;
   border-radius: 3px;
@@ -337,13 +346,13 @@ export default {
 }
 
 /* 左侧菜单选中样式 */
-.food .food_categories .categories_item.activeClass {
+.navbar-item.activeClass {
   border-left: 2px solid #0089dc;
   background-color: #fff;
   font-weight: bold;
 }
 /* 底部购物车栏 */
-.food > footer {
+.cart {
   box-sizing: border-box;
   position: fixed;
   left: 0;
@@ -352,7 +361,7 @@ export default {
   height: 40px;
   z-index: 13;
 }
-.food > footer .cart {
+.cart-icon-wrapper {
   position: absolute;
   top: -15px;
   left: 14px;
@@ -367,7 +376,7 @@ export default {
   color: #fff;
   z-index: 999;
 }
-.food > footer .cart .count {
+.cart-food-count {
   position: absolute;
   right: -1px;
   top: -3px;
@@ -381,29 +390,29 @@ export default {
   border-radius: 50%;
   background: red;
 }
-.food .cart_container {
+.cart-details {
   width: 100%;
   display: flex;
   justify-content: space-between;
   background-color: #3d3d3f;
 }
-.food .cart_container .total {
+.cart-cost {
   flex: 1;
   padding: 8px 0 5px 80px;
 }
 
-.food .cart_container .total .price {
+.cart-total-price {
   font-size: 16px;
   color: #fff;
   font-weight: bold;
   margin-bottom: 4px;
 }
 
-.food .cart_container .total .fee {
+.cart-delivery-fee {
   font-size: 9.6px;
   color: #fff;
 }
-.food .cart_container .payBtn {
+.cart-pay-btn {
   flex: 0 0 100px;
   background-color: #4cd946;
   font-size: 14px;
@@ -414,7 +423,7 @@ export default {
 }
 /* 购物车遮罩层 */
 
-.food .layer_mask {
+.cart-layer-mask {
   position: fixed;
   left: 0;
   top: 0;

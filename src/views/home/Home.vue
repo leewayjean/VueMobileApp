@@ -4,43 +4,30 @@
     <header-top :loginshow="true">
       <!-- 搜索按钮 -->
       <router-link to="/search" slot="search_btn">
-        <i class="fa fa-search search_btn" aria-hidden="true"></i>
+        <i class="fa fa-search search-btn" aria-hidden="true"></i>
       </router-link>
       <!-- 定位地址 -->
       <router-link to="/cities" slot="address" tag="span" class="address">{{sliceAddress}}</router-link>
     </header-top>
-      <main>
-        <!-- 轮播 -->
-        <div class="swipe_container">
-          <van-swipe
-            class="swiper"
-            :autoplay="5000"
-            indicator-color="#1989fa"
-          >
-            <van-swipe-item
-              v-for="(entryItem, index) in indexEntry"
-              :key="index"
-              class="swipe_item"
-            >
-              <div v-for="item in entryItem" :key="item.id" class="entry_item">
-                <img
-                  :src="`https://fuss10.elemecdn.com${item.image_url}`"
-                  alt="分类"
-                  class="entry_img"
-                />
-                <h5 class="entry_title">{{item.title}}</h5>
-              </div>
-            </van-swipe-item>
-          </van-swipe>
-        </div>
-        <!-- 店铺列表 -->
-        <section class="shop_list_container">
-          <header class="shop_header">附近商家</header>
-          <keep-alive>
-            <shop-list></shop-list>
-          </keep-alive>
-        </section>
-      </main>
+    <!-- 轮播 -->
+    <nav class="swipe-container">
+      <van-swipe class="swiper" :autoplay="5000" indicator-color="#1989fa" v-if="indexEntry.length > 0">
+        <van-swipe-item v-for="(entryItem, index) in indexEntry" :key="index" class="swipe-item">
+          <figure v-for="item in entryItem" :key="item.id" class="entry-item">
+            <img :src="`https://fuss10.elemecdn.com${item.image_url}`" alt="分类" class="entry-img" />
+            <figcaption class="entry-title">{{item.title}}</figcaption>
+          </figure>
+        </van-swipe-item>
+      </van-swipe>
+      <img src="../../assets/images/fl.svg" alt="" v-else>
+    </nav>
+    <!-- 店铺列表 -->
+    <section class="shop-list-container">
+      <header class="shop-header">附近商家</header>
+      <keep-alive>
+        <shop-list></shop-list>
+      </keep-alive>
+    </section>
     <!-- tabbar -->
     <Footer />
   </div>
@@ -48,7 +35,6 @@
 <script>
 import HeaderTop from "../../components/header/header";
 import Footer from "../../components/footer/Footer";
-import ShopList from "../../components/common/ShopList";
 import { getAddressByGeohash, getIndexEntry } from "../../server/getData";
 
 export default {
@@ -96,7 +82,7 @@ export default {
   },
   components: {
     HeaderTop,
-    ShopList,
+    ShopList:() => import('../../components/common/ShopList'),
     Footer
   }
 };
@@ -106,12 +92,13 @@ export default {
 .home {
   min-height: 100%;
   padding-top: 42px;
+  padding-bottom: 39px;
 }
-.home .search_btn {
+ .search-btn {
   font-size: 20px;
   color: #fff;
 }
-.home .address {
+ .address {
   font-size: 14px;
   color: #fff;
   font-weight: bold;
@@ -120,47 +107,45 @@ export default {
   top: 50%;
   transform: translate(-50%, -50%);
 }
-/* 滚动 */
-.home .bs-wrap {
-  height: calc(100vh - 78px);
-}
-.home .swipe_container {
+ .swipe-container {
   width: 100%;
   padding-bottom: 12px;
   background-color: #fff;
 }
-.home .swiper {
+ .swiper {
   width: 100%;
   background-color: #fff;
   display: inline-block;
 }
-.home .swiper .swipe_item {
+ .swipe-item {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
 }
-.home .swiper .entry_item {
+ .entry-item {
+  box-sizing: border-box;
   width: 25%;
+  height: 75px;
   padding: 6px 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
 }
- .entry_img {
+.entry-img {
   width: 36px;
   margin-bottom: 6px;
 }
-.entry_title {
+.entry-title {
   font-size: 11px;
   color: #666;
 }
-.shop_list_container {
+.shop-list-container {
   margin-top: 8px;
   background-color: #fff;
   border-top: 1px solid #e4e4e4;
 }
- .shop_header {
+.shop-header {
   box-sizing: border-box;
   padding: 0 8px;
   font-size: 11px;

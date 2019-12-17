@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-      <!-- 顶栏 -->
+    <!-- 顶栏 -->
     <header-top :goback="true" :headshow="true" headtitle="重置密码"></header-top>
     <!-- 表单 -->
     <form>
@@ -11,7 +11,7 @@
       <InputGroup inputtype="text" placeholder="验证码" />
     </form>
     <!-- 确认按钮 -->
-    <ConfirmBtn btnText="重置密码" class="login_btn"/>
+    <ConfirmBtn btnText="重置密码" class="login-btn" />
   </div>
 </template>
 
@@ -32,18 +32,8 @@ export default {
   margin-top: 12px;
   padding-top: 39px;
 }
-.login .login_tips .tip_item {
-  font-size: 10px;
-  color: #f00;
-  padding: 8px 12px;
-}
-.login .login_btn {
-    margin-top: 10px;
-}
-.login .reset_password {
-  float: right;
-  font-size: 12px;
-  color: #3b95e9;
-  margin-right: 6px;
+
+.login-btn {
+  margin-top: 10px;
 }
 </style>

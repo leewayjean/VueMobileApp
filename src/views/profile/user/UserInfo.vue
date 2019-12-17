@@ -1,15 +1,15 @@
 <template>
   <div class="order">
     <header-top :goback="true" :headshow="true" headtitle="用户信息"></header-top>
-    <section class="userinfo_item">
+    <section class="userinfo-item">
       <TextBar textBarTitle="用户名" />
       <TextBar textBarTitle="收货地址" />
     </section>
-    <section class="userinfo_item">
+    <section class="userinfo-item">
       <h3 class="title">账号绑定</h3>
       <TextBar textBarTitle="手机" />
     </section>
-    <section class="userinfo_item">
+    <section class="userinfo-item">
       <h3 class="title">安全设置</h3>
       <TextBar textBarTitle="登录密码" />
     </section>
@@ -63,7 +63,7 @@ export default {
   min-height: 100%;
   padding-top: 49px;
 }
-.order section.userinfo_item h3 {
+.order section.userinfo-item h3 {
   padding: 10px;
   font-size: 10px;
   color: #666;

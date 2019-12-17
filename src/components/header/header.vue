@@ -4,15 +4,15 @@
     <slot name="search_btn"></slot>
     <router-link class="fa fa-angle-left goback" aria-hidden="true" v-if="goHome" tag="i" :to="{path:'/home',query:{geohash}}"></router-link>
     <!-- 返回按钮 -->
-    <i class="fa fa-angle-left goback" aria-hidden="true" v-if="goback" @click="$router.go(-1)" ></i>
+    <i class="fa fa-angle-left goback-btn" aria-hidden="true" v-if="goback" @click="$router.go(-1)" ></i>
     <!-- 顶栏文字 -->
-    <h3 v-if="headshow" class="city_name">{{headtitle}}</h3>
+    <h3 v-if="headshow" class="head-title">{{headtitle}}</h3>
     <slot name="address"></slot>
     <!-- 登录注册按钮 -->
     <router-link :to="isLogin?'/profile':'login'" v-if="loginshow" tag="div">
-      <span class="login" v-if="!isLogin">登录|注册</span>
-      <span tag="span" to="/login" class="user" v-else>
-        <i class="fa fa-user" aria-hidden="true"></i>
+      <span class="login-btn" v-if="!isLogin">登录|注册</span>
+      <span tag="span" to="/login" class="user-profile" v-else>
+        <i class="fa fa-user user-icon" aria-hidden="true"></i>
       </span>
     </router-link>
 
@@ -83,11 +83,11 @@ header {
   background-image: -webkit-linear-gradient(left, #0af, #0085ff);
   background-image: linear-gradient(90deg, #0af, #0085ff);
 }
-header .goback {
+.goback-btn {
   color: #fff;
   font-size: 22px;
 }
-header .city_name {
+.heade-tile {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -97,11 +97,11 @@ header .city_name {
   font-weight: bold;
   text-align: center;
 }
-header .login {
+.login-btn {
   font-size: 12px;
   color: #fff;
 }
-header .user i {
+.user-icon {
   font-size: 16px;
   color: #fff;
 }

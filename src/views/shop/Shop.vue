@@ -1,22 +1,19 @@
 <template>
   <main class="shop">
-    <!-- <section v-if="!successLoadData">
-      <img src="../../assets/images/shop_back_svg.svg" alt="">
-    </section>-->
     <!-- 店铺信息栏 -->
     <section class="header">
-      <span class="goBackBtn" @click="goBack">
+      <span class="goback-btn" @click="goBack">
         <i class="fa fa-angle-left" aria-hidden="true"></i>
       </span>
-      <header class="shop_header">
-        <img :src="`//elm.cangdu.org/img/${shopInfo.image_path}`" alt class="shop_avatar" />
-        <section class="info_container">
-          <section class="shop_info">
+      <header class="shop-header">
+        <img :src="`//elm.cangdu.org/img/${shopInfo.image_path}`" alt class="shop-avatar" />
+        <section class="info-container">
+          <section class="shop-info">
             <h3 class="name">{{shopInfo.name}}</h3>
-            <p class="delivery_info">满20配送</p>
+            <p class="delivery-info">满20配送</p>
             <p class="shop_notice">公告：{{shopInfo.promotion_info}}</p>
           </section>
-          <router-link class="next_icon" :to="{path:'/shopinfo',query:{id}}">
+          <router-link class="next-icon" :to="{path:'/shopinfo',query:{id}}">
             <i class="fa fa-angle-right" aria-hidden="true"></i>
           </router-link>
         </section>
@@ -24,15 +21,15 @@
     </section>
     <!-- 导航 -->
     <nav>
-      <section class="nav_item">
-        <router-link :to="{path:`/shop/food`,query:{id}}" tag="span" class="nav_btn">商品</router-link>
+      <section class="nav-item">
+        <router-link :to="{path:`/shop/food`,query:{id}}" tag="span" class="nav-btn">商品</router-link>
       </section>
-      <section class="nav_item">
-        <router-link :to="{path:`/shop/comment`,query:{id}}" tag="span" class="nav_btn">评价</router-link>
+      <section class="nav-item">
+        <router-link :to="{path:`/shop/comment`,query:{id}}" tag="span" class="nav-btn">评价</router-link>
       </section>
     </nav>
     <!-- 食品 -->
-    <section class="food_container">
+    <section class="food-container">
       <!-- keep-live -->
       <keep-alive>
         <router-view :shopInfo="shopInfo"></router-view>
@@ -85,16 +82,16 @@ export default {
 .shop .header {
   position: relative;
 }
- .goBackBtn {
+ .goback-btn {
   position: absolute;
   left: 4px;
   top: 0px;
 }
-.goBackBtn i {
+.goback-btn i {
   font-size: 26px;
   color: #fff;
 }
-.shop_header {
+.shop-header {
   display: flex;
   padding: 8px;
   background-image: -webkit-gradient(
@@ -107,13 +104,13 @@ export default {
   background-image: -webkit-linear-gradient(left, #0af, #0085ff);
   background-image: linear-gradient(90deg, #0af, #0085ff);
 }
-.info_container {
+.info-container {
   flex: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.shop_info {
+.shop-info {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -121,25 +118,25 @@ export default {
   line-height: 1.2em;
 }
 
- .shop_avatar {
+ .shop-avatar {
   width: 58px;
   height: 58px;
   margin-right: 8px;
   border-radius: 3px;
 }
-.shop_info .name {
+.shop-info .name {
   font-size: 16px;
   color: #fff;
 }
- .shop_info .delivery_info {
+.delivery-info {
   font-size: 10px;
   color: #fff;
 }
-.shop_info .shop_notice {
+.shop_notice {
   font-size: 10px;
   color: #fff;
 }
-.next_icon i {
+.next-icon i {
   font-size: 12px;
   color: #fff;
 }
@@ -151,12 +148,12 @@ export default {
   align-items: center;
   border-bottom: 1px solid #ddd;
 }
-.shop nav .nav_item {
+.nav-item {
   flex: 1;
   display: flex;
   justify-content: center;
 }
-.nav_item .nav_btn {
+.nav-btn {
   color: #666;
   padding: 4px;
   font-size: 13px;
@@ -164,12 +161,12 @@ export default {
 }
 
 /* 路由激活状态 */
-.nav_item .router-link-active {
+.nav-item .router-link-active {
   color: #0085ff;
   border-bottom: 2px solid #0089dc;
 }
 
-.food_container {
+.food-container {
   height: calc(100% - 120px);
   background-color: #f5f5f5;
   box-sizing: border-box;

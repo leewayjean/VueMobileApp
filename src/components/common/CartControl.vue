@@ -1,10 +1,10 @@
 <template>
-  <div class="cart_control">
-    <span class="circle first_circle" @click="decreaseFood" v-if="foodItem.count>0">
+  <div class="cart-control">
+    <span class="cart-circle-btn cart-minus-btn" @click="decreaseFood" v-if="foodItem.count>0">
       <i class="fa fa-minus" aria-hidden="true"></i>
     </span>
-    <span class="count" v-if="foodItem.count>0">{{foodItem.count}}</span>
-    <span class="circle" @click="increaseFood">
+    <span class="cart-count" v-if="foodItem.count>0">{{foodItem.count}}</span>
+    <span class="cart-circle-btn" @click="increaseFood">
       <i class="fa fa-plus" aria-hidden="true"></i>
     </span>
   </div>
@@ -21,34 +21,28 @@ export default {
   methods: {
     // 商品数量加
     increaseFood() {
-      if (!this.foodItem.count) {
-        // 由于商品的json数据中没有计数的属性，因此设置count属性
-        this.$set(this.foodItem, "count", 1);
-      } else {
-        this.foodItem.count++;
-      }
+      !this.foodItem.count
+        ? this.$set(this.foodItem, "count", 1)
+        : this.foodItem.count++;
     },
     decreaseFood() {
-      if (!this.foodItem.count) {
-        // 由于商品的json数据中没有计数的属性，因此设置count属性
-        this.$set(this.foodItem, "count", 1);
-      } else {
-        this.foodItem.count--;
-      }
+      !this.foodItem.count
+        ? this.$set(this.foodItem, "count", 1)
+        : this.foodItem.count--;
     }
   }
 };
 </script>
 <style scoped>
-.cart_control {
+.cart-control {
   display: flex;
   align-items: center;
 }
-.cart_control .circle .fa-minus {
+.cart-minus-btn i {
   color: #0085ff;
 }
 
-.cart_control .circle {
+.cart-circle-btn {
   box-sizing: border-box;
   width: 16px;
   height: 16px;
@@ -61,12 +55,12 @@ export default {
   padding: 2px;
   font-size: 12px;
 }
-.cart_control .count {
+.cart-count {
   margin: 0 6px;
   font-size: 12px;
   color: #666;
 }
-.cart_control .circle.first_circle {
+.cart-minus-btn {
   background-color: #fff;
   border: 1px solid #0085ff;
 }
