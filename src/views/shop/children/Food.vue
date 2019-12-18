@@ -245,11 +245,13 @@ export default {
   display: flex;
   width: 100%;
   height: 100%;
+  background-color: #fff;
   overflow: hidden;
 }
 .navbar-wrapper {
   width: 76px;
   height: 100%;
+  background-color: #f5f5f5;
 }
 .food-wrapper {
   flex: 1;

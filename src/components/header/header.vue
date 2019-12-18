@@ -2,7 +2,7 @@
   <header>
     <slot name="logo"></slot>
     <slot name="search_btn"></slot>
-    <router-link class="fa fa-angle-left goback" aria-hidden="true" v-if="goHome" tag="i" :to="{path:'/home',query:{geohash}}"></router-link>
+    <router-link class="fa fa-angle-left goback-btn" aria-hidden="true" v-if="goHome" tag="i" :to="{path:'/home',query:{geohash}}"></router-link>
     <!-- 返回按钮 -->
     <i class="fa fa-angle-left goback-btn" aria-hidden="true" v-if="goback" @click="$router.go(-1)" ></i>
     <!-- 顶栏文字 -->
@@ -87,7 +87,7 @@ header {
   color: #fff;
   font-size: 22px;
 }
-.heade-tile {
+.head-title {
   position: absolute;
   left: 50%;
   top: 50%;

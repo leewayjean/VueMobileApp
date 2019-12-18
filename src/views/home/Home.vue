@@ -11,7 +11,12 @@
     </header-top>
     <!-- 轮播 -->
     <nav class="swipe-container">
-      <van-swipe class="swiper" :autoplay="5000" indicator-color="#1989fa" v-if="indexEntry.length > 0">
+      <van-swipe
+        class="swiper"
+        :autoplay="5000"
+        indicator-color="#1989fa"
+        v-if="indexEntry.length > 0"
+      >
         <van-swipe-item v-for="(entryItem, index) in indexEntry" :key="index" class="swipe-item">
           <figure v-for="item in entryItem" :key="item.id" class="entry-item">
             <img :src="`https://fuss10.elemecdn.com${item.image_url}`" alt="分类" class="entry-img" />
@@ -19,7 +24,7 @@
           </figure>
         </van-swipe-item>
       </van-swipe>
-      <img src="../../assets/images/fl.svg" alt="" v-else>
+      <img src="../../assets/images/fl.svg" alt v-else />
     </nav>
     <!-- 店铺列表 -->
     <section class="shop-list-container">
@@ -43,7 +48,19 @@ export default {
     return {
       indexEntry: [], //分类入口
       address: "正在获取定位...", // 当前地址
-      geohash: "" // 地理坐标
+      geohash: "", // 地理坐标
+      value1: 0,
+      value2: "a",
+      option1: [
+        { text: "全部商品", value: 0 },
+        { text: "新款商品", value: 1 },
+        { text: "活动商品", value: 2 }
+      ],
+      option2: [
+        { text: "默认排序", value: "a" },
+        { text: "好评排序", value: "b" },
+        { text: "销量排序", value: "c" }
+      ]
     };
   },
   computed: {
@@ -82,7 +99,7 @@ export default {
   },
   components: {
     HeaderTop,
-    ShopList:() => import('../../components/common/ShopList'),
+    ShopList: () => import("../../components/common/ShopList"),
     Footer
   }
 };
@@ -94,11 +111,11 @@ export default {
   padding-top: 42px;
   padding-bottom: 39px;
 }
- .search-btn {
+.search-btn {
   font-size: 20px;
   color: #fff;
 }
- .address {
+.address {
   font-size: 14px;
   color: #fff;
   font-weight: bold;
@@ -107,22 +124,22 @@ export default {
   top: 50%;
   transform: translate(-50%, -50%);
 }
- .swipe-container {
+.swipe-container {
   width: 100%;
   padding-bottom: 12px;
   background-color: #fff;
 }
- .swiper {
+.swiper {
   width: 100%;
   background-color: #fff;
   display: inline-block;
 }
- .swipe-item {
+.swipe-item {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
 }
- .entry-item {
+.entry-item {
   box-sizing: border-box;
   width: 25%;
   height: 75px;
@@ -141,7 +158,6 @@ export default {
   color: #666;
 }
 .shop-list-container {
-  margin-top: 8px;
   background-color: #fff;
   border-top: 1px solid #e4e4e4;
 }

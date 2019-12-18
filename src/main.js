@@ -3,12 +3,10 @@ import App from './App.vue'
 // 引入mint-ui
 import { Switch,Indicator  } from 'mint-ui';
 
-import { AddressList} from 'vant';
-Vue.use(AddressList);
+import { AddressList,Swipe, SwipeItem} from 'vant';
 
-import { Swipe, SwipeItem } from 'vant';
 
-Vue.use(Swipe).use(SwipeItem);
+Vue.use(Swipe).use(SwipeItem).use(AddressList);
 
 // 全局注册
 
