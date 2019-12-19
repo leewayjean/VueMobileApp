@@ -5,15 +5,11 @@ import store from './store'
 import axios from "axios"
 
 // 引入mint-ui
-import { Switch} from 'mint-ui';
-import { AddressList,Swipe, SwipeItem} from 'vant';
-Vue.use(Swipe).use(SwipeItem).use(AddressList);
+import { AddressList,Swipe, SwipeItem,Switch } from 'vant';
+Vue.use(Swipe).use(SwipeItem).use(AddressList).use(Switch);;
 
-// 全局注册
 import Toast from "../src/components/common/toast/index"
 Vue.use(Toast)
-// 注册全局组件
-Vue.component("mt-switch",Switch)
 
 // 添加请求拦截器
 axios.interceptors.request.use(function (config) {

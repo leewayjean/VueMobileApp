@@ -9,7 +9,7 @@ export default {};
 </script>
 <style scoped>
 .load2 {
-  position: absolute;
+  position: fixed;
   width: 50px;
   height: 40px;
   background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48ZWxsaXBzZSBjeD0iNDgiIGN5PSIxMi40NjMiIGZpbGw9IiNEM0U2RkYiIGZpbGwtcnVsZT0iZXZlbm9kZCIgcng9IjQ3Ljg5IiByeT0iMTIuMzY5IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyIDM4KSIvPjwvc3ZnPg==")
@@ -46,8 +46,8 @@ export default {};
   width: 50px;
   margin-left: -25px;
   margin-top: -25px;
-  animation: test 4.5s steps(6) infinite, updown 0.8s infinite;
-  /*-webkit-animation:test 3.5s steps(6) infinite;*/
+  animation: test 4.5s steps(6) infinite ,updown 0.8s infinite;
+  /* -webkit-animation:test 3.5s steps(6) infinite, updown 0.8s infinite; */
 }
 
 @keyframes test {
@@ -56,7 +56,7 @@ export default {};
   }
 
   100% {
-    background-position: 0 600px;
+    background-position: 0 93.75vw;
   }
 }
 
@@ -66,7 +66,7 @@ export default {};
   }
 
   50% {
-    transform: translateY(-50px);
+    transform: translateY(-15.625vw);
   }
 
   100% {

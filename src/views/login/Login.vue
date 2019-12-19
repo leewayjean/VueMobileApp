@@ -7,7 +7,7 @@
       <InputGroup inputtype="text" placeholder="账号" v-model="username" />
       <!-- 密码 -->
       <InputGroup :inputtype="inputType" placeholder="密码" v-model="password">
-        <mt-switch v-model="showValue" slot="switch"></mt-switch>
+        <van-switch v-model="showValue" size="24px" slot="switch" />
       </InputGroup>
       <!-- 验证码 -->
       <InputGroup inputtype="text" placeholder="验证码" v-model="captcha_code">
