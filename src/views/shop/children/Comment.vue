@@ -28,7 +28,7 @@
         <ul class="content-list">
           <li v-for="(item,index) in rates" :key="index" class="list-item">
             <img
-              :src="`https://fuss10.elemecdn.com/1/5f/${item.avatar}.jpeg`"
+              :src="`https://fuss10.elemecdn.com/1/5f/${item.avatar.slice(3)}.jpeg`"
               alt="头像"
               class="avatar"
             />
@@ -72,8 +72,8 @@ export default {
       id: this.$route.query.id
     };
   },
-  methods:{
-    changeTag(index){
+  methods: {
+    changeTag(index) {
       this.currentIndex = index;
     }
   },
@@ -89,15 +89,16 @@ export default {
     });
     // 获取评价
     getRatings(this.id).then(res => {
+      console.log(res.data);
       this.rates = res.data;
     });
   },
   updated() {
     new BScroll(this.$refs.wrapper, {
       // ...... 详见配置项
-      click:true
+      click: true
     });
-  }
+  },
 };
 </script>
 
@@ -137,14 +138,14 @@ export default {
   color: #999;
 }
 /* 评价标签 */
- .content .tags {
+.content .tags {
   display: flex;
   flex-wrap: wrap;
   padding: 8px;
   background-color: #fff;
   border-bottom: 1px solid #eee;
 }
- .content .tags .tag {
+.content .tags .tag {
   font-size: 12px;
   color: #6d7885;
   padding: 6px;
@@ -153,33 +154,33 @@ export default {
   border-radius: 5px;
 }
 /* 评价列表 */
-  .content-list {
+.content-list {
   padding: 0 10px;
   background-color: #fff;
 }
- .list-item {
+.list-item {
   display: flex;
   padding: 12px 0;
   border-bottom: 1px solid #eee;
 }
- .list-item .avatar {
+.list-item .avatar {
   width: 30px;
   height: 30px;
   margin-right: 16px;
 }
- .rate-content {
+.rate-content {
   flex: 1;
 }
- .rate-content .info {
+.rate-content .info {
   display: flex;
   justify-content: space-between;
 }
- .rate-content .info .rated_at {
+.rate-content .info .rated_at {
   font-size: 9.6px;
   color: #999;
 }
 
- .tags .tag.activeClass {
+.tags .tag.activeClass {
   background-color: #3190e8;
   color: #fff;
 }

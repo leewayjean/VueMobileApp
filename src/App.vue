@@ -1,11 +1,21 @@
 <template>
   <div id="app">
       <router-view  class="animated fadeIn"/>
+      <loading v-if="isShow"/>
   </div>
 </template>
 <script>
+import loading from "./components/common/Loading"
 export default {
   name: "App",
+  components:{
+    loading
+  },
+  computed:{
+    isShow(){
+      return this.$store.state.isShow;
+    }
+  },
   created() {
     //根组件实例化时查看用户是否已经登录
     let isLogin = window.localStorage.getItem("IS_LOGIN");
@@ -18,7 +28,7 @@ export default {
     } else {
       this.$router.push("/login");
     }
-  }
+  },
 };
 </script>
 <style>

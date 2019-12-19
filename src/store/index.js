@@ -16,6 +16,7 @@ const state = {
   userInfo:{},//登录成功后返回的用户信息
   // 关于购物车
   cartList:[], // 购物车商品
+  isShow:false
   
 }
 

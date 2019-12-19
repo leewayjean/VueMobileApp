@@ -1,10 +1,10 @@
 <template>
   <section class="text-bar">
-    <section class="text-bar-title">
+    <section class="text-bar__title">
       <slot class="title_icon"></slot>
-      <span class="text-bar-name">{{textBarTitle}}</span>
+      <span class="title">{{textBarTitle}}</span>
     </section>
-    <span class="next-icon">
+    <span class="text-bar__icon">
       <i class="fa fa-angle-right" aria-hidden="true"></i>
     </span>
   </section>
@@ -32,11 +32,11 @@ export default {
   padding: 0 10px;
   border-bottom: 1px solid #eee;
 }
-.text-bar-name {
+.text-bar__title .title {
   font-size: 14px;
   color: #666;
 }
-.next-icon i {
+.text-bar__icon i {
   color: #666;
   font-size: 16px;
 }

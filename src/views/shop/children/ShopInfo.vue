@@ -13,7 +13,7 @@
       <p>准时必达，超时必赔</p>
       <p>该商家支持开发票，请在下单时天浩发票抬头</p>
     </section>
-    <section>
+    <section v-if="isEmpety">
       <h3 class="title">商家信息</h3>
       <TextBar :textBarTitle="shopInfo.name"/>
       <TextBar :textBarTitle="shopInfo.address"/>
@@ -35,7 +35,12 @@ export default {
       id: this.$route.query.id
     };
   },
-  mounted() {
+  computed:{
+    isEmpety(){
+      return Object.keys(this.shopInfo).length > 0;
+    }
+  },
+  created() {
     getShopInfo(this.id).then(res => {
       console.log(res.data);
       this.shopInfo = res.data;

@@ -35,7 +35,7 @@
         <router-view :shopInfo="shopInfo"></router-view>
       </keep-alive>
     </section>
-  
+
   </main>
 </template>
 
@@ -82,7 +82,7 @@ export default {
 .shop .header {
   position: relative;
 }
- .goback-btn {
+.goback-btn {
   position: absolute;
   left: 4px;
   top: 0px;
@@ -118,7 +118,7 @@ export default {
   line-height: 1.2em;
 }
 
- .shop-avatar {
+.shop-avatar {
   width: 58px;
   height: 58px;
   margin-right: 8px;
