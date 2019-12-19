@@ -40,7 +40,7 @@
   </div>
 </template>
 <script>
-import { Toast } from "mint-ui";
+import { Toast } from 'vant';
 import { mapMutations } from "vuex";
 import { searchAddress, getCurrentCityById } from "../../server/getData";
 import { setLocalStorage } from "../../config/utils";

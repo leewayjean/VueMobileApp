@@ -1,40 +1,48 @@
 <template>
-  <ul class="shop-list">
-    <router-link
-      class="shop-list-item"
-      v-for="(item,index) in restaurants"
-      :key="index"
-      :to="{path:'/shop',query:{id:item.id}}"
-      tag="li"
-    >
-      <img class="shop-avatar" :src="`//elm.cangdu.org/img/${item.image_path}`" alt />
-      <ul class="shop-info-container">
-        <li class="shop-info-item">
-          <h3 class="shop-name">
-            <span class="shop-brand-icon">品牌</span>
-            {{item.name}}
-          </h3>
-          <span class="shop-month-sell">评论34</span>
-        </li>
-        <li class="shop-info-item">
-          <section>
-            <span class="shop-rating-num">{{item.rating}}</span>
-            <span class="shop-month-sell">月售{{item.recent_order_num}}单</span>
-          </section>
-          <p class="shop-month-sell">月售23</p>
-        </li>
-        <li class="shop-info-item">
-          <span
-            class="delivery-fee"
-          >￥{{item.float_delivery_fee}}元起送 / 配送费约{{item.float_minimum_order_amount}}元</span>
-          <span>
-            <span class="delivery-distance">{{item.distance}}/</span>
-            <span class="order-lead-time">{{item.order_lead_time}}</span>
-          </span>
-        </li>
-      </ul>
-    </router-link>
-  </ul>
+  <section>
+    <ul class="shop-list" v-if="restaurants.length">
+      <router-link
+        class="shop-list-item"
+        v-for="(item,index) in restaurants"
+        :key="index"
+        :to="{path:'/shop',query:{id:item.id}}"
+        tag="li"
+      >
+        <img class="shop-avatar" :src="`//elm.cangdu.org/img/${item.image_path}`" alt />
+        <ul class="shop-info-container">
+          <li class="shop-info-item">
+            <h3 class="shop-name">
+              <span class="shop-brand-icon">品牌</span>
+              {{item.name}}
+            </h3>
+            <span class="shop-month-sell">评论34</span>
+          </li>
+          <li class="shop-info-item">
+            <section>
+              <span class="shop-rating-num">{{item.rating}}</span>
+              <span class="shop-month-sell">月售{{item.recent_order_num}}单</span>
+            </section>
+            <p class="shop-month-sell">月售23</p>
+          </li>
+          <li class="shop-info-item">
+            <span
+              class="delivery-fee"
+            >￥{{item.float_delivery_fee}}元起送 / 配送费约{{item.float_minimum_order_amount}}元</span>
+            <span>
+              <span class="delivery-distance">{{item.distance}}/</span>
+              <span class="order-lead-time">{{item.order_lead_time}}</span>
+            </span>
+          </li>
+        </ul>
+      </router-link>
+    </ul>
+    <!-- 骨架屏 -->
+    <ul v-else class="skeleton">
+      <li v-for="item in 10" :key="item">
+        <img src="../../../src/assets/images/shopback.svg" alt />
+      </li>
+    </ul>
+  </section>
 </template>
 <script>
 import { getShopList } from "../../server/getData";

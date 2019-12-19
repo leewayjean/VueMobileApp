@@ -100,7 +100,6 @@
 
 <script>
 import BScroll from "@better-scroll/core";
-import { Indicator } from "mint-ui";
 import { getFoods } from "../../../server/getData";
 import CartControl from "../../../components/common/CartControl";
 import CartDetail from "../../../components/common/CartDetail";

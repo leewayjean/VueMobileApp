@@ -35,6 +35,10 @@
         <router-view :shopInfo="shopInfo"></router-view>
       </keep-alive>
     </section>
+    <!-- 骨架屏 -->
+    <section class="shop-back-container" v-if="isShow && $route.name == 'food'">
+      <img src="../../assets/images/shop_back_svg.svg" alt="">
+    </section>
 
   </main>
 </template>
@@ -51,7 +55,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["geohash"])
+    ...mapState(["geohash","isShow"])
   },
   methods: {
     // 返回到home页面
@@ -172,5 +176,14 @@ export default {
   box-sizing: border-box;
 }
 
+.shop-back-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  z-index: 9999;
+}
 
 </style>

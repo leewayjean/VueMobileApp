@@ -55,6 +55,7 @@ export default {
   background: #fff;
 }
 .food-list-item {
+  position: relative;
   display: flex;
   justify-content: space-between;
   padding: 12px 10px;
@@ -64,6 +65,10 @@ export default {
   color: #666;
 }
 .food-price {
+  position: absolute;
+  transform: translate(-50%,-50%);
+  left: 50%;
+  top: 50%;
   font-size: 14px;
   color: #f60;
 }

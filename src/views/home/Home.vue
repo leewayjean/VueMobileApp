@@ -24,6 +24,7 @@
           </figure>
         </van-swipe-item>
       </van-swipe>
+      <!-- 骨架屏 -->
       <img src="../../assets/images/fl.svg" alt v-else />
     </nav>
     <!-- 店铺列表 -->

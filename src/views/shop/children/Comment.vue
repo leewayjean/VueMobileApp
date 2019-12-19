@@ -89,7 +89,6 @@ export default {
     });
     // 获取评价
     getRatings(this.id).then(res => {
-      console.log(res.data);
       this.rates = res.data;
     });
   },
