@@ -121,11 +121,11 @@ footer {
   line-height: 26px;
   font-size: 12px;
   color: #fff;
-  background-color: #0085ff;
+  background-color: #38bb8b;
   border-radius: 3px;
 }
 .food-options .activeClass {
-  color: #0085ff;
-  border-color: #0085ff;
+  color: #38bb8b;
+  border-color: #38bb8b;
 }
 </style>

@@ -98,7 +98,7 @@ export default {
   display: inline-block;
   width: 65px;
   height: 30px;
-  background-color: #3190e8;
+  background-color: #38bb8b;
   color: #fff;
   font-size: 14px;
   text-align: center;

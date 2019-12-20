@@ -14,7 +14,7 @@
       <van-swipe
         class="swiper"
         :autoplay="5000"
-        indicator-color="#1989fa"
+        indicator-color="#38bb8b"
         v-if="indexEntry.length > 0"
       >
         <van-swipe-item v-for="(entryItem, index) in indexEntry" :key="index" class="swipe-item">

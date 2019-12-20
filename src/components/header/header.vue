@@ -72,16 +72,16 @@ header {
   height: 39px;
   padding: 0 10px;
   box-sizing: border-box;
-  background-color: #3190e8;
+  background-color: #38bb8b;
   background-image: -webkit-gradient(
     linear,
     left top,
     right top,
-    from(#0af),
-    to(#0085ff)
+    from(#3bcd9c),
+    to(#38bb8b)
   );
-  background-image: -webkit-linear-gradient(left, #0af, #0085ff);
-  background-image: linear-gradient(90deg, #0af, #0085ff);
+  background-image: -webkit-linear-gradient(left, #3bcd9c, #38bb8b);
+  background-image: linear-gradient(90deg, #3bcd9c, #38bb8b);
 }
 .goback-btn {
   color: #fff;

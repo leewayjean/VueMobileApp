@@ -70,7 +70,7 @@
       <!-- 购物车图标 -->
       <span
         class="cart-icon-wrapper"
-        :style="{backgroundColor:cartFoods.length>0?'#0089dc':'#535356'}"
+        :style="{backgroundColor:cartFoods.length>0?'#38bb8b':'#535356'}"
         @click="isShowCart = true;"
       >
         <span class="cart-food-count" v-if="foodCount">{{foodCount}}</span>
@@ -83,7 +83,7 @@
         </section>
         <router-link
           class="cart-pay-btn"
-          :style="{backgroundColor:cartFoods.length>0?'#4cd946':'#535356'}"
+          :style="{backgroundColor:cartFoods.length>0?'#38b88b':'#535356'}"
           tag="span"
           to="/confirmOrder"
         >去结算</router-link>
@@ -212,6 +212,7 @@ export default {
     },
     loadData() {
       getFoods(this.id).then(res => {
+        console.log(res.data);
         // 获取数据
         this.foodList = res.data;
         this.$nextTick(() => {
@@ -341,14 +342,14 @@ export default {
   font-size: 11px;
   padding: 2px 4px;
   border-radius: 3px;
-  border: 1px solid #3190e8;
+  border: 1px solid #38bb8b;
   color: #fff;
-  background-color: #0085ff;
+  background-color: #38bb8b;
 }
 
 /* 左侧菜单选中样式 */
 .navbar-item.activeClass {
-  border-left: 2px solid #0089dc;
+  border-left: 2px solid #38bb8b;
   background-color: #fff;
   font-weight: bold;
 }
@@ -371,7 +372,7 @@ export default {
   text-align: center;
   line-height: 40px;
   border-radius: 50%;
-  background-color: #0085ff;
+  background-color: #38bb8b;
   border: 4px solid #3d3d3f;
   font-size: 20px;
   color: #fff;
@@ -415,7 +416,7 @@ export default {
 }
 .cart-pay-btn {
   flex: 0 0 100px;
-  background-color: #4cd946;
+  background-color: #38bb8b;
   font-size: 14px;
   color: #fff;
   text-align: center;

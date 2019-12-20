@@ -59,9 +59,9 @@ footer {
   font-size: 9.6px;
 }
 .router-link-active .tabbar-icon {
-  color: #0089dc;
+  color: #38bb8b;
 }
 .router-link-active .tabbar-name {
-  color: #0089dc;
+  color: #38bb8b;
 }
 </style>

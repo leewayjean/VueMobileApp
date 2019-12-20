@@ -180,7 +180,7 @@ export default {
 }
 
 .tags .tag.activeClass {
-  background-color: #3190e8;
+  background-color: #38bb8b;
   color: #fff;
 }
 </style>

@@ -22,6 +22,6 @@ export default {
   padding: 10px 0;
   color: #fff;
   border-radius: 4px;
-  background: #4cd96f;
+  background: #38bb8b;
 }
 </style>

@@ -39,14 +39,14 @@ export default {
   align-items: center;
 }
 .cart-minus-btn i {
-  color: #0085ff;
+  color: #38bb8b;
 }
 
 .cart-circle-btn {
   box-sizing: border-box;
   width: 16px;
   height: 16px;
-  background-color: #0085ff;
+  background-color: #38bb8b;
   color: #fff;
   display: flex;
   align-items: center;
@@ -62,6 +62,6 @@ export default {
 }
 .cart-minus-btn {
   background-color: #fff;
-  border: 1px solid #0085ff;
+  border: 1px solid #38bb8b;
 }
 </style>

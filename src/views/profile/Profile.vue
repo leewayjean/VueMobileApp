@@ -94,15 +94,16 @@ header {
   display: flex;
   justify-content: space-between;
   padding: 24px 12px;
+  background-color: #38bb8b;
   background-image: -webkit-gradient(
     linear,
     left top,
     right top,
-    from(#0af),
-    to(#0085ff)
+    from(#3bcd9c),
+    to(#38bb8b)
   );
-  background-image: -webkit-linear-gradient(left, #0af, #0085ff);
-  background-image: linear-gradient(90deg, #0af, #0085ff);
+  background-image: -webkit-linear-gradient(left, #3bcd9c, #38bb8b);
+  background-image: linear-gradient(90deg, #3bcd9c, #38bb8b);
 }
 .avatar {
   width: 50px;
@@ -155,13 +156,13 @@ header {
   font-size: 24px;
   font-weight: 700;
 }
-.user-account{
+.user-account {
   color: #ff9900;
 }
-.user-discount{
+.user-discount {
   color: #ff5f3e;
 }
-.user-accu-points{
+.user-accu-points {
   color: #6ac20b;
 }
 .points-title {
@@ -183,7 +184,7 @@ header {
 }
 .user-secrte a {
   font-size: 12px;
-  color: #0085ff;
+  color: #38bb8b;
   text-decoration: none;
 }
 </style>

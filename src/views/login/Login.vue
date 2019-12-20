@@ -7,7 +7,7 @@
       <InputGroup inputtype="text" placeholder="账号" v-model="username" />
       <!-- 密码 -->
       <InputGroup :inputtype="inputType" placeholder="密码" v-model="password">
-        <van-switch v-model="showValue" size="24px" slot="switch" />
+        <van-switch v-model="showValue" size="24px" slot="switch" active-color="#38bb8b"/>
       </InputGroup>
       <!-- 验证码 -->
       <InputGroup inputtype="text" placeholder="验证码" v-model="captcha_code">
@@ -136,7 +136,7 @@ export default {
 }
 .verify-code span {
   font-size: 11px;
-  color: #3b95e9;
+  color: #38bb8b;
 }
 .login-tips .tips-item {
   font-size: 10px;
@@ -152,12 +152,12 @@ export default {
   padding: 10px 0;
   color: #fff;
   border-radius: 4px;
-  background: #4cd96f;
+  background: #38bb8b;
 }
 .reset-password {
   float: right;
   font-size: 12px;
-  color: #3b95e9;
+  color: #38bb8b;
   margin-right: 6px;
 }
 </style>

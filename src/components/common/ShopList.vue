@@ -111,7 +111,7 @@ export default {
 }
 .order-lead-time {
   font-size: 10px;
-  color: #0089dc;
+  color: #38bb8b;
 }
 
 .shop-name {

@@ -37,9 +37,8 @@
     </section>
     <!-- 骨架屏 -->
     <section class="shop-back-container" v-if="isShow && $route.name == 'food'">
-      <img src="../../assets/images/shop_back_svg.svg" alt="">
+      <img src="../../assets/images/shop_back_svg.svg" alt />
     </section>
-
   </main>
 </template>
 
@@ -51,11 +50,11 @@ export default {
   data() {
     return {
       shopInfo: {}, //店铺信息
-      id: this.$route.query.id  //当前路由查询参数
+      id: this.$route.query.id //当前路由查询参数
     };
   },
   computed: {
-    ...mapState(["geohash","isShow"])
+    ...mapState(["geohash", "isShow"])
   },
   methods: {
     // 返回到home页面
@@ -102,11 +101,11 @@ export default {
     linear,
     left top,
     right top,
-    from(#0af),
-    to(#0085ff)
+    from(#3bcd9c),
+    to(#38bb8b)
   );
-  background-image: -webkit-linear-gradient(left, #0af, #0085ff);
-  background-image: linear-gradient(90deg, #0af, #0085ff);
+  background-image: -webkit-linear-gradient(left, #3bcd9c, #38bb8b);
+  background-image: linear-gradient(90deg, #3bcd9c, #38bb8b);
 }
 .info-container {
   flex: 1;
@@ -166,8 +165,8 @@ export default {
 
 /* 路由激活状态 */
 .nav-item .router-link-active {
-  color: #0085ff;
-  border-bottom: 2px solid #0089dc;
+  color: #38bb8b;
+  border-bottom: 2px solid #38bb8b;
 }
 
 .food-container {
@@ -185,5 +184,4 @@ export default {
   background-color: #fff;
   z-index: 9999;
 }
-
 </style>

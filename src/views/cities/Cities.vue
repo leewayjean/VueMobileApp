@@ -135,7 +135,7 @@ export default {
 }
 .city_nav .current_city .city_name {
   font-size: 15px;
-  color: #3190e8;
+  color: #38bb8b;
 }
 .city_nav .current_city .next_arrow {
   width: 12px;
@@ -166,7 +166,7 @@ export default {
   justify-content: center;
   align-items: center;
   font-size: 12px;
-  color: #3190e8;
+  color: #38bb8b;
   box-sizing: border-box;
   border-right: 1px solid #e4e4e4;
   border-bottom: 1px solid #e4e4e4;
