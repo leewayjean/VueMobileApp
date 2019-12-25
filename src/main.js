@@ -5,8 +5,8 @@ import store from './store'
 import axios from "axios"
 
 // 引入mint-ui
-import { AddressList,Swipe, SwipeItem,Switch } from 'vant';
-Vue.use(Swipe).use(SwipeItem).use(AddressList).use(Switch);;
+import { AddressList,Swipe, SwipeItem,Switch,Icon  } from 'vant';
+Vue.use(Swipe).use(SwipeItem).use(AddressList).use(Switch).use(Icon);;
 
 import Toast from "../src/components/common/toast/index"
 Vue.use(Toast)

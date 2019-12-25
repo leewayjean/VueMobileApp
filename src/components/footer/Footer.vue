@@ -3,19 +3,22 @@
     <router-link tag="div" :to="{path:'/home',query:{
       geohash,
     }}" class="tabbar-item">
-      <i class="fa fa-home tabbar-icon" aria-hidden="true"></i>
+      <van-icon :name="$route.name == 'home'? 'wap-home' : 'wap-home-o'" class="tabbar-icon" />
       <span class="tabbar-name">首页</span>
     </router-link>
     <router-link tag="div" to="/search" class="tabbar-item">
-      <i class="fa fa-compass tabbar-icon" aria-hidden="true"></i>
+      <van-icon :name="$route.name == 'search'?'search' :'search'" class="tabbar-icon" />
       <span class="tabbar-name">搜索</span>
     </router-link>
     <router-link tag="div" to="/order" class="tabbar-item">
-      <i class="fa fa-shopping-cart tabbar-icon" aria-hidden="true"></i>
+      <van-icon
+        :name="$route.name == 'order'? 'shopping-cart': 'shopping-cart-o' "
+        class="tabbar-icon"
+      />
       <span class="tabbar-name">订单</span>
     </router-link>
     <router-link tag="div" to="/profile" class="tabbar-item">
-      <i class="fa fa-user tabbar-icon" aria-hidden="true"></i>
+      <van-icon :name="$route.name =='profile'? 'manager' : 'manager-o'" class="tabbar-icon" />
       <span class="tabbar-name">我的</span>
     </router-link>
   </footer>
@@ -52,8 +55,8 @@ footer {
   color: #666;
 }
 .tabbar-icon {
-  font-size: 16px;
-  margin-bottom: 4px;
+  font-size: 22px;
+  margin-bottom: 2px;
 }
 .tabbar-name {
   font-size: 9.6px;
